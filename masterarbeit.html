@@ -285,7 +285,7 @@ function calculatewindgeneration (winddata,pricedata){
 				yearrunner = startyear+i
 				
 				var monthrunner = '0' + (d.date.getMonth())+1).slice(-2);
-				var dayrunner = d.date.getDate();
+				var dayrunner = '0' + d.date.getDate()).slice(-2);
 				var hourrunner = d.date.getHours();
 				var daterunner = new Date(yearrunner+"-"+monthrunner+"-"+dayrunner+"T"+hourrunner+":00:00");
 				windgeneration[daterunner] = d.generation
