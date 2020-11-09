@@ -1,0 +1,70 @@
+headline,serie,r,g,b,displaytype
+Demand in MW,applied,100,196,100,1
+Demand in MW,residual,255,100,255,1
+Power Price in €/MWh,future,100,100,100,1
+Power Price in €/MWh,yfuture,100,100,100,1
+Power Price in €/MWh,historical,255,100,100,1
+Power Price in €/MWh,simulated,100,100,255,1
+Generation in MW,other,150,150,150,1
+Generation in MW,hydro,100,150,255,1
+Generation in MW,biomass,128,255,128,1
+Generation in MW,nuclear,255,204,0,1
+Generation in MW,other_fossils,200,200,200,1
+Generation in MW,lignite,153,51,0,1
+Generation in MW,hard_coal,128,128,128,1
+Generation in MW,gas,153,204,255,1
+Generation in MW,oil,51,51,153,1
+Generation in MW,reservoir,100,100,255,1
+Generation in MW,solar,255,50,50,1
+Generation in MW,solarnp,255,100,100,1
+Generation in MW,wind,150, 150, 250,1
+Generation in MW,windnp,200,200,250,1
+Generation in MW,otherrenew,75,201,150,1
+Generation in MW,pump,64,64,128,5,1
+Capacities in MW,nuclear,255,204,0,1
+Capacities in MW,lignite,153,51,0,1
+Capacities in MW,hard_coal,128,128,128,1
+Capacities in MW,gas,153,204,255,1
+Capacities in MW,oil,51,51,153,1
+Capacities in MW,bio,128,255,128,1
+Capacities in MW,reservoir,100,100,255,1
+Capacities in MW,pump,64,64,128,5,1
+Capacities in MW,hydro,100,150,255,1
+Capacities in MW,wind,150, 150, 250,1
+Capacities in MW,solar,255,50,50,1
+Temperatur in °C,historical,255,100,100,1
+Temperatur in °C,SNT,100,100,100,1
+NetImports in MW,historical,255,100,100,1
+NetImports in MW,applied,100,196,100,1
+Generation EE in MW,other,150,150,150,0
+Generation EE in MW,hydro,100,150,255,1
+Generation EE in MW,biomass,128,255,128,1
+Generation EE in MW,nuclear,255,204,0,0
+Generation EE in MW,other_fossils,200,200,200,0
+Generation EE in MW,lignite,153,51,0,0
+Generation EE in MW,hard_coal,128,128,128,0
+Generation EE in MW,gas,153,204,255,0
+Generation EE in MW,oil,51,51,153,0
+Generation EE in MW,reservoir,100,100,255,1
+Generation EE in MW,solar,255,50,50,1
+Generation EE in MW,solarnp,255,100,100,1
+Generation EE in MW,wind,150, 150, 250,1
+Generation EE in MW,windnp,200,200,250,1
+Generation EE in MW,otherrenew,75,201,150,1
+Generation EE in MW,pump,64,64,128,5,1
+EUA Price in €/t,yfuture,100,100,100,1
+EUA Price in €/t,historical,255,100,100,1
+EUA Price in €/t,scenario,100,196,100,1
+Gas Price in €/MWh,future,100,100,100,1
+Gas Price in €/MWh,yfuture,100,100,100,1
+Gas Price in €/MWh,historical,255,100,100,1
+Gas Price in €/MWh,scenario,100,196,100,1
+Hard Coal Price in $/t,future,100,100,100,1
+Hard Coal Price in $/t,historical,255,100,100,1
+Hard Coal Price in $/t,scenario,100,196,100,1
+USD-Rate,historical,255,100,100,1
+USD-Rate,applied,100,196,100,1
+Wind in m/s,map,new,,,1
+Temperatur [°C],map,Temperatur,,,1
+Power Price simulated in €/MWh,map,standard,,,1
+Global Radiation in W/m²,map,standard,,,1

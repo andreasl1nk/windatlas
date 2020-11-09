@@ -1,0 +1,52 @@
+table,number,width,height,type,csv_name,headline,strokewidth,ymin,ymax,cb,mapcolumn,hourly
+Power-Sector,Graph1,750,989,map,PowerPrices,Power Price simulated in €/MWh,1,0,90,no,4,yes
+Power-Sector,Graph2,920,322,line,Demand,Demand in MW,1,auto,auto,no,,yes
+Power-Sector,Graph3,920,322,line,PowerPrices,Power Price in €/MWh,1,-10,150,no,,yes
+Power-Sector,Graph4,920,322,stackedline,Generation,Generation in MW,1,auto,auto,no,,yes
+Overview,Graph2,835,189,line,Demand,Demand in MW,1,auto,auto,no,,yes
+Overview,Graph3,835,189,line,PowerPrices,Power Price in €/MWh,1,-10,150,no,,yes
+Overview,Graph4,835,189,stackedline,Generation,Generation in MW,1,auto,auto,no,,yes
+Overview,Graph5,835,189,stackedline,Capacities,Capacities in MW,1,auto,auto,no,,no
+Overview,Graph6,835,189,line,Temperature,Temperatur in °C,1,auto,auto,no,,no
+Overview,Graph7,835,189,line,NetImports,NetImports in MW,1,auto,auto,no,,yes
+Overview,Graph9,835,189,eu_line,EUA-Price,EUA Price in €/t,1,auto,auto,no,,no
+Overview,Graph10,835,189,eu_line,Gas-Price,Gas Price in €/MWh,1,auto,auto,no,,no
+Overview,Graph11,835,189,eu_line,Coal-Price,Hard Coal Price in $/t,1,auto,auto,no,,no
+Overview,Graph12,835,189,eu_line,USD-Rate,USD-Rate,1,auto,auto,no,,no
+Temperatur,Graph1,750,989,windmap,Temp,Temperatur [°C],1,-10,25,no,14,yes
+Temperatur,Graph2,920,322,line,Demand,Demand in MW,1,auto,auto,no,,yes
+Temperatur,Graph3,920,322,line,Temperature,Temperatur in °C,1,auto,auto,no,,no
+Temperatur,Graph4,920,322,stackedline,Generation,Generation in MW,1,auto,auto,no,,yes
+Radiation,Graph1,750,989,windmap,SSRD,Global Radiation in W/m²,1,0,300,no,4,yes
+Radiation,Graph2,920,322,line,Demand,Demand in MW,1,auto,auto,no,,yes
+Radiation,Graph3,920,322,line,PowerPrices,Power Price in €/MWh,1,-10,150,no,,yes
+Radiation,Graph4,920,322,stackedline,Generation,Generation in MW,1,auto,auto,no,,yes
+Wind,Graph1,750,989,windmap,Wind,Wind in m/s,1,0,12,no,4,no
+Wind,Graph2,920,322,line,Demand,Demand in MW,1,auto,auto,no,,yes
+Wind,Graph3,920,322,line,PowerPrices,Power Price in €/MWh,1,-10,150,no,,yes
+Wind,Graph4,920,322,stackedline,Generation,Generation in MW,1,auto,auto,no,,yes
+Import-Export,Graph1,750,989,map,PowerPrices,Power Price simulated in €/MWh,1,0,90,1,4,yes
+Import-Export,Graph2,920,239,line,Demand,Demand in MW,1,auto,auto,no,,yes
+Import-Export,Graph3,920,239,line,PowerPrices,Power Price in €/MWh,1,-10,150,no,,yes
+Import-Export,Graph4,920,239,stackedline,Generation,Generation in MW,1,auto,auto,no,,yes
+Import-Export,Graph5,920,239,line,NetImports,NetImports in MW,1,auto,auto,no,,yes
+Commodities,Graph1,1650,238,eu_line,EUA-Price,EUA Price in €/t,1,auto,auto,no,,no
+Commodities,Graph2,1650,239,eu_line,Gas-Price,Gas Price in €/MWh,1,auto,auto,no,,no
+Commodities,Graph3,1650,239,eu_line,Coal-Price,Hard Coal Price in $/t,1,auto,auto,no,,no
+Commodities,Graph4,1650,239,stackedline,Generation,Generation in MW,1,auto,auto,no,,no
+Compare,Graph11,835,189,line,Demand,Demand in MW,1,auto,auto,no,,yes
+Compare,Graph12,835,189,line,Demand,Demand in MW,1,auto,auto,no,,yes
+Compare,Graph3,835,189,line,PowerPrices,Power Price in €/MWh,1,-10,150,no,,yes
+Compare,Graph4,835,189,line,PowerPrices,Power Price in €/MWh,1,-10,150,no,,yes
+Compare,Graph5,835,189,stackedline,Generation,Generation in MW,1,auto,auto,no,,yes
+Compare,Graph6,835,189,stackedline,Generation,Generation in MW,1,auto,auto,no,,yes
+Compare,Graph7,835,188,stackedline,Capacities,Capacities in MW,1,auto,auto,no,,no
+Compare,Graph8,835,188,stackedline,Capacities,Capacities in MW,1,auto,auto,no,,no
+Compare,Graph9,835,188,line,NetImports,NetImports in MW,1,auto,auto,no,,yes
+Compare,Graph10,835,188,line,NetImports,NetImports in MW,1,auto,auto,no,,yes
+Compare-Maps,Graph1,750,989,map,PowerPrices,Power Price simulated in €/MWh,1,0,90,no,4,yes
+Compare-Maps,Graph2,750,989,map,PowerPrices,Power Price simulated2 in €/MWh,1,0,90,no,4,yes
+Stylesheets/windger.csv,Graph1,750,989,windmap,winddata.csv,Power Price simulated in €/MWh,1,0,90,no,4,yes
+Stylesheets/windger.csv,Graph2,920,322,line,Demand,Demand in MW,1,auto,auto,no,,yes
+Stylesheets/windger.csv,Graph3,920,322,line,PowerPrices,Power Price in €/MWh,1,-10,150,no,,yes
+Stylesheets/windger.csv,Graph4,920,322,stackedline,Generation,Generation in MW,1,auto,auto,no,,yes

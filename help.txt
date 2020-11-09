@@ -1,0 +1,14 @@
+Leftclick on a country in the Map to change to the country 
+Leftklick on a date in Diagramm to show the Date in the Map 
+Brush in a Diagramm to zoom in  
+Rightclick in a Diagramm to zoom out
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+in the Free Software Foundation, either version 3 of the License, or
+any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.

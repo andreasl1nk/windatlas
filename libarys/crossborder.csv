@@ -1,0 +1,71 @@
+country1,country2,value,Latitude1,Longitude1,Latitude2,Longitude2,
+Albania,Greece,AL-GR,40.25,20.5,39.5,20.5
+Austria,Czech Republic,AT-CZ,48.5,15,49.25,15
+Austria,Hungary,AT-HU,47.5,16,47.5,17
+Austria,Italy,AT-IT,47.1,12,46.35,12
+Austria,Slovenia,AT-SL,47,14.5,46.25,14.5
+Austria,Switzerland,AT-CH,47.1,8.95,47.1,9.95
+Belarus,Lithuania,BY-LT,55,26.5,55,25.5
+Belgium,Luxembourg,BE-LU,50,5,50,6
+Belgium,Netherlands,BE-NL,51,5,51.75,5
+Belgium,United Kingdom,BE-UK,51.25,3,51.25,2
+Bosnia Herzegovina,Croatia,BA-HR,44.5,16.5,44.5,15.5
+Bulgaria,Greece,BG-GR,41.75,24,41,24
+Bulgaria,Macedonia,BG-MK,41.75,23,41.75,22
+Bulgaria,Romania,BG-EO,43.5,25,44.25,25
+Bulgaria,Serbia,BG-RS,43.25,23.25,43.25,22.25
+Croatia,Hungary,HR-HU,46,17,46.75,17
+Croatia,Serbia,HR-RS,45.5,18.5,45.5,19.5
+Croatia,Slovenia,HR-SL,46,16,46,15
+Czech Republic,Poland,CZ-PL,50,17,50.75,17
+Czech Republic,Slovakia,CZ-SK,49,17.5,49,18.5
+Denmark,Norway,DK-NO,57.25,9,57.8,9
+Denmark,Sweden,DK-SE,56.5,10.75,56.5,11.75
+Denmark,United Kingdom,DK-UK,56,4.5,56,3.5
+Estonia,Finland,EE-FI,59.75,25.5,60.2,25.5
+Estonia,Latvia,EE-LV,58,26,57.4,26
+Estonia,Russia,EE-RU,58.5,27,58.5,28
+Finland,Norway,FI-NO,68.5,23,69,23
+Finland,Sweden,FI-SE,62,20,62,19
+Finland,Russia,FI-RU,62,30,62,31
+France,Belgium,FR-BE,49.85,4,50.5,4
+France,Switzerland,FR-CH,46.65,6,46.65,7
+France,Spain,FR-ES,43,0,42.35,0
+France,Italy,FR-IT,44.75,6.5,44.75,7.5
+France,Germany,FR-DE,48.75,7.5,48.75,8.5
+France,United Kingdom,FR-UK,50,-2,50.65,-2
+Germany,Poland,DE-PL,52.5,14.25,52.5,15.25
+Germany,Czech Republic,DE-CZ,49.2,12.8,49.2,13.8
+Germany,Austria,DE-AT,48,11.75,47.35,11.75
+Germany,Switzerland,DE-CH,48,8.5,47.35,8.5
+Germany,Netherlands,DE-NL,52,7.5,52,6.5
+Germany,Denmark,DE-DK,54.6,9,55.15,9
+Germany,Luxembourg,DE-LU,49.6,7.2,49.6,6.2
+Germany,Sweden,DE-SE,54.75,13.75,55.3,13.75
+Greece,Italy,GR-IT,38.5,19.25,38.5,18.25
+Greece,Macedonia,GR-MK,40.65,21.75,41.4,21.75
+Greece,Turkey,GR-TR,38.75,24.5,38.75,25.5
+Hungary,Romania,HU-EO,47,21.25,47,22.25
+Hungary,Slovakia,HU-SK,47.5,19,48.25,19
+Hungary,Ukraine,HU-UA,48.2,22.35,48.2,23.35
+Hungary,Serbia,HU-RS,46.5,19.75,45.75,19.75
+Ireland,United Kingdom,IE-UK,53,-5.75,53,-4.75
+Italy,Slovenia,IT-SL,46,13.25,46,14.25
+Italy,Switzerland,IT-CH,45.5,7.5,46.25,7.5
+Latvia,Lithuania,LV-LT,56.5,24,55.85,24
+Latvia,Russia,LV-RU,56.75,27.5,56.75,28.5
+Lithuania,Russia,LT-RU,55.35,22,54.75,22
+Lithuania,Poland,LT-PL,54.15,23.75,54.15,22.75
+Lithuania,Sweden,LT-SE,55.5,19,55.5,18
+Netherlands,Norway,NL-NO,54,5.75,54.65,5.75
+Netherlands,United Kingdom,NL-UK,52.5,3.5,52.5,2.5
+Norway,Sweden,NO-SE,60.5,12,60.5,13
+Norway,Russia,NO-RU,69.75,30,69.25,30
+Norway,United Kingdom,NO-UK,58.5,4,58.5,3
+Poland,Slovakia,PL-SK,49.75,20.5,49,20.5
+Poland,Sweden,PL-SE,55,16.5,55.6,16.5
+Poland,Ukraine,PL-UA,50.5,23.5,50.5,24.5
+Portugal,Spain,PT-ES,40,-7.25,40,-6.25
+Romania,Serbia,EO-RS,45.5,21.25,45.5,20.25
+Romania,Ukraine,EO-UA,47.5,24.5,48.25,24.5
+Slovakia,Ukraine,SK-UA,48.75,22,48.75,23

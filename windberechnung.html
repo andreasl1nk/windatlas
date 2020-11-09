@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta charset="utf-8">
+<head> 
+
+<style> 
+
+.selectertext{
+	font-family: PT Sans;
+	font-size: 20px;
+	margin-top:10px;
+	margin-bottom:5px;
+	margin-left:10px;
+}
+.dropdown{
+	width: 150px !important; 
+	min-width: 150px; 
+	max-width: 150px;
+	margin-top:5px;
+	margin-left:10px;
+	font-family: PT Sans;
+	font-size: 20px;
+}
+
+.graph {
+    float: left;
+	background-color:White;
+	border:1px solid #00305d;
+	margin-left:5px;
+	margin-top:5px;
+	}
+path { 
+    stroke: black;
+    stroke-width: 3px;
+    fill: none;
+	}
+.legend {
+	font-family: PT Sans;
+    font-size: 15px;
+	}
+	
+.axis text {
+	font-family: PT Sans;
+	font-size: 10pt;
+	}
+
+.text{
+	font-family: PT Sans;
+	font-size: 6pt;
+	}  
+
+.axis line,
+.axis path {
+	fill: none;
+	stroke: grey;
+	stroke-width: 1px;
+	opacity: 1;
+	}
+.line{stroke-width: 0.2px;}	
+.tablevalue{
+text-align: right
+}
+
+</style>
+</head>
+<body>
+<script src="libarys/d3.v3.min.js"></script>
+<script src="libarys/queue.v1.min.js"></script>
+<script src="libarys/topojson.v1.min.js"></script>
+<script src="libarys/d3.geo.projection.v0.min.js"></script>
+<script src="libarys/colorscale.js"></script>
+<script src="libarys/contrylist.js"></script>
+<script src="libarys/myfunctions.js"></script>
+
+<div   id="complscreen" style="width: 1890px;height: 850px;background-color: white;"> 
+	<div id="dropdowncontainer" style="background-color:White; border: 1px solid #00305d; height: 925px; margin-left:10px; margin-bottom:0px; margin-top:5px; width:170px;   float: left" align="left">
+		<p class="selectertext">Windturbine</p>
+		<select   id="windturbine" class ="dropdown" >
+			<option value='Enercon E101/3000'>Enercon E101/3000</option>
+			<option value='Enercon E126/4200'>Enercon E126/4200</option>
+			<option value='Enercon E126/7500'>Enercon E126/7500</option>
+			<option value='Enercon E126/7580'>Enercon E126/7580</option>
+			<option value='Enercon E141/4200'>Enercon E141/4200</option>
+			<option value='Siemens SWT-3.6-107'>Siemens SWT-3.6-107</option>
+			<option value='Siemens SWT-3.6-120'>Siemens SWT-3.6-120</option>
+			<option value='Vestas V105/3300'>Vestas V105/3300</option>
+			<option value='Vestas V105/3450'>Vestas V105/3450</option>
+			<option value='Vestas V112/3000'>Vestas V112/3000</option>
+			<option value='Vestas V112/3000 Offshore'>Vestas V112/3000 Offshore</option>
+			<option value='Vestas V164/8000'>Vestas V164/8000</option>
+		</select>
+		<p style="margin-left:10px; float: left ;margin-top:20px;font-family: PT Sans ;" align="left">Startjahr<input type="text" id="startjahr"style="width: 120px !important; min-width: 120px; max-width: 120px" value = 2014 > </p>	
+		<p style="margin-left:10px; float: left ;margin-top:20px;font-family: PT Sans ;" align="left">Laufzeit<input type="text" id="laufzeit"style="width: 120px !important; min-width: 120px; max-width: 120px" value = 2 > </p>	
+	 	<p class="selectertext">Map</p> 
+	 	<select   id="mapselecter" class ="dropdown" > 
+			<option value='Windspeed'>Windgeschwindigkeit 100 m in m/s </option> 
+	 		<option value='capacity'>Installierte Leistung in MW</option> 
+	 		<option value='erträge'>Erzeugte Leistung in MWh </option> 
+			<option value='WKA Standorte'>WKA Standorte</option> 
+			
+	 	</select> 
+	
+	</div> 	
+	<div  class="graph" id="Graph1" style="width:300px; height: 100px;"></div>
+	<div  class="graph" id="Graph3" style="width:700px; height: 1045px;display:none"></div>
+
+	<div  class="graph" id="Graph2"	style="width:800px; height: 303px;"></div>
+	<table    id="summarytable"     >   
+		 <tr>
+			<td>Erzeugte Strommnege: </td>
+			<td id="table1"class="tablevalue">  </td>
+			<td>MWh</td>
+		  </tr>
+		  <tr>
+			<td>Installierte Leistung: </td>
+			<td id="table2"class="tablevalue">  </td>
+			<td>MW</td>
+		  </tr>
+	</table>
+<div   id="tooltip"></div>		
+</div> 
+
+<script>
+
+//var menu = d3.select("#mapselecter")
+ //   .on("change", change);
+var menu = d3.select("#windturbine")
+    .on("change", change);
+
+typo = "PT Sans";	
+	
+redraw ();
+
+function redraw (){ //lädt die komplette seite neu
+drawgeneratorline()
+gnumber = "Graph1"
+drawmap(gnumber )
+
+
+
+}
+
+
+
+function drawgeneratorline(){
+
+
+	margin = {top: 20, right: 20, bottom: 30, left: 50}
+	var width = document.getElementById("Graph2").offsetWidth- margin.left - margin.right
+	var height = document.getElementById("Graph2").offsetHeight- margin.top - margin.bottom;
+	
+	
+	data = []
+	xy = []
+	generatorline = []
+	d3.csv("data/windturbines.csv", function(error, data){
+		turbineselecter = document.getElementById("windturbine").value;
+
+		data.forEach(function(d){
+			if (d.name == turbineselecter){
+				for (s =0;s<=35;s=s+0.5){
+				d.speed = s
+				d.value = +d[s]
+				xy.push({x: d.speed, y: d.value});
+				generatorline[s] = +d.value 
+				}
+			}
+		})
+		
+		var xscl = d3.scale.linear()
+			.domain(d3.extent(xy, function(d) {return d.x;})) //use just the x part
+			.range([margin.left, width])
+			
+		var x_axis = d3.svg.axis()
+			.scale(xscl)
+			.orient("bottom") ;
+	maxgenrationpower = d3.max(xy, function(d) {return d.y;})
+
+		var yscl = d3.scale.linear()
+			.domain(d3.extent(xy, function(d) {return d.y*1.1;})) // use just the y part
+			.range([height + margin.top, margin.top])
+			
+		var y_axis = d3.svg.axis()
+                .scale(yscl)
+                .orient("left") ;	
+	
+		slice = d3.svg.line()
+		  .x(function(d) { return xscl(d.x);}) // apply the x scale to the x data
+		  .y(function(d) { return yscl(d.y);}) // apply the y scale to the y data
+
+
+		
+		var svg = d3.select("#Graph2")
+			.append("svg")
+						.attr({
+				width: width+ margin.left + margin.right,
+				height: height+ margin.top + margin.bottom,
+			});
+			
+		svg.append('rect') // outline for reference
+			.attr({x: margin.left, y: margin.top,
+				width: width,
+				height: height,
+				stroke: 'black',
+				'stroke-width': 0.5,
+				fill:'white'});
+		
+		height = height+margin.top
+				svg.append("g")	
+					.attr("class", "x axis")
+					.attr("transform", "translate(0," + height  + ")") 
+					.call(x_axis)
+			
+				svg.append("g")
+					.attr("transform", "translate(" + margin.left  + ",0)") 
+					.attr("class", "y axis")
+					.call(y_axis)			
+				
+		svg.append("path")
+			.attr("class", "line")
+			.attr("d", slice(xy)) // use the return value of slice(xy) as the data, 'd'
+			.style("fill", "none")
+			.style("stroke", "red")
+			.style("stroke-width", 2)
+			
+			
+
+			
+	})
+;
+
+
+   
+	
+}
+
+
+function drawmap(){
+
+
+
+	var mapwidth = document.getElementById(gnumber).offsetWidth-5;
+	var mapheight = document.getElementById(gnumber).offsetHeight-40;
+	mapselecter = document.getElementById("mapselecter").value;
+	if (mapselecter == "capacity"){
+		colorscale = "";
+	wdata = "data/windger.csv"; //Pfad
+	mapdate = "2016";
+	ymin = 0;
+	ymax = 30000;
+	auflsng =0.25
+	}
+	else if (mapselecter == 'erträge'){
+	auflsng =0.25
+		colorscale = "";
+	wdata = "data/025_wind_2016.csv"; //Pfad
+	mapdate = "2016";
+	ymin = 0;
+	ymax = 30000;
+	}
+		else if (mapselecter == 'WKA Standorte'){
+	auflsng =0.025
+		colorscale = "";
+	wdata = "data/wkalist.csv"; //Pfad
+	mapdate= document.getElementById("startjahr").value;
+	//mapdate = "2016";
+	ymin = 0;
+	ymax = 8000;
+	}
+	else {
+	auflsng =0.25
+		colorscale = "";
+	wdata = "data/025_wind_2016.csv"; //Pfad
+	mapdate = "2016";
+	ymin = 0;
+	ymax = 12;
+	}
+	//Define map projection
+	projection = d3.geo.mercator() 
+		.center([ 10.3, 51.5 ]) 
+		.translate([ mapwidth/2, mapheight/2 ]) 
+		.scale([7000]); 
+	//Define path generator
+	var path = d3.geo.path()
+		 .projection(projection);
+	//Create SVG
+	svg = d3.select("#"+gnumber)
+		.append("svg")
+		.attr("id","svg"+gnumber)
+		.attr("width", mapwidth)
+		.attr("height", mapheight)
+		.append("g")
+				
+	//create map
+	d3.json("libarys/world-topo-min.json", function(error, world) {
+		var topo = topojson.feature(world, world.objects.countries).features;
+		var country = svg.selectAll(".type").data(topo);
+		country.enter().insert("path")
+			.attr("class", "country")
+			.attr("d", path)
+			.style("fill", "white")
+	});
+	capacitydata=[]
+	entrynmbr=0
+	if (mapselecter == 'erträge'){
+		capdata = "data/windger.csv";
+		d3.csv(capdata, function(err, value) {
+			value.forEach(function(i){
+				if (i.Date == "2016"){
+
+					capacitydata[entrynmbr]= {
+						date : i.Date,
+						Longitude : i.Longitude,
+						Latitude:i.Latitude,
+						value:i.value
+					}
+				}
+				entrynmbr++
+			});
+		});		
+	}
+	erzeugung_deutschlandweit = 0
+	instaliert_deutschlandweit = 0
+	d3.csv(wdata, function(err, value) {
+		value.forEach(function(i){
+		if (mapselecter == 'WKA Standorte'){
+		addpoint(i.Longitude, i.Latitude,i.value );
+		}
+		else{
+			if (i.Date == mapdate){
+				if (mapselecter == 'erträge'){					
+					for (entry in capacitydata){
+						if (i.Longitude == capacitydata[entry].Longitude && i.Latitude == capacitydata[entry].Latitude){
+							i.rounded = Math.round(i.value*2)/2;
+							maxgenerator = generatorline[23]
+							capacitydata[entry].value = + capacitydata[entry].value
+							i.generation = (generatorline[i.rounded]/maxgenerator * capacitydata[entry].value)
+							i.value= i.generation
+							erzeugung_deutschlandweit = erzeugung_deutschlandweit+i.value
+							instaliert_deutschlandweit = instaliert_deutschlandweit + capacitydata[entry].value
+						}
+					}
+
+				}
+				}
+			addpoint(i.Longitude, i.Latitude,i.value );
+			}
+		});
+		 NumbType = d3.format(",.2f");
+		document.getElementById("table1").innerHTML = NumbType(erzeugung_deutschlandweit);
+		document.getElementById("table2").innerHTML = NumbType(instaliert_deutschlandweit);
+		//alert(erzeugung_deutschlandweit)
+	});
+	addlegend()
+	//getlatlon()
+}
+
+		function getlatlon(){
+			textval = []; 
+			textval2 = [];
+			direction = [];
+			d3.tsv("wka_list.tsv", function(err, cbflows) {
+				cbflows.forEach(function(i){
+						addwka(i.Latitude, i.Longitude, i.Manufacturer);
+					
+				});
+			});
+		}
+		
+				//function to add polygons and text to the map 
+		function addwka(lat, lon, company) {
+				
+			var gpoint = svg.append("svg")
+				.attr("class", "gpoint");
+				
+			
+	var lat1 = +lat-0.51;
+	var lon1 = +lon-0.51;
+	var lat2 = +lat+0.51;
+	var lon2 = +lon+0.51;
+	var gpoint = svg.append("g").attr("class", "gpoint");
+	var x = projection([lat1,lon1])[0];
+	var y = projection([lat1,lon1])[1];
+	var x2 = projection([lat2,lon2])[0]*1.001;
+	var y2 = projection([lat2,lon2])[1]-0.35;
+
+polypoints = x+","+y+"  "+x2+","+y+" "+x2+","+y2+" "+x+","+y2+" "
+
+	gpoint.append("polygon")
+		.attr("points",polypoints)
+		.attr("fill-opacity",0.8)
+		.attr("stroke-width", "0px")
+		.attr("stroke", "black")
+		.attr("fill", "black");
+				
+
+				
+				
+		}
+
+
+
+
+function addpoint(lat,lon,value) {
+	
+	var lat1 = +lat-auflsng/2;
+	var lon1 = +lon-auflsng/2;
+	var lat2 = +lat+auflsng/2;
+	var lon2 = +lon+auflsng/2;
+	var gpoint = svg.append("g").attr("class", "gpoint");
+	var x = projection([lat1,lon1])[0];
+	var y = projection([lat1,lon1])[1];
+	var x2 = projection([lat2,lon2])[0]*1.001;
+	var y2 = projection([lat2,lon2])[1]-0.35;
+	value = +value
+	
+	
+	n = (+value-ymin)	/(ymax-ymin);
+	
+	getcolours(n,colorscale)
+	polypoints = x+","+y+"  "+x2+","+y+" "+x2+","+y2+" "+x+","+y2+" "
+
+	gpoint.append("polygon")
+		.attr("points",polypoints)
+		.attr("fill-opacity",0.8)
+		.attr("stroke-width", "0px")
+		.attr("stroke", colour)
+		.attr("fill", colour);
+		
+		
+		tooltip = d3.select("#tooltip").attr("class", "tooltip hidden");
+		//offsets for tooltips
+		var offsetL = 20;
+		var offsetT = 20;  
+			  
+		//tooltips
+		gpoint
+			.on("mousemove", function(d,i) {
+			
+				tooltip.classed("hidden", false)
+					.attr("style", 'left:' + (d3.event.clientX + offsetL) + 'px; top:' + (d3.event.clientY - offsetT) + 'px')
+					.html( lat + ";"+ lon);
+			})
+			.on("mouseout",  function(d,i) {
+				tooltip.classed("hidden", true);
+			}); 
+		
+		
+		
+}
+function addlegend(){
+	coulour = new Array;
+	for (var i = 0; i <= 10; i++){
+		n= i/10;
+		getcolours(n,colorscale)
+		coulour[i] =colour;
+	}	
+	varcolour = [coulour[0],coulour[1],coulour[2],coulour[3],coulour[4],coulour[5],coulour[6],coulour[7],coulour[8],coulour[9],coulour[10]]
+	var threshold = d3.scale.threshold()
+		.domain(d3.range(5,16))
+		.range(varcolour)
+	var x = d3.scale.linear()
+		.domain([1,5,11])
+		.range([0, 90])	
+	var xAxis = d3.svg.axis()  
+		.scale(x)
+		.tickSize(980)	
+		.tickValues(d3.range(1.5,12.5,5))	
+		.tickFormat(function(d)  {ymin = +ymin;return  (((ymax-ymin)/10)*(d-1.5)+ymin); }) 	
+		
+	 legend = d3.select("#svg"+gnumber)
+	
+	 var headpts = "0,955 0,1000 270,1000 270,955";
+	maphead = legend.append("svg:polygon")
+		.attr("points", headpts)
+		.attr("stroke", "lightgrey")
+		.attr("stroke-width", 1)
+		.attr("fill", "white");
+	 legend.style("font-size","16px")
+			.call(xAxis);
+
+		legend.select(".domain")
+			.remove();
+			
+		legend.selectAll("rect")
+			.data(threshold.range().map(function(color) {
+				var d = threshold.invertExtent(color);
+				if (d[0] == null) d[0] = x.domain()[0];
+				if (d[1] == null) d[1] = x.domain()[1];
+				return d;
+			}))
+			.enter().insert("rect", ".tick")
+			.attr("height", 12)
+			.attr("y", 965)
+			.attr("x", function(d) { return x(d[0])-75; })
+			.attr("width", function(d) { return x(d[1]) - x(d[0]); })
+			//.attr("transform", function(d) { return "rotate(90)" })
+			.attr("fill", function(d) { return threshold(d[0]); })
+}
+
+function change(){
+	//delete the old Graphs
+		 div = document.getElementById("Graph1");	
+	while(div.firstChild){
+		div.removeChild(div.firstChild);
+	}
+			 div = document.getElementById("Graph2");	
+	while(div.firstChild){
+		div.removeChild(div.firstChild);
+	}
+			 div = document.getElementById("Graph2");	
+	while(div.firstChild){
+		div.removeChild(div.firstChild);
+	}
+	
+
+redraw()
+}
+
+
+</script> 
+</body>
