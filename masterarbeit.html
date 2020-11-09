@@ -213,7 +213,7 @@ function loadwinddata(){
 lati = Math.round(document.getElementById("MapLatitude").value/0.25)*0.25;
 longi= Math.round(document.getElementById("MapLongitude").value/0.25)*0.25;
 
-csvreso =  "data/winddata/vwind_"+lati+"_"+longi+".txt";
+csvreso =  "https://andreasl1nk.github.io/windatlas/data/winddata/vwind_"+lati+"_"+longi+".txt";
 //csvreso =  "data/wind_52_13_80m_2014.csv";
 queue()
 	.defer(d3.csv,csvreso) 
