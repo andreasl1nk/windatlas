@@ -290,7 +290,7 @@ function calculatewindgeneration (winddata,pricedata){
 				var daterunner = new Date(yearrunner+"-"+monthrunner+"-"+dayrunner+"T"+hourrunner+":00:00");
 				windgeneration[daterunner] = d.generation
 				produziertsum = produziertsum+d.generation
-
+alert(daterunner)
 			}
 		}
 		 document.getElementById("table3").innerHTML = NumbType(produziertsum/1000);
