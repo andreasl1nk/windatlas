@@ -260,7 +260,8 @@ function calculatewindgeneration (winddata,pricedata){
 		d.date = parseDateiso(d.validdate);
 		
 
-		readinyear = d.date.getFullYear();
+		//readinyear = d.date.getFullYear();
+	    	readinyear = "2009";
 		if (readinyear == refwindyear){
 		
 			d.value = +d["wind_speed_100m:ms"]*biascorection;
