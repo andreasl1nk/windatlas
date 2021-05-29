@@ -252,7 +252,7 @@ function calculatewindgeneration (winddata,pricedata){
 	entrynmbr=0
 	extendeddata=[]
 
-	parseDateiso = d3.time.format("%Y-%m-%dT %H:%M:%SZ").parse;
+	parseDateiso = d3.time.format("%Y-%m-%dT%H:%M:%SZ").parse;
 	parseDate = d3.time.format("%d.%m.%Y %H:%M").parse;
 	reparseDate = d3.time.format("%d.%m.%Y %H:%M");
 	
@@ -260,8 +260,8 @@ function calculatewindgeneration (winddata,pricedata){
 		d.date = parseDateiso(d.validdate);
 		
 
-		//readinyear = d.date.getFullYear();
-	    	readinyear = "2009";
+		readinyear = d.date.getFullYear();
+	    	
 		if (readinyear == refwindyear){
 		
 			d.value = +d["wind_speed_100m:ms"]*biascorection;
