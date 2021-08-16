@@ -2,39 +2,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta charset="utf-8">
 <head> 
-<link rel="stylesheet" type="text/css" href="libarys/datepicker.css" /> 
+
 <style> 
-
-html, body{
-	margin: 0;
-	padding: 0;
-	}
-	
-div.tooltip {
-	color: #222; 
-	background: #fff; 
-	padding: .5em; 
-	font-family: PT Sans;
-	border-radius: 2px; 
-	box-shadow: 0px 0px 2px 0px #a6a6a6; 
-	opacity: 0.9; 
-	position: absolute;	
-	width: 140px !important; min-width: 140px; max-width: 140px
-	}
-
-.hidden { 
-	display: none; 
-	}
-
-.hed {
-	font-family: PT Sans;
-	font-size: 30pt;
-	font-weight: bold;
-	margin-top:0px;
-	margin-left:18px;
-	margin-bottom:0px; 
-	float: left;
-	}
 
 .clear-button {
   font-family: PT Sans;
@@ -42,22 +11,24 @@ div.tooltip {
   cursor: pointer;
 }
 
-.grey-button {
-  font-family: PT Sans;
-  font-size: 12pt;
-  border:1px solid black;
-  cursor: pointer;
+
+.selectertext{
+	font-family: PT Sans;
+	font-size: 14px;
+	margin-top:10px;
+	margin-bottom:5px;
+	margin-left:10px;
+}
+.dropdown{
+	width: 170px !important; 
+	min-width: 170px; 
+	max-width: 170px;
+	margin-top:5px;
+	margin-left:10px;
+	font-family: PT Sans;
+	font-size: 14px;
 }
 
-.menuchoice {
-	font-family: PT Sans;
-	font-size: 12pt;
-	margin-bottom:0px; 
-	margin-top:15px;
-	float: right;
-	fill: #231F20; 
-	}
-	
 .graph {
     float: left;
 	background-color:White;
@@ -65,7 +36,16 @@ div.tooltip {
 	margin-left:5px;
 	margin-top:5px;
 	}
-	 
+path { 
+    stroke: black;
+    stroke-width: 3px;
+    fill: none;
+	}
+.legend {
+	font-family: PT Sans;
+    font-size: 15px;
+	}
+	
 .axis text {
 	font-family: PT Sans;
 	font-size: 10pt;
@@ -81,72 +61,34 @@ div.tooltip {
 	fill: none;
 	stroke: grey;
 	stroke-width: 1px;
-	opacity: 0.2;
+	opacity: 1;
 	}
-
-	
-	
-path { 
-    stroke: black;
-    stroke-width: 0.5px;
-    fill: none;
-	}
-
-.legend {
+.line{stroke-width: 0.2px;}	
+.tablevalue{
 	font-family: PT Sans;
-    font-size: 15px;
-	}
-.browser text {
-  text-anchor: end;
-}	
-	
-.brush .extent {
-  stroke: #fff;
-  fill-opacity: .125;
-  shape-rendering: crispEdges;
-}	
-
-/* The Modal (background) */
-.modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 67px; /* Location of the box */
-    left: 15px;
-    top: 0;
-    width: 170px; 
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0); /* Black w/ opacity */
+	text-align: right;
+	margin-top:25px;
+	padding: .5em; 
 }
 
-/* Modal Content */
-.modal-content {
-    background-color: #fefefe;
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #888;
+div.tooltip {
+	color: #222; 
+	background: #fff; 
+	padding: .5em; 
 	font-family: PT Sans;
-	 font-size: 12px;
-    width: 80%;
-}
+	border-radius: 2px; 
+	box-shadow: 0px 0px 2px 0px #a6a6a6; 
+	opacity: 0.9; 
+	position: absolute;	
+	width: 150px !important; min-width: 150px; max-width: 150px
+	}
 
-/* The Close Button */
-.close {
-    color: #aaaaaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
+.hidden { 
+	display: none; 
+	}
 
-.close:hover,
-.close:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
-}
-
+	
+	
 </style>
 </head>
 <body>
@@ -157,1721 +99,946 @@ path {
 <script src="libarys/colorscale.js"></script>
 <script src="libarys/contrylist.js"></script>
 <script src="libarys/myfunctions.js"></script>
-<script type="text/javascript" src="libarys/datepicker.js"></script>
 
-
-<div   id="complscreen" style="width: 1890px;height: 1050px;background-color: white;"> 
-	<div style="height: 10px;" id="Space"> </div>  	
-		<p id="headline" align="left" class="hed" style="width: 1850px">	<font   color="#00305d">Power</font><font color="#E2001a">2</font><font color="#00305d">Sim Dashboard</font> 
-
-			<input name="helpbutton" align="right" type="button" value="?"  style="margin-top:20px;margin-right:5px;float: right" onclick="helpmenu()" />	
-			<img style="margin-right:15px;margin-top:10px;float: right" src="./logo.png" align="right" width="204" height="35" alt="logo" onclick="location.reload(true)"> 
-			<p id="szen" align="left" style="margin-left:460px;margin-top:20px;position:absolute;" class="menuchoice">Szenario 
-				<select  id="szenario"style="width: 400px !important; min-width: 400px; max-width: 400px;">
-					<option selected value="DashBoard2050/">Standardszenario 2005 - 2050</option>
-				</select>
-			</p>
-			<p id="szen2" align="left" style="margin-left:1060px;margin-top:20px;position:absolute;" class="menuchoice">
-						
-				<select  id="szenario2"style="width: 400px !important; min-width: 400px; max-width: 400px;">
-					<option selected value="DashBoard2050/">Standardszenario 2005 - 2050</option>
-				</select>
-			</p>		
-		</p>
-	<div style=" margin-left:5px; float: left;">
-		<div style="background-color:White; border: 1px solid #00305d; height: 993px; margin-left:10px; margin-bottom:0px; margin-top:5px; width:170px;   float: left"id="container" align="left">
-			<div style="height: 10px;" id="Space"> </div> 
-
+<div   id="complscreen" style="width: 1890px;height: 850px;background-color: white;"> 
+	<div id="dropdowncontainer" style="background-color:White; border: 1px solid #00305d; height: 765px; margin-left:10px; margin-bottom:0px; margin-top:5px; width:240px;   float: left" align="left">
+		<p class="selectertext">Windturbine</p>
+		<select   id="windturbine" class ="dropdown" >
+			<option value='Enercon E101/3000'>Enercon E101/3000</option>
+			<option value='Enercon E126/4200'>Enercon E126/4200</option>
+			<option value='Enercon E126/7500'>Enercon E126/7500</option>
+			<option value='Enercon E126/7580'>Enercon E126/7580</option>
+			<option value='Enercon E141/4200'>Enercon E141/4200</option>
+			<option value='Siemens SWT-3.6-107'>Siemens SWT-3.6-107</option>
+			<option value='Siemens SWT-3.6-120'>Siemens SWT-3.6-120</option>
+			<option value='Vestas V105/3300'>Vestas V105/3300</option>
+			<option value='Vestas V112/3000'>Vestas V112/3000</option>
+			<option value='Vestas V112/3000 Offshore'>Vestas V112/3000 Offshore</option>
+			<option value='Vestas V164/8000'>Vestas V164/8000</option>
+			<option value='Enercon E70/2000'>Enercon E70/2000</option>
+			<option value='Enercon E 66 1800'>Enercon E 66 1800</option>
+			<option value='Vestas V105/3450'>Vestas V105/3450(398 W/m^2)</option>
+			<option value='Vestas V117-3.45'>Vestas V117-3.45(320 W/m^2) </option>
+			<option value='Vestas EV136-3.45'>Vestas EV136-3.45 (237 W/m^2)</option>
+			
+			
+		</select>
+		<p style="margin-left:10px; float: left ;margin-top:20px;font-family: PT Sans ;" align="left">Latitude<input type="text" id="MapLatitude"style="width: 170px !important; min-width: 170px; max-width: 170px" value = 51 > </p>	
+		<p style="margin-left:10px; float: left ;margin-top:20px;font-family: PT Sans ;" align="left">Longitude<input type="text" id="MapLongitude"style="width: 170px !important; min-width: 170px; max-width: 170px" value = 10 > </p>	
+		<p style="margin-left:10px; float: left ;margin-top:20px;font-family: PT Sans ;" align="left">Turmhöhe in m<input type="text" id="turmhoehe"style="width: 170px !important; min-width: 170px; max-width: 170px" value = 100 > </p>	
+		<p style="margin-left:10px; float: left ;margin-top:20px;font-family: PT Sans ;" align="left">Startjahr<input type="text" id="startjahr"style="width: 170px !important; min-width: 170px; max-width: 170px" value = 2014 > </p>	
+		<p class="selectertext">Referenzwindjahr</p> 
+	 	<select   id="refjahr" class ="dropdown" > 
+			<option selected value='2009'>2009</option> 
+			<option value='2007'>2007</option> 
+	 		<option value='2010'>2010</option> 
 
 			
-						<p id="tables" style="margin-left:10px; ;margin-top:20px; float: left ;" align="left" class="menuchoice">Tables 
-				<select   id="series"style="width: 150px !important; min-width: 150px; max-width: 150px">
-					<option value='Power-Sector'>Power-Sector</option>
-					<option  value='Commodities' >Commodities</option>
-					<option value='Import-Export'>Import-Export</option>
-					<option value='Overview'>Overview</option>
-					<option value='Wind'>Wind</option>
-					<option value='Temperatur'>Temperatur</option>
-					<option value='Radiation'>Radiation</option>
-					<option value='Compare'>Compare</option>
-					<option value='Compare-Maps'>Compare-Maps</option>
-					<option value='Stylesheets/windger.csv'>Wind in D</option>	
-					<!-- <option value='Stylesheets/firstrenew.csv'>Dunkelflaute</option> -->
-				</select>
-			</p>
 			
-			<p id="reso" style="margin-left:10px; margin-top:20px; float: left ;" align="left" class="menuchoice">Resolution 
-				<select id="resolution"style="width: 150px !important; min-width: 150px; max-width: 150px;">
-					<option value="y">Yearly</option>
-					<option  value="m" >Monthly</option>
-					<option value="d">Daily</option>
-					<option value="h">Hourly</option>
-				</select>
-			</p>
-		
-			<p id="drpdwn" style="margin-left:10px; margin-top:20px;  float: left";align="left" class="menuchoice">Country 
-				<select id="cntry"style="width: 150px !important; min-width: 150px; max-width: 150px;">	
-					<option  value="Albania"   >Albania</option>
-					<option value="Austria">Austria</option>
-					<option value="Belarus">Belarus</option>
-					<option value="Belgium">Belgium</option>
-					<option value="Bosnia Herzegovina">Bosnia Herzegovina</option>
-					<option value="Bulgaria">Bulgaria</option>
-					<option value="Croatia">Croatia</option>
-					<option value="Czech Republic">Czech Republic</option>
-					<option value="Cyprus">Cyprus</option>
-					<option value="Denmark">Denmark</option>
-					<option value="Estonia">Estonia</option>
-					<option value="Finland">Finland</option>
-					<option value="France">France</option>
-					<option selected value="Germany">Germany</option>
-					<option value="Greece">Greece</option>
-					<option value="Hungary">Hungary</option>
-					<option value="Ireland">Ireland</option>
-					<option value="Italy">Italy</option>
-					<option value="Latvia">Latvia</option>
-					<option value="Lithuania">Lithuania</option>
-					<option value="Luxembourg">Luxembourg</option>
-					<option value="Macedonia">Macedonia</option>
-					<option value="Malta">Malta</option>
-					<option value="Montenegro">Montenegro</option>
-					<option value="Netherlands">Netherlands</option>
-					<option value="Norway">Norway</option>
-					<option value="Poland">Poland</option>
-					<option value="Portugal">Portugal</option>
-					<option value="Romania">Romania</option>
-					<option value="Russia">Russia</option>
-					<option value="Serbia">Serbia</option>
-					<option value="Slovakia">Slovakia</option>
-					<option value="Slovenia">Slovenia</option>
-					<option value="Spain">Spain</option>
-					<option value="Sweden">Sweden</option>
-					<option  value="Switzerland"   >Switzerland</option>
-					<option value="Ukraine">Ukraine</option>
-					<option value="United Kingdom">United Kingdom</option>	
-				</select>
-			</p>
-			<p style="margin-left:10px; float: left ;margin-top:20px;font-family: PT Sans ;" align="left">Startdate <input type="text" id="from" class='datepicker'style="width: 120px !important; min-width: 120px; max-width: 120px" value = "01-Jan-2005" placeholder="01-Jan-2005"> </p>		
-
-			<p style="margin-left:10px; float: left;margin-top:10px;font-family: PT Sans ;" align="left">Enddate      <input type="text" id="to" class='datepicker' style="width: 120px !important; min-width: 120px; max-width: 120px"value = "31-Dec-2050" placeholder="31-Dec-2050"> </p>
-
-			
-			<input name="submit" align="center" type="button" value="Submit"  style="margin-left:40px;margin-top:30px;" onclick="change()" />	
-		<!-- <div style=" border: 3px solid white; height: 0px; margin-top:10px; width:169px;   float: left align="left">-->
-		</div>
-		<div   id="tooltipGraph1"></div>
-		<div   id="tooltipGraph2"></div>
-		<div   id="tooltipGraph3"></div>
-		<div   id="tooltipGraph4"></div>
-		<div   id="tooltipGraph5"></div>
-		<div   id="tooltipGraph6"></div>
-		<div   id="tooltipGraph7"></div>
-		<div   id="tooltipGraph8"></div>
-		<div   id="tooltipGraph9"></div>
-		<div   id="tooltipGraph10"></div>
-		<div   id="tooltipGraph11"></div>
-		<div   id="tooltipGraph12"></div>
-	</div> 
-	<div   id="Grapharea">
+	 	</select> 
+		<p style="margin-left:10px; float: left ;margin-top:20px;font-family: PT Sans ;" align="left">Anlagenlaufzeit<input type="text" id="laufzeit"style="width: 170px !important; min-width: 170px; max-width: 170px" value = 2 > </p>	
+		<p style="margin-left:10px; float: left ;margin-top:20px;font-family: PT Sans ;" align="left">WACC in %<input type="text" id="wacc"style="width: 170px !important; min-width: 170px; max-width: 170px" value = 5 > </p>	
 	
-		<div  class="graph" id="Graph1"></div>
-		<div  class="graph" id="Graph2"></div>
-		<div  class="graph" id="Graph3"></div>
-		<div  class="graph" id="Graph4"></div>
-		<div  class="graph" id="Graph5"></div>
-		<div  class="graph" id="Graph6"></div>
-		<div  class="graph" id="Graph7"></div>
-		<div  class="graph" id="Graph8"></div>
-		<div  class="graph" id="Graph9"></div>
-		<div  class="graph" id="Graph10"></div>
-		<div  class="graph" id="Graph11"></div>
-		<div  class="graph" id="Graph12"></div>
-	</div>
-		<div   id="btnDiv" style="width:395px; position:absolute;left:550px;top:70px " >
-		   <input style="font-family: PT Sans ;" id="Autoscale" type="checkbox"  onchange="autoscalecheck(this)" checked> Autoscale <br>
-			<input style="font-family: PT Sans ;" id="Crossborderflow" type="checkbox"  onchange="changes()" > Cross-Border <br>
-		
-		<!-- Trigger/Open The Modal -->
-		<button id="myBtn"style=" position:absolute;top:10px;left:150px; ">Countries</button>
-
-		<!-- The Modal -->
-		<div id="myModal" class="modal">
-
-			<!-- Modal content -->
-			<div class="modal-content">
-				<span class="close">&times;</span>
-				<input type="checkbox" id="Albania"onchange="changecontry(this,id)"/>Albania<br>
-				<input type="checkbox" id="Austria"onchange="changecontry(this,id)"/>Austria<br>
-				<input type="checkbox" id="Belarus"onchange="changecontry(this,id)"/>Belarus<br>
-				<input type="checkbox" id="Belgium"onchange="changecontry(this,id)"/>Belgium<br>
-				<input type="checkbox" id="Bosnia Herzegovina"onchange="changecontry(this,id)"/>Bosnia Herzegovina<br>
-				<input type="checkbox" id="Bulgaria"onchange="changecontry(this,id)"/>Bulgaria<br>
-				<input type="checkbox" id="Croatia"onchange="changecontry(this,id)"/>Croatia<br>
-				<input type="checkbox" id="Czech Republic"onchange="changecontry(this,id)"/>Czech Republic<br>
-				<input type="checkbox" id="Cyprus"onchange="changecontry(this,id)"/>Cyprus<br>
-				<input type="checkbox" id="Denmark"onchange="changecontry(this,id)"/>Denmark<br>
-				<input type="checkbox" id="Estonia"onchange="changecontry(this,id)"/>Estonia<br>
-				<input type="checkbox" id="Finland"onchange="changecontry(this,id)"/>Finland<br>
-				<input type="checkbox" id="France"onchange="changecontry(this,id)"/>France<br>
-				<input type="checkbox" id="Germany"onchange="changecontry(this,id)"/>Germany<br>
-				<input type="checkbox" id="Greece"onchange="changecontry(this,id)"/>Greece<br>
-				<input type="checkbox" id="Hungary"onchange="changecontry(this,id)"/>Hungary<br>
-				<input type="checkbox" id="Ireland"onchange="changecontry(this,id)"/>Ireland<br>
-				<input type="checkbox" id="Italy"onchange="changecontry(this,id)"/>Italy<br>
-				<input type="checkbox" id="Latvia"onchange="changecontry(this,id)"/>Latvia<br>
-				<input type="checkbox" id="Lithuania"onchange="changecontry(this,id)"/>Lithuania<br>
-				<input type="checkbox" id="Luxembourg"onchange="changecontry(this,id)"/>Luxembourg<br>
-				<input type="checkbox" id="Macedonia"onchange="changecontry(this,id)"/>Macedonia<br>
-				<input type="checkbox" id="Malta"onchange="changecontry(this,id)"/>Malta<br>
-				<input type="checkbox" id="Montenegro"onchange="changecontry(this,id)"/>Montenegro<br>
-				<input type="checkbox" id="Netherlands"onchange="changecontry(this,id)"/>Netherlands<br>
-				<input type="checkbox" id="Norway"onchange="changecontry(this,id)"/>Norway<br>
-				<input type="checkbox" id="Poland"onchange="changecontry(this,id)"/>Poland<br>
-				<input type="checkbox" id="Portugal"onchange="changecontry(this,id)"/>Portugal<br>
-				<input type="checkbox" id="Romania"onchange="changecontry(this,id)"/>Romania<br>
-				<input type="checkbox" id="Russia"onchange="changecontry(this,id)" disabled />Russia<br>
-				<input type="checkbox" id="Serbia"onchange="changecontry(this,id)"/>Serbia<br>
-				<input type="checkbox" id="Slovakia"onchange="changecontry(this,id)"/>Slovakia<br>
-				<input type="checkbox" id="Slovenia"onchange="changecontry(this,id)"/>Slovenia<br>
-				<input type="checkbox" id="Spain"onchange="changecontry(this,id)"/>Spain<br>
-				<input type="checkbox" id="Sweden"onchange="changecontry(this,id)"/>Sweden<br>
-				<input type="checkbox" id="Switzerland"onchange="changecontry(this,id)"/>Switzerland<br>
-				<input type="checkbox" id="Ukraine"onchange="changecontry(this,id)"/>Ukraine<br>
-				<input type="checkbox" id="United Kingdom"onchange="changecontry(this,id)"/>United Kingdom<br>
-				<button id="EU27">EU27</button><br>
-				<button id="enbrBt">EnergyBrainpool</button><br>
-				<button id="AllBt">ALL</button><br>
-				<button id="NoneBt">NONE</button><br>
-				
-			</div>
-
-		</div>
-		<p id="Coloursselcter" style="margin-left:10px; margin-top:10px; float: left ;" align="left" class="menuchoice">Colors
-			<select id="Colours"style="width: 90px !important; min-width: 90px; max-width: 90px;">
-				<option selected value="Standard">Standard</option>
-				<option value="blue">blue</option>
-				<option  value="red" >red</option>
-				<option value="green">green</option>
-				<option value="Temperatur">Temperatur</option>
-			</select>
-		</p>
-		<p id="datasetselecter" style="margin-left:10px; margin-top:10px; float: left ;" align="left" class="menuchoice">Dataset
-			<select id="dataset"style="width: 130px !important; min-width: 130px; max-width: 130px;">
-				<option selected value="PowerPrice">Power Price</option>
-				<option value="Demand">Demand</option>
-				<option  value="NetImports" >Net Imports</option>
-				<option  value="ResidualDemand" >Residual Demand</option>
-				<option  value="Temperatur" >Temperatur</option>
-				<option  value="Nuclear Capacities" >Nuclear Capacities</option>
-				<option  value="Lignite Capacities" >Lignite Capacities</option>
-				<option  value="Hard Coal Capacities" >Hard Coal Capacities</option>
-				<option  value="Gas Capacities" >Gas Capacities</option>
-				<option  value="Oil Capacities" >Oil Capacities</option>
-				<option  value="Bio Capacities" >Bio Capacities</option>
-				<option  value="Reservoir Capacities" >Reservoir Capacities</option>
-				<option  value="Pump Capacities" >Pump Capacities</option>
-				<option  value="Wind Capacities" >Wind Capacities</option>
-				<option  value="Solar Capacities" >Solar Capacities</option>
-				<option  value="Hydro Capacities" >Hydro Capacities</option>
-			</select>
-		</p>
-		<p style="margin-left:10px; float: left;margin-top:20px;font-family: PT Sans ;" align="left">Map Scale Min.    <input type="text" id="mincosc" style="width: 60px !important; min-width: 60px; max-width: 60px"> </p>
-		<p style="margin-left:10px; float: left;margin-top:20px;font-family: PT Sans ;" align="left">Max.    <input type="text" id="maxcosc" style="width: 60px !important; min-width: 60px; max-width: 60px" ></p>
-
-	</div>
+		<p class="selectertext">Szenario</p> 
+	 	<select   id="szenarioselecter" class ="dropdown" > 
+			<option value='EUET'>Szenario 1</option> 
+			<option value='EUET_Schwachwindzubau'>Szenario 2</option> 
+			<option value='Agora'>Szenario 3</option> 			
+	 	</select> 
+		<input name="submit" align="center" type="button" value="Run Simulation"  style="margin-left:40px;margin-top:30px;" onclick="change()" />	
 	
+		<div   id="tooltip"></div>
+	</div> 	
+	<div 	class="graph" id="Graph1" style="width:550px; height: 765px;"></div>
+	<div  class="graph" id="auswertung" style="width:695px; height: 765px;">
+	
+	
+	 	<select   id="anlage" class ="dropdown" > 
+		<!--	<option value=''></option>-->
+			<option value='standard'>Standard </option> 
+			<option value='schwachwind'>Schwachwindanlage</option> 
+	 		<option value='starkwind'>Starkwindanlage</option> 
+
+	
+	 	</select> 	
+	
+
+ 	<select   id="mapselecter" class ="dropdown" style="width: 290px !important; min-width: 290px; max-width: 290px"> 
+		<!--	<option value='WKA Standorte'>WKA Standorte</option> -->
+		<!--	<option value='Windspeed'>Windgeschwindigkeit 100 m in m/s </option> -->
+		<!--	<option value='Rauhigkeitslaenge in m '>Rauhigkeitslaenge in m </option> -->
+	 		<option value='revenue'>Jährliche Erträge in €</option> 
+			<option value='volllast'>Jährliche Volllaststunden in h</option> 
+			<option value='spezrev'>spezifischen jährliche Erträge in €/MW inst.</option> 
+			<option value='production'>jährlich produzierte Strommenge in GWh</option> 
+		<option value='installed'>Installierte Leistung in kW</option> 
+			<option value='spezpprice'>Vermarktungswerte in €/MWh</option> 
+			<option value='npv'>Ertragswerte in €/kW(inst.)</option> 
+	 	</select> 
+		<select   id="mapdate" class ="dropdown" > 
+			<!--<option value='2017'>2017</option> -->
+			<option value='2020'>2020</option> 
+			<option value='2025'>2025</option> 
+			<option value='2030'>2030</option> 
+			<option value='2035'>2035</option> 
+			<option value='2040'>2040</option> 
+			<option value='2045'>2045</option> 
+			<option value='2050'>2050</option> 
+	 	</select> 	
+		
+		<p style="margin-left:10px; float: left ;margin-top:20px;font-family: PT Sans ;" align="left">min<input type="text" id="mapmin"style="width: 170px !important; min-width: 170px; max-width: 170px"  > </p>	
+		<p style="margin-left:10px; float: left ;margin-top:20px;font-family: PT Sans ;" align="left">max<input type="text" id="mapmax"style="width: 170px !important; min-width: 170px; max-width: 170px"  > </p>	
+		<input style="font-family: PT Sans ;margin-left:40px" id="Autoscale" type="checkbox"  checked> Autoscale <br>
+		<input name="newmap" align="center" type="button" value="Karte aktualisieren"  style="margin-left:40px;margin-top:10px;" onclick="redrawmap()" />	
+	
+	
+		 
+
+<div  class="graph" id="Graph2"	style="width:600px; height: 253px;"></div>
+			
+	
+	<table    id="summarytable"     >   
+		 <tr>
+			<td>Insgesamter Erlös: </td>
+			<td id="table1"class="tablevalue">  </td>
+			<td>€</td>
+		  </tr>
+		<tr>
+			<td>Erlöse pro kW installierter Leistung:  </td>
+			<td id="table2"class="tablevalue">  </td>
+			<td>€/kW(installiert)</td>
+		</tr>
+		<tr>
+			<td>produzierte Strommenge: </td>
+			<td id="table3"class="tablevalue">  </td>
+			<td>MWh</td>
+		</tr>
+		<tr>
+			<td>Durchschnittlicher Strompreis: </td>
+			<td id="table4"class="tablevalue">  </td>
+			<td>€/MWh</td>
+		</tr>
+		<tr>
+			<td>Durchschnittliche Vollaststunden/a: </td>
+			<td id="table5"class="tablevalue">  </td>
+			<td>h</td>
+		</tr>
+	</table>
+	<div   id="tooltipGraph7"></div>
+	<div  class="graph" id="Graph7"	style="width:600px; height: 200px;"></div>
+	</div>	
+
+		<div  class="graph" id="Graph3"	style="width:750px; height: 303px;"></div>
+	<div  class="graph" id="Graph4"	style="width:750px; height: 303px;"></div>
+	<div  class="graph" id="Graph5"	style="width:750px; height: 303px;"></div>
+	<div  class="graph" id="Graph6"	style="width:750px; height: 303px;"></div>
+	<img style="margin-left:-705px;margin-top:360px;float: left;position:absolute" id="loadscreen" src="./loading.png" align="left" width: 1890px;height: 850px alt="loading" > 	
+
 </div> 
 
 <script>
 
 
 
-//Datenpfade
-z = document.getElementById("szenario");
-szenario = z.value
-datapath = szenario;
-meteodatapath = "MeteoDaten/";
+typo = "PT Sans";	
+NumbType = d3.format(",.2f");	
+redraw ();
 
-//Konstanten
-typo = "PT Sans";
-maxcharts = 12;   //maximale Anzahl von charts pro serie
-initfirstdate = "01-Jan-2005";
-lastdate = "31-Dec-2050";
+	jahrerloes = []
+	for (i= 2005;i<=2051;i++){jahrerloes[i] = []}
+				
 
-//Szenarioliste laden aus Stylesheets/szenarios.csv
-szenarios = []
-szenariopath = []
-d3.csv("Stylesheets/szenarios.csv", function(err, szenarioloader){
-	szenarioloader.forEach(function(i){
+function redraw (){ //lädt die komplette seite neu
+
+
+
+d3.select("#loadscreen").style("visibility", "visible");
+tooltip = d3.select("#tooltip").attr("class", "tooltip hidden");
+	winddata = []
+	pricedata = []
+	extendeddata = []
+	loadrldata()
+	gnumber = "Graph1"
+drawmap(gnumber )
+drawgeneratorline()
+
+	//drawmap()
 	
-		szenarios.push(i.name); 
-		szenariopath.push(i.path);
-	})
-	var sel = document.getElementById('szenario');
-	var sel2 = document.getElementById('szenario2');
-	//style="width:395px; position:absolute;left:550px;top:70px 		
-	for(var i = 0; i < szenarios.length; i++) {
-		var opt = document.createElement('option');
-		opt.innerHTML = szenarios[i];
-		opt.value = szenariopath[i];
-		sel.appendChild(opt);
-	}
-	for(var i = 0; i < szenarios.length; i++) {
-		var opt = document.createElement('option');
-		opt.innerHTML = szenarios[i];
-		opt.value = szenariopath[i];
-		sel2.appendChild(opt);
-	}
-})
-
-
-
-//Startbildschirm (firstload)
-firstdate = document.getElementById("from").value;
-stylecsv = document.getElementById("series").value;
-InputDateParse = d3.time.format("%d-%b-%Y").parse;
-if (typeof mapdate !== 'undefined'){}
-else { mapdate = InputDateParse(firstdate)}
-selecteddate = mapdate
-e = document.getElementById("cntry");
-mapcountry = e.options[e.selectedIndex].value;
-autoscalevalue =1;
-loadcolorscale ();
-loadcsv(stylecsv,firstdate,mapdate,mapcountry);
-firsttimehere = 0
-getcontrylist() //lädt die Länderlisten aus libarys/contrylist.js
-showenbr() //lädt beim firstload die Länder aus der EnergyBrainpool Liste
-
-// force data to update when menu is changed    
-var menu = d3.select("#szen select")
-    .on("change", changes); 
-var menu = d3.select("#szen2 select")
-    .on("change", changes);	
-	var menu = d3.select("#tables select")
-    .on("change", changes); 
-var menu = d3.select("#drpdwn select")
-    .on("change"  ,changes);   
-var menu = d3.select("#reso select")
-    .on("change", changes);
-var menu = d3.select("#Coloursselcter select")
-    .on("change", changes);  
-var menu = d3.select("#datasetselecter select")
-    .on("change", changes); 
-
-	
-
-// Get the modal
-var modal = document.getElementById('myModal');
-
-// Get the button that opens the modal
-var ctbtn = document.getElementById("myBtn");
-var btneu27 = document.getElementById("EU27");
-var AllBt = document.getElementById("AllBt");
-var NoneBt = document.getElementById("NoneBt");
-var enbrBt = document.getElementById("enbrBt");
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
-
-// When the user clicks the button, open the modal 
-ctbtn.onclick = function() {
-    modal.style.display = "block";
-}
-//eu Button
-enbrBt.onclick = function() {showenbr();change()}
-btneu27.onclick = function() {showeurope();change()}
-AllBt.onclick = function() {showallct(); change()}
-NoneBt.onclick = function() {shownonect();change()}
-
-
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-    modal.style.display = "none";
 }
 
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-}
-//alert message for no Data
-function nodataalert(number,hourly){
-if(hourly!="no"){
-	text = number.append('text')
-		.text('No Data available')
-		.attr('dy','0.9em')
-		}
-}
-//get stylesheet name and render svg
 
-function loadcsv(csvname,firstdate,mapdate,mapcountry)
-{
-	z = document.getElementById("series");
-	activetable = z.value
-	if (activetable == "Compare" ||activetable == "Compare-Maps"){d3.select("#szenario2").classed("hidden", false)}
-	else {d3.select("#szenario2").classed("hidden", true)}
-	opp = 1;			//opacity of the Legend is set to 1 so it can change later on clicking
-	if (typeof mapcountry == 'undefined'){
-  		e = document.getElementById("cntry");
-		mapcountry = e.options[e.selectedIndex].value;
-	}
-	//get the selected parameters
-	fromdate 	= document.getElementById("from").value;
-	todate 		= document.getElementById("to").value;
-	r 			= document.getElementById("resolution");
-	InputDateParse = d3.time.format("%d-%b-%Y").parse;
-	InputYearParse = d3.time.format("%Y");
-	InputMonthParse = d3.time.format("%b");
-	InputMonthReParse = d3.time.format("%m");
-	rseries = r.options[r.selectedIndex].value;
-	InputStartDate = InputDateParse(firstdate);
-	InputEndDate = InputDateParse(todate);
-	InputStartYear = InputYearParse(InputStartDate);
-	MapYear  = InputYearParse(mapdate);
-	InputEndYear = InputYearParse(InputEndDate);
-	InputStartMonth = InputMonthParse(InputStartDate);
-	InputStartMonthNr = InputMonthReParse(InputStartDate);
-	InputEndMonth = InputMonthParse(InputEndDate);
-	InputEndMonthNr = InputMonthReParse(InputEndDate);
-	if(InputStartDate > InputEndDate){alert ("End-Date is before Start-Date");return;}
-	mouseover = []
 
-	//get the stylesheetdata
-	d3.csv("Stylesheets/style.csv", function(err, Graph) {
-		for (chartno = 1;chartno<= maxcharts;chartno ++){
-			graphchek =0;
-			chnumber = "Graph"+chartno;	
-			Graph.forEach(function(i){	
-				if (typeof i.xmin === "undefined" || i.xmin === null || i.xmin === "") {}
-				else {
-					e = document.getElementById("from"); 
-					f = document.getElementById("to"); 
-					g =document.getElementById("resolution"); 
-					if (g.value == i.reso && f.value == i.xmax){}
-					else {
-						g.value = i.reso; 
-						e.value = i.xmin; 
-						f.value = i.xmax; 
-						NewDateParse = d3.time.format("%d-%b-%Y").parse
-						mapdate = NewDateParse(i.xmin)
-						selecteddate = mapdate
-						changes();
-					}
-				}	
-			
-				if (i.table == csvname && i.number == chnumber){
-					graphchek =1;
-					addplot(i.number, i.width, i.height, i.type, i.csv_name, i.headline, i.strokewidth, i.ymin,i.ymax,i.cb,i.mapcolumn,mapdate,mapcountry,i.hourly,i.lines,avoidline[i.headline], colorscale[i.headline]);
-				}		
-			});
-			if(graphchek == 0){
-				addplot(chnumber,"","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","");
+function loadrldata(){
+	lati = Math.round(document.getElementById("MapLatitude").value/0.25)*0.25;
+	longi= Math.round(document.getElementById("MapLongitude").value/0.25)*0.25;
+
+	csvreso =  "data/rauhigkeitslänge.csv";
+	queue()
+		.defer(d3.csv,csvreso) 
+		.await(function(error, rldata) {
+		    rldata.forEach(function(d) {
+				if (d.Latitude == lati && d.Longitude == longi){
+					rauhigkeitslänge=d.value;
 				}
-		}
-	});
+				
+			})
+			//alert(rauhigkeitslänge)
+			loadwinddata ()	
+		})
+}		
+
+//load the Data
+function loadwinddata(){
+lati = Math.round(document.getElementById("MapLatitude").value/0.25)*0.25;
+longi= Math.round(document.getElementById("MapLongitude").value/0.25)*0.25;
+
+csvreso =  "data/winddata/vwind_"+lati+"_"+longi+".txt";
+//csvreso =  "data/wind_52_13_80m_2014.csv";
+queue()
+	.defer(d3.csv,csvreso) 
+	.await(function(error, winddata) {
+		loadprices (winddata)	
+	})
+}
+function loadprices (winddata){
+csvpath = document.getElementById("szenarioselecter").value;
+csvyear = document.getElementById("refjahr").value;
+csvreso =  "data/"+csvpath+"_"+csvyear+"/powerprices.csv";
+		queue()
+		.defer(d3.csv,csvreso) 
+		.await(function(error, pricedata) {
+			//processdata(winddata,pricedata)
+			calculatewindgeneration (winddata,pricedata);
+			d3.select("#loadscreen").style("visibility", "hidden");
+			
+			addyouarehere()
+		})
+
+
+
 }
 
-//create new Graphs
 
-function addplot(gnumber, width, height, type, csv, headline,strkwidth, ymin,ymax,cbselecter,mapcolumn,mapdate,mapcountry,hourly,lines,avoidline,colorscale) 
-{
 
-	mouseover[gnumber] = []
-	mouseover[gnumber].lenght = 0;	
-	//show the buttons for the map if first div is a map
-	if ((type == "map" ||type == "windmap")){
-		 if (gnumber == "Graph1"){ 
-			d3.select("#btnDiv").classed("hidden", false)
-								.style.left= "+850px";}
-		c = document.getElementById("Colours"); 
-		if (c.value != "Standard"){colorscale = c.value}
-		else {}
+function calculatewindgeneration (winddata,pricedata){
+	
+	//get the Parameters
+	laufzeit = document.getElementById("laufzeit").value;
+	refwindyear = document.getElementById("refjahr").value;
+	startjahr = document.getElementById("startjahr").value
+	turmhoehe = document.getElementById("turmhoehe").value
+	biascorection = 0.77
+	
+	produziertsum = 0
+	windgeneration = []
+	entrynmbr=0
+	extendeddata=[]
+
+	parseDateiso = d3.time.format("%Y-%m-%dT%H:%M:%SZ").parse;
+	parseDate = d3.time.format("%d.%m.%Y %H:%M").parse;
+	reparseDate = d3.time.format("%d.%m.%Y %H:%M");
+	
+    winddata.forEach(function(d) {
+		d.date = parseDateiso(d.validdate);
 		
-		if (type == "map"){
-			d = document.getElementById("dataset");
-			if (d.value == "PowerPrice")				{csv = "PowerPrices";	headline ="Power Price simulated in €/MWh" ;mapcolumn =4 ;}	
-			else if (d.value == "Demand")				{csv = "Demand";		headline = "Demand in MW" ;					mapcolumn =1 ;}
-			else if (d.value == "NetImports")			{csv = "NetImports";	headline = "NetImports in MW";				mapcolumn =2 ;}
-			else if (d.value == "ResidualDemand")		{csv = "Demand";		headline = "Residual Demand in MWW";		mapcolumn =2 ;}
-			else if (d.value == "Temperatur")			{csv = "Temperature";	headline = "Temperature in °C";				mapcolumn =2 ;}
-			else if (d.value == "Nuclear Capacities")	{csv = "Capacities";	headline = "Nuclear Capacities in MW";		mapcolumn =1 ;}
-			else if (d.value == "Lignite Capacities")	{csv = "Capacities";	headline = "Lignite Capacities in MW";		mapcolumn =2 ;}
-			else if (d.value == "Hard Coal Capacities")	{csv = "Capacities";	headline = "Hard Coal Capacities in MW";	mapcolumn =3 ;}
-			else if (d.value == "Gas Capacities")		{csv = "Capacities";	headline = "Gas Capacities in MW";			mapcolumn =4 ;}
-			else if (d.value == "Oil Capacities")		{csv = "Capacities";	headline = "Oil Capacities in MW";			mapcolumn =5 ;}
-			else if (d.value == "Bio Capacities")		{csv = "Capacities";	headline = "Bio Capacities in MW";			mapcolumn =6 ;}
-			else if (d.value == "Reservoir Capacities")	{csv = "Capacities";	headline = "Reservoir Capacities in MW";	mapcolumn =7 ;}
-			else if (d.value == "Pump Capacities")		{csv = "Capacities";	headline = "Pump Capacities in MW";			mapcolumn =8 ;}
-			else if (d.value == "Hydro Capacities")		{csv = "Capacities";	headline = "Hydro Capacities in MW";		mapcolumn =9 ;}
-			else if (d.value == "Wind Capacities")		{csv = "Capacities";	headline = "Wind Capacities in MW";			mapcolumn =10 ;}
-			else if (d.value == "Solar Capacities")		{csv = "Capacities";	headline = "Solar Capacities in MW";		mapcolumn =11 ;}
+
+		readinyear = d.date.getFullYear();
+		if (readinyear == refwindyear){
+		
+			d.value = +d["wind_speed_100m:ms"]*biascorection;
+			if (+turmhoehe != 100){
+			//rauhigkeitslänge = 0.01
 			
-			else {}
-			crossbordercheck = document.getElementById("Crossborderflow");
-			if (true === crossbordercheck.checked) {
-				cbselecter = "1"
+			d.value = d.value *Math.log(turmhoehe/rauhigkeitslänge)/Math.log(100/rauhigkeitslänge)
+			
+				
+			}
+			d.rounded = Math.round(d.value*2)/2;
+			d.ceil = Math.ceil(d.value*2)/2;
+			d.floor = Math.floor(d.value*2)/2;
+			if (d.ceil != d.floor)
+			{
+				d.y1 = generatorline[d.ceil]
+				d.y2 = generatorline[d.floor]
+				steigung = (d.y1-d.y2)/(d.ceil-d.floor)
+				t = d.y1 - steigung * d.ceil
+				d.generation = steigung *d.value + t
+			
+			}
+			else
+			{
+				d.generation = generatorline[d.rounded]
+			}
+			extendeddata[entrynmbr]= {
+					date : d.date,
+					generation : d.generation,
+					rounded:d.rounded,
+					value:d.value
+				}
+				entrynmbr ++;
+			for (i=0;i<laufzeit;i++){
+				startyear = +startjahr
+				
+				yearrunner = startyear+i
+				
+				var monthrunner = d.date.getMonth()+1;
+				var dayrunner = d.date.getDate();
+				var hourrunner = d.date.getHours();
+				var daterunner = new Date(yearrunner+"-"+monthrunner+"-"+dayrunner+"T"+hourrunner+":00:00");
+				windgeneration[daterunner] = d.generation
+				produziertsum = produziertsum+d.generation
+
 			}
 		}
-	}
-	else if (gnumber == "Graph1"){ 
-		d3.select("#btnDiv").classed("hidden", true);}
+		 document.getElementById("table3").innerHTML = NumbType(produziertsum/1000);
+    });	
+	
+
+	//console.log(extendeddata)
+	makedatasmaller (pricedata,windgeneration,winddata,extendeddata);	
+	drawwindline(extendeddata)
+}
 
 	
-	z = document.getElementById("series");
-	activetable = z.value
+		
+	function makedatasmaller (data,windgeneration,winddata,extendeddata)
+	{
+parseDate = d3.time.format("%d.%m.%Y %H:%M").parse;
+reparsedatexcel = d3.time.format("%d.%m.%Y %H:%M");
+reparseDateiso = d3.time.format("%Y-%m-%dT%H:%M:%SZ");
+		startjahr = +document.getElementById("startjahr").value
+		laufzeit = document.getElementById("laufzeit").value;
+		endjahr = +laufzeit+startjahr
+		pricedata=[]
+		yearrevenue =[]
+		
+		
+		entrynmbr=0
+		entrynmbr2=0
+		erlossum = 0
+		realerlossum =0
+	//console.log(winddata)
+	csvexportdata = []
 	
-	if (activetable == "Compare"||activetable == "Compare-Maps"){
-		if (gnumber == "Graph1"|| gnumber == "Graph3"  ||  gnumber == "Graph5"  ||  gnumber == "Graph7"  ||  gnumber == "Graph9" ||gnumber == "Graph11"){
-		y = document.getElementById("szenario");
-			datapath = y.value
-		}
-		else {
-			y = document.getElementById("szenario2");
-			datapath = y.value
+	erlose = "erlose";
+	csvexportdata[erlose] = []
+
+	
+	headerrow  = "Date;Erloese;Windgeneration";
+	csvexportdata[erlose].push(headerrow)
+		data.forEach(function(d) {
+			d.date = parseDate(d.date);
+
+			d.value = +d.simulated;
+			//if (year>= 2018){pricedate  = new Date(yearrunner+"-"+monthrunner+"-"+dayrunner+"T"+hourrunner+":00:00");
+			//else {pricedate}
+		
+			readinyear = d.date.getFullYear();
+			
+			if (readinyear >= startjahr && readinyear < endjahr)
+			{
+					pricedate = (d.date)
+					
+					//vgenereation = extendeddata.find(x => x.date.getTime() === pricedate.getTime()).generation
+					//vwind = winddata.find(x => x.date.getTime() === pricedate.getTime()).value
+				if (isNumeric(windgeneration[d.date]) ){}
+				else (windgeneration[d.date]=0 )
+				
+				if (d.value >= 0){
+					d.erlose = d.value * windgeneration[d.date]/1000
+					jahrerloes[readinyear] = +jahrerloes[readinyear] + d.erlose
+				}
+				else 
+				{
+					d.erlose = 0;
+					produziertsum = produziertsum - windgeneration[d.date]
+				}
+				
+			
+				
+				//csv
+				
+
+			exportvalue = reparsedatexcel(d.date)  +" ; "+  d.erlose+" ; "+ windgeneration[d.date]
+			csvexportdata[erlose].push(exportvalue)
+				
+					
+				  	pricedata[entrynmbr]= {
+					date : pricedate,
+					erlose : d.erlose,
+					value: +d.simulated
+				}
+				entrynmbr ++;
 			}
-	}
+
+		});	
+		wacc = document.getElementById("wacc").value;
+		for (yearcounter = startjahr;yearcounter<endjahr;yearcounter++){
+
+			yearrevenue[entrynmbr2]= {
+				date : yearcounter,
+				erlose : jahrerloes[yearcounter],
+				rmzerlose : jahrerloes[yearcounter]/ Math.pow( (1+wacc/100),(yearcounter-startjahr))	
+				
+						
+			}
+			entrynmbr2 ++;
+			erlossum = erlossum +jahrerloes[yearcounter]/ Math.pow( (1+wacc/100),(yearcounter-startjahr));
+			realerlossum = realerlossum +jahrerloes[yearcounter];
+		}	
+		//console.log(jahrerloes)	
 	
-		
-	//allgemein
-	//set the margins
-	var margin = {top: 40, right: 150, bottom: 30, left: 60};
-	if (type == "map"||type == "windmap"){var margin = {top: 0, right: 0, bottom: 0, left: 0};}
+		document.getElementById("table1").innerHTML = NumbType(erlossum);
+		document.getElementById("table2").innerHTML = NumbType(erlossum/(maxgenrationpower));
 
-	//color function pulls from array of colors stored in colorscale
-	color = []
-	if (colorscale === undefined)
-	{
-		colorscale = []
-		var color = d3.scale.ordinal().range(colorscale);
-	}
-	else
-	{
-		var color = d3.scale.ordinal().range(colorscale);
+		document.getElementById("table4").innerHTML = NumbType(realerlossum/(produziertsum/1000));
+		document.getElementById("table5").innerHTML = NumbType((produziertsum/laufzeit)/maxgenrationpower);
+		drawprice (pricedata,yearrevenue)
 	}
 
-	//define your year format here, first for the x csv input format, then if the date is displayed in tooltips, then for the x axis ticks
-	Interval = InputEndDate-InputStartDate
-	var parseDate = d3.time.format("%d.%m.%Y %H:%M").parse;
-	var formatDate = d3.time.format("%d-%m-%Y %H:%M");
-	if (rseries == "h" && Interval< 150000000) {axisformat = d3.time.format("%d-%m-%Y %H:%M");}  //bei weiger als 3 Tagen und einer stündlichen Auflösung werden die Stunden mit angeteigt
-	else {axisformat = d3.time.format("%d-%m-%Y");}	
-	var NumbType = d3.format(".2f");   // 2 Nachkommastellen 
-	var NumbType1 = d3.format(".1f");   //1 Nachkommastelle 
-	var NumbType0 = d3.format(".0f"); 
+function isNumeric(n) {
+  return !isNaN(parseFloat(n)) && isFinite(n);
+}
 
-	//Legende: rect size: größe der Vierecke; spacing für Platz dazwischen
-	legendRectSize = 14;
-	legendSpacing = 4;
+//create the Graphs
 
-	//kein Rand um platzhalter container wenn es kein Graph gibt
-	if (type == ""){d3.select("#"+gnumber).classed("hidden", true);}
-	else {d3.select("#"+gnumber).classed("hidden", false);}
-		
-	//delete the old Graphs
-	var div = document.getElementById(gnumber);	
-	while(div.firstChild){
-		div.removeChild(div.firstChild);
-	}
 
-	var width = +width- margin.left - margin.right;
-	var height = +height- margin.top - margin.bottom;
-	
-	//erstellen des svg's
-	var number = d3.select("#"+gnumber)
+function drawwindline(winddata) {
+
+
+var width = document.getElementById("Graph4").offsetWidth
+var height = document.getElementById("Graph4").offsetHeight
+var margin = {top: 40, right: 20, bottom: 30, left: 80};
+var width = +width- margin.left - margin.right;
+var height = +height- margin.top - margin.bottom;
+
+	//erstellen des svg's 3
+	var number = d3.select("#Graph3")
 		.append("svg")
 		.attr("width", width + margin.left + margin.right)
-		.attr("id","svg"+gnumber)
+		.attr("id","svgGraph3")
 		.attr("height", height + margin.top + margin.bottom)
 		.append("g")
 		.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-	if (type == "map"||type == "windmap"){}
-	else {
-		number.append("text")            
-			.attr("y", 4 - (margin.top / 2))
-			.attr("x", width/2 )
-			.style("font-size", "20px")  
-			.style("font-family", typo) 
-			.text(headline);	
-	}									
-	//make a rectangle so there is something to click on
+	number.append("text")            
+		.attr("y", 4 - (margin.top / 2))
+		.attr("x", width/2 )
+		.style("font-size", "20px")  
+		.style("font-family", typo) 
+		.text("Windgeschwindigkeit");
 	number.append("svg:rect")
 		.attr("width", width)
 		.attr("height", height)
 		.style("stroke", "lightgrey")
 		.style("stroke-width", 1)
-		.attr("fill","white");
+		.attr("fill","white");	
+	 //make a clip path for the graph  (defines the visible area of thwe graph )
+	var clip = number.append("svg:clipPath")
+		.attr("id", "clip")
+		.append("svg:rect")
+		.attr("x", 0)
+		.attr("y", 0)	
+		.attr("width", width )
+		.attr("height", height ); 
+	number.append("text")
+		.attr("text-anchor", "middle")  // this makes it easy to centre the text as the transform is applied to the anchor
+	   .style("font-family", typo) 
+	   .attr("transform", "translate("+ (-55) +","+(height/2+10)+")rotate(-90)")  // text is drawn off the screen top left, move down and out and rotate
+		.text("Windgeschwindigkeit in m/s");
+		
+
+		
 	
-	//erstelle unterschiedliche Arten von Graphen 
-////////////LINEGRAPH///////////////////////////////////////////////////////////////////////////////////////////////////////////////	
-	if (type == "line"|| type == "eu_line"|| type == "stackedline") 
-	{
-		 //make a clip path for the graph  (defines the visible area of thwe graph )
-		var clip = number.append("svg:clipPath")
-			.attr("id", "clip")
-			.append("svg:rect")
-			.attr("x", 0)
-			.attr("y", 0)	
-			.attr("width", width )
-			.attr("height", height );  
-			
-		var f = document.getElementById("series");
-		var seriesselect = f.options[f.selectedIndex].value;
-		getyear = d3.time.format("%Y")
-		getmonth = d3.time.format("%m")
-		duobleload = 0;
-		if (type == 'eu_line'){var series = "EU";}
-		else {var series = mapcountry}
-		if (rseries == "m" )		{parseDate = d3.time.format("%d.%m.%Y").parse; 			csvreso = datapath +"m"+csv + ".csv";												totiparse =  d3.time.format("%m.%Y")}
-		else if (rseries == "y"  )	{parseDate = d3.time.format("%d.%m.%Y").parse; 			csvreso = datapath +"y"+csv + ".csv"; 												totiparse =  d3.time.format("%Y")}
-		else if (rseries == "d"  )	{parseDate = d3.time.format("%d.%m.%Y").parse; 		if (type == 'eu_line'){ csvreso = datapath +"d"+csv + ".csv"; } else {	csvreso = datapath +"d"+csv +"_01-01-"+InputStartYear +".csv"}; 						totiparse =  d3.time.format("%d.%m.%Y")}
-		else if (rseries == "h"  )	{
-			if(hourly=="no"){
-				parseDate = d3.time.format("%d.%m.%Y").parse; 			if (type == 'eu_line'){ csvreso = datapath +"d"+csv + ".csv"; } else {	csvreso = datapath +"d"+csv +"_01-01-"+InputStartYear +".csv"}; 						totiparse =  d3.time.format("%d.%m.%Y ")
-			}
-			else {
-				parseDate = d3.time.format("%d.%m.%Y %H:%M:%S").parse; csvreso = datapath +"h"+csv +"_01-"+ InputStartMonthNr +"-"+InputStartYear +".csv" ;totiparse =  d3.time.format("%d.%m.%Y %H")
-			}
-		}
-		
+	//erstellen des svg's 4
+	var number2 = d3.select("#Graph4")
+		.append("svg")
+		.attr("width", width + margin.left + margin.right)
+		.attr("id","svgGraph4")
+		.attr("height", height + margin.top + margin.bottom)
+		.append("g")
+		.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+	number2.append("text")            
+		.attr("y", 4 - (margin.top / 2))
+		.attr("x", width/2 )
+		.style("font-size", "20px")  
+		.style("font-family", typo) 
+		.text("Stromerzeugung");
+	number2.append("svg:rect")
+		.attr("width", width)
+		.attr("height", height)
+		.style("stroke", "lightgrey")
+		.style("stroke-width", 1)
+		.attr("fill","white");	
+	 //make a clip path for the graph  (defines the visible area of thwe graph )
+	var clip = number2.append("svg:clipPath")
+		.attr("id", "clip")
+		.append("svg:rect")
+		.attr("x", 0)
+		.attr("y", 0)	
+		.attr("width", width )
+		.attr("height", height );	
+	number2.append("text")
+		.attr("text-anchor", "middle")  // this makes it easy to centre the text as the transform is applied to the anchor
+	   .style("font-family", typo) 
+	   .attr("transform", "translate("+ (-55) +","+(height/2+10)+")rotate(-90)")  // text is drawn off the screen top left, move down and out and rotate
+		.text("Stromerzeugung in kW");		
 
 		
-		//load the data...
-		if (rseries == "d" && getyear(InputStartDate) < getyear(InputEndDate)){
-			data = []
-			strkwidth = 0.5
-			imax = getyear(InputEndDate) - getyear(InputStartDate);
-			q= queue()
-			q.defer(d3.csv,csvreso) 
-			for(i =1 ;i<= imax; i++){
-				loadyear = +	getyear(InputStartDate) + i;
-				csvresoi  =  datapath +"d"+csv +"_01-01-"+ loadyear +".csv"; 
-				q.defer(d3.csv,csvresoi) 
-			}
-			q.awaitAll(function(error, datas) {
-				if (datas == null ){nodataalert(number,hourly)}
-				datas.forEach (function(entry) {data = data.concat(entry) });
-				drwalinegraph(data)
-			});
-		}
-			
-		else if ((rseries == "h" && getyear(InputStartDate) < getyear(InputEndDate)) ||(rseries == "h" && getmonth(InputStartDate) < getmonth(InputEndDate)) ){
-			if (hourly=="no"){}
-			else{
-				data = []
-				strkwidth = 0.5
-				yearcount = getyear(InputEndDate) - getyear(InputStartDate);
-				monthcount = getmonth(InputEndDate) - getmonth(InputStartDate);
-				stepcounter = +yearcount * 12 + monthcount
-				
-				loadyear = +	getyear(InputStartDate) ;
-				loadmonth = +	getmonth(InputStartDate) ;				
-				q= queue()
-				q.defer(d3.csv,csvreso) 
-				for(i =1 ;i<= stepcounter; i++){
-					loadmonth = loadmonth +1
-					if (loadmonth > 12)
-					{
-						loadmonth = 1
-						loadyear = loadyear +1	
-					}
-					if (loadmonth > 9) {	csvresoi  =  datapath +"h"+csv +"_01-"+ loadmonth +"-"+ loadyear +".csv"; }
-					else  {			csvresoi  =  datapath +"h"+csv +"_01-0"+ loadmonth +"-"+ loadyear +".csv"; }
-					q.defer(d3.csv,csvresoi) 
-				}
-				q.awaitAll(function(error, datas) {
-					if (datas == null ){nodataalert(number,hourly)}
-					datas.forEach (function(entry) {data = data.concat(entry) });
-					drwalinegraph(data)
-				});
-			}
-		}
-		
-		
-		else{
-			queue()
-				.defer(d3.csv,csvreso) 
-				.await(function(error, data) {
-				if (data == null ){nodataalert(number,hourly)}
-			drwalinegraph(data)})
-			;}
+// Set the ranges
+var x = d3.time.scale().range([0, width]);
+var y = d3.scale.linear().range([height, 0]);
+var y2 = d3.scale.linear().range([height, 0]);
 
+// Define the axes
+var xAxis = d3.svg.axis().scale(x)
+    .orient("bottom").ticks(5);
 
-		function drwalinegraph(data)
-		{
-		//linien die laut stylesheet nicht geladen werden sollen werden nicht geladen	
+var yAxis = d3.svg.axis().scale(y)
+    .orient("left").ticks(5);
+var yAxis2 = d3.svg.axis().scale(y2)
+    .orient("left").ticks(5);	
+
+// Define the lines
+var valueline = d3.svg.line()
+    .x(function(d) { return x(d.date); })
+    .y(function(d) { return y(d.value); });		
+var valueline2 = d3.svg.line()
+    .x(function(d) { return x(d.date); })
+    .y(function(d) { return y2(d.generation); });			
 		
-			color.domain(d3.keys(data[0]).filter(function(key) { 
-				keytext =  key !== "UTC" &&  key !== "Type" && key !==   avoidline[0]	&& key !==   avoidline[1]&& key !==   avoidline[2]&& key !==   avoidline[3]&& key !==   avoidline[4]&& key !==   avoidline[5]&& key !==   avoidline[6]&& key !==   avoidline[7]&& key !==   avoidline[8]&& key !==   avoidline[9]&& key !==   avoidline[10]&& key !==   avoidline[11]&& key !==   avoidline[12]&& key !==   avoidline[13]&& key !==   avoidline[14]&& key !==   avoidline[15]&& key !==   avoidline[16]&& key !==   avoidline[17]&& key !==   avoidline[18]&& key !==   avoidline[19];
+
 
 	
-				return (keytext) 
-			}));
-			
-			//Linegraph
+	
+    // Scale the range of the data
+    x.domain(d3.extent(extendeddata, function(d) { return d.date; }));
+    y.domain([0, d3.max(extendeddata, function(d) { return d.value*1.1; })]);
+	y2.domain([0, d3.max(extendeddata, function(d) { return d.generation*1.1; })]);
 
-		if (type == "line"|| type == "eu_line") 
-			{
-				var x = d3.time.scale()
-				var y = d3.scale.linear()
-				var nested = d3.nest()
-					.key(function(d) { return d.Type; })
-					.map(data);
-				
-				// only retrieve data from the selected series, using the nest we just created
-				var data = nested[series];
+    // Add the valueline path.
+    number.append("path")
+        .attr("class", "line")
+        .attr("d", valueline(extendeddata));
+	 // Add the valueline path.
+    number2.append("path")
+        .attr("class", "line")
+        .attr("d", valueline2(extendeddata));	
 
-				// for object constancy we will need to set "keys", one for each type of data (column name) exclude all others.
-				
-				var linedata = color.domain().map(function(name) {
+    // Add the X Axis
+    number.append("g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(xAxis);
 
-						return {name: name,
-							values: data.map(function(d) {
-							totidate = parseDate(d.UTC)
-							totidate = totiparse(totidate)
-							if (rseries == "h"){shownformat = totidate+":00"}
-							else {shownformat = totidate}
-							if (typeof mouseover[gnumber][totidate] === 'undefined'){mouseover[gnumber][totidate]= shownformat+"<br>"+ headline+": "+"<br>";}
-								if (+d[name] != 0){mouseover[gnumber][totidate] = mouseover[gnumber][totidate] +"<br>"+name  +" : "+ NumbType1(+d[name])}
-								return {name:name, date: parseDate(d.UTC), value: parseFloat(+d[name],10)};
-							})
-						};
-					
-				});
-				if (rseries == "m" || rseries == "y"){interpolator = "step-after"}
-				else {interpolator = "linear"}
-				
-				//will draw the line	
-				
-				var line = d3.svg.line()
-					.x(function(d) { return x(d.date); })
-					.y(function(d) { return y(d.value); });		
-				line.interpolate(interpolator)					
-				
-				//bind the data
-				var thegraph = number.selectAll(".thegraph")
-					.data(linedata)
-					
-				//draw  a clip path
-				var thegraphEnter=thegraph.enter().append("g")
-					.attr("clip-path", "url(#clip)")
-					.attr("class", "thegraph")
-					.style("fill", "grey")
-					.attr('id',function(d){ return headline + d.name+"-line"; })
-					.style("stroke-width",5)
+    // Add the Y Axis
+    number.append("g")
+        .attr("class", "y axis")
+        .call(yAxis);
+	
+    // Add the X Axis
+    number2.append("g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(xAxis);
 
-				//actually append the line to the graph
-				thegraphEnter.append("path")
-					.attr("class", "line")
-					.style("stroke", function(d) { return color(d.name); })
-					.style("stroke-width", strkwidth)
-					.attr("d", function(d) { return line(d.values[0]); })
-					.transition()
-					.attrTween('d',function (d){
-						var interpolate = d3.scale.quantile()
-							.domain([0,1])
-							.range(d3.range(1, d.values.length+1));
-							return function(t){
-							return line(d.values.slice(0, interpolate(t)));
-						};
-					})
-				
-				//setup the x and y scales
-				//if (rseries == "h"  ){InputEndDatexline = InputEndDate.setHours(InputEndDate.getHours()+23) } // add 23 hours so the full day is displayed.
-				//else {InputEndDatexline = InputEndDate}	
-				InputEndDatexline = InputEndDate				
-				// if no min and max values are given in the csv get them 
-				minvalue = d3.min(linedata, function(c) { return d3.min(c.values, function(v) { return v.value; }); })
-				if (minvalue < 0 && ymin=="auto"){ymin = minvalue * 1.1}
-				else if (ymin=="auto"){ymin = 0};
-				if (ymax=="auto"){ymax = d3.max(linedata, function(c) { return d3.max(c.values, function(v) { return v.value; })*1.1; })}	;	
-			}	
-//stackedline//////////////////////////////////////////////////////////////////////////////////////			
-		else if (type == "stackedline") 
-			{
-				data.forEach(function(d) {	  
-					d.UTC = parseDate(d.UTC);
-				});
-				// for object constancy we will need to set "keys", one for each type of data (column name) exclude all others.
-			
-				var x = d3.time.scale()
-				var y = d3.scale.linear()
-				if (rseries == "m" || rseries == "y"){interpolator = "step-after"}
-				else {interpolator = "linear"}
-				
-				var area = d3.svg.area()
-					.x(function(d) { return x(d.UTC); })
-					.y0(function(d) { return y(d.y0); })
-					.y1(function(d) { return y(d.y0 + d.y); })
-					.interpolate(interpolator)	;
-					
-				var stack = d3.layout.stack()
-					.values(function(d) { return d.values; });
-					
-				var nested = d3.nest()
-					.key(function(d) { return d.Type; })
-					.map(data);
-				
-				// only retrieve data from the selected series(country), using the nest we just created
-				var data = nested[series];
-				
-				var browsers = stack(color.domain().map(function(name) {
-					return {
-						name: name,
-						values: data.map(function(d) {
-						return {UTC: (d.UTC), y:  parseFloat(+d[name],10)};
-						})
-					};
-				}));
-				
-				var browser = number.selectAll(".browser")
-					.data(browsers)
-					.enter().append("g")
-					.attr("clip-path", "url(#clip)")
-					.attr("class", "browser")
-					//.style("fill", "grey")
-					.attr('id',function(d){ return headline + d.name+"-line"; }) // every line has an unique id: headline+linename+"line"
-					//.style("stroke-width",5)
-
-				
-				browser.append("path")
-					.attr("class", "area")
-					.attr("d", function(d) { return area(d.values); })
-					.style("fill", function(d) { return color(d.name); })
-					.style("stroke", function(d) { return color(d.name); })
-					.style("stroke-width", strkwidth)
-					.transition()
-					.attrTween('d',function (d){
-						var interpolate = d3.scale.quantile()
-							.domain([0,1])
-							.range(d3.range(1, d.values.length+1));
-							return function(t){
-							return area(d.values.slice(0, interpolate(t)));
-						};
-					})
-				//hier nur für die legede graph wird aus browsers erstellt			
-				var linedata = color.domain().map(function(name) {
-						return {name: name,
-							values: data.map(function(d) {
-							totidate = (d.UTC)
-							totidate = totiparse(totidate)
-							if (rseries == "h"){shownformat = totidate+":00"}
-							else {shownformat = totidate}
-							if (typeof mouseover[gnumber][totidate] == "undefined"){mouseover[gnumber][totidate]= shownformat+"<br>"+ headline+": "+"<br>";}
-								if (+d[name] != 0){mouseover[gnumber][totidate] = mouseover[gnumber][totidate] +"<br>"+name  +" : "+ NumbType1(+d[name])}
-								return {name:name, date: (d.UTC), value: parseFloat(+d[name],10)};
-							})
-						};
-					
-				});		
-				InputEndDatexline = InputEndDate
-				  // Find the value  with highest total value
-				var maxUTCVal = d3.max(data, function(d){
-					var vals = d3.keys(d).map(function(key){ return key !== "UTC" ? d[key] : 0 });
-					return d3.sum(vals);
-				});
-				if (ymin=="auto"){ymin = 0};
-				if (ymax=="auto"){ymax = maxUTCVal*1.1};		
-			}
-			
-				x.domain([InputStartDate,InputEndDatexline])
-				x.range([0, width]);
-				//if (rseries == "h"  ){InputEndDatexline = InputEndDate.setHours(InputEndDate.getHours()-23)}  // to avoid the InputEndDate counts up we minus 23 h here again
-			
-			
-				y.domain([ymin,ymax])
-				y.range([height, 0]);
-		
-			//create and draw the x axis
-			var xAxis = d3.svg.axis()
-				.scale(x)
-				.orient("bottom")
-				.tickPadding(10)
-				.tickSize(-height)
-				.ticks(3)
-				.tickFormat(axisformat);
-				
-
-					if (type == "stackedline"){ xAxis.tickSize(0)}
-				
-			number.append("g")
-				.attr("class", "x axis")
-				.attr("transform", "translate(0," + height + ")")
-				.call(xAxis);
-
-							
-			//create and draw the y axis                  
-			var yAxis = d3.svg.axis()
-				.scale(y)
-				.orient("left")
-				.tickSize(-width)
-				.ticks(4)
-				.tickPadding(6);
-				
-				if (type == "stackedline"){ yAxis.tickSize(4)}
-		
-			number.append("g")
-				.attr("class", "y axis")
-				.call(yAxis);	
-				
-				
-			//Buttons for Moving on x Axis
-			move_button_right = number.append('text')
-			  .attr("y", height+10)
-			  .attr("x", width+50)
-			  .attr("class", "clear-button")
-			  .text(">>");
-	  
-			move_button_left = number.append('text')
-			  .attr("y", height+10)
-			  .attr("x", -50)
-			  .attr("class", "clear-button")
-			  .text("<<");	  
-	  
-			  move_button_right
-			 .on('click', function(){vorzeichen ="1";movebutton(vorzeichen)});
-			   move_button_left
-			 .on('click', function(){vorzeichen ="-1";movebutton(vorzeichen)});
-  
-			//define the Legend
-			//define here how many legend entrys should be maximum on a page using the height of the svg
-			
-						
-			legperpage = Math.round(height/27)
-            if(linedata.length > legperpage){
-
-                legendPerPage=Math.ceil(legperpage);
-                totalPages=Math.ceil(linedata.length/legendPerPage);
-
-                pageNo=1;
-
-                var startIndex=(pageNo-1)*legendPerPage;
-                var endIndex=startIndex+legendPerPage;
-                var seriesSubset=[],colorscaleubset=[];
-
-                for(var i=0;i<linedata.length;i++){
-                    if(i>=startIndex && i<endIndex){
-                        seriesSubset.push(linedata[i]);
-                        colorscaleubset.push(colorscale[i]);
-                    }
-                } 
-
-                DrawLegendSubset(seriesSubset,colorscaleubset,legendPerPage,pageNo,totalPages,number);
-            }
-	else {
-			var legend = number.selectAll('g.legend')
-				.data(linedata)
-				.enter()
-				.append('g')
-				.attr('class', 'legend')
-				.attr('transform', function(d, i) {
-					var height = legendRectSize + legendSpacing;
-					var offset =  -10;
-					var horz = width - offset;
-					var vert = i * height - offset;
-					return 'translate(' + horz + ',' + vert + ')';
-				})
-				.attr('id',function(d){ return headline +d.name; })
-				//onclick function to toggle off the lines 
-				.on('click', function (d) {                           			       	     	
-					var elemented = document.getElementById(  this.id +"-line");   //grab the line that has the same ID as this point along w/ "-line"  use get element cause ID has spaces
-					if(opp == 1){	
-						d3.select(elemented)
-							.transition()
-							.duration(1000)
-							.style("opacity",0)
-							.style("display",'none');
-						d3.select(this)
-							.attr('fakeclass', 'fakelegend')
-							.transition()
-							.duration(1000)
-							.style ("opacity", .2);
-						opp = 0
-					} 
-					else if(opp == 0) {
-						opp = 1
-						d3.select(elemented)
-							.style("display", "block")
-							.transition()
-							.duration(1000)
-							.style("opacity",1);
-						d3.select(this)
-							.attr('fakeclass','legend')
-							.transition()
-							.duration(1000)
-							.style ("opacity", 1);
-					}
-				});		  
-			legend.append('rect')
-				.attr('width', legendRectSize)
-				.attr('height', legendRectSize)
-				.attr('orient', "right")
-				.style("fill", function(d, i) { return colorscale[i]; })
-				
-				  
-			legend.append('text')
-				.attr('x', legendRectSize + legendSpacing)
-				.attr('y', legendRectSize - legendSpacing)
-				.text(function(d){ return d.name; });
+    // Add the Y Axis
+    number2.append("g")
+        .attr("class", "y axis")
+        .call(yAxis2);	
+	
 }
- function DrawLegendSubset(seriesSubset,colorscaleubset,legendPerPage,pageNo,totalPages){
-
-                var legend = number.selectAll("g.legendg")
-                .data(seriesSubset)
-                .enter().append("g")
-                .attr('class','legendg')
-                .attr('transform', function(d, i) {
-					var height = legendRectSize + legendSpacing;
-					var offset =  -10;
-					var horz = width - offset;
-					var vert = i * height - offset;
-					return 'translate(' + horz + ',' + vert + ')';
-				}).attr('id',function(d){ return headline +d.name; })
-				//onclick function to toggle off the lines 
-				.on('click', function (d) {                           			       	     	
-					var elemented = document.getElementById(  this.id +"-line");   //grab the line that has the same ID as this point along w/ "-line"  use get element cause ID has spaces
-					if(opp == 1){	
-						d3.select(elemented)
-							.transition()
-							.duration(1000)
-							.style("opacity",0)
-							.style("display",'none');
-						d3.select(this)
-							.attr('fakeclass', 'fakelegend')
-							.transition()
-							.duration(1000)
-							.style ("opacity", .2);
-						opp = 0
-					} 
-					else if(opp == 0) {
-						opp = 1
-						d3.select(elemented)
-							.style("display", "block")
-							.transition()
-							.duration(1000)
-							.style("opacity",1);
-						d3.select(this)
-							.attr('fakeclass','legend')
-							.transition()
-							.duration(1000)
-							.style ("opacity", 1);
-					}
-				});	
-				
-				
-                legend.append("rect")
-                
-                .attr("width", legendRectSize)
-                .attr("height", legendRectSize)
-                .attr("class", "legend")
-				.attr('orient', "right")
-                .style('fill',function(d,i){return colorscaleubset[i];})
-               
-
-			legend.append('text')
-				.attr('x', legendRectSize + legendSpacing)
-				.attr('y', legendRectSize - legendSpacing)
-				.text(function(d){ return d.name; });
-
-
-                var pageText = number.append("g")
-                .attr('class','pageNo')
-                .attr("transform", "translate(" + (width+7.5) + ","+ (legendPerPage+1)*(legendRectSize+legendSpacing) +")");
-
-                pageText.append('text').text(pageNo+'/'+totalPages)
-                .attr('dx','2.15em')
-				.attr('dy','1.25em');
-
-                var prevtriangle = number.append("g")
-                .attr('class','prev')
-                .attr("transform", "translate(" + (width+5) + ","+ (legendPerPage+1.5)*(legendRectSize+legendSpacing) +")")
-                .on('click',prevLegend)
-                .style('cursor','pointer');
-
-                var nexttriangle = number.append("g")
-                .attr('class','next')
-                .attr("transform", "translate(" + (width+20) + ","+ (legendPerPage+1.5)*(legendRectSize+legendSpacing) +")")
-                .on('click',nextLegend)
-                .style('cursor','pointer');
-
-                nexttriangle.append('polygon')
-                    .style('stroke','#000')
-                    .style('fill','#000')
-                    .attr('points','0,0, 10,0, 5,5');
-
-                prevtriangle.append('polygon')
-                    .style('stroke','#000')
-                    .style('fill','#000')
-                    .attr('points','0,5, 10,5, 5,0');
-
-                if(pageNo==totalPages){
-                    nexttriangle.style('opacity','0.5')
-                    nexttriangle.on('click','')
-                    .style('cursor','');
-                }
-                else if(pageNo==1){
-                    prevtriangle.style('opacity','0.5')
-                    prevtriangle.on('click','')
-                    .style('cursor','');
-                }
-
-            }
-
-            function prevLegend(){
-                pageNo--;
-
-                number.selectAll("g.legendg").remove();
-                number.select('.pageNo').remove();
-                number.select('.prev').remove();
-                number.select('.next').remove();
-
-                var startIndex=(pageNo-1)*legendPerPage;
-                var endIndex=startIndex+legendPerPage;
-
-                var seriesSubset=[],colorscaleubset=[];
-
-                for(var i=0;i<linedata.length;i++){
-                    if(i>=startIndex && i<endIndex){
-                        seriesSubset.push(linedata[i]);
-                        colorscaleubset.push(colorscale[i]);
-                    }
-                }  
-
-                DrawLegendSubset(seriesSubset,colorscaleubset,legendPerPage,pageNo,totalPages);
-            }
-            
-            function nextLegend(){
-                pageNo++;
-
-                number.selectAll("g.legendg").remove();
-                number.select('.pageNo').remove();
-                number.select('.prev').remove();
-                number.select('.next').remove();
-
-                var startIndex=(pageNo-1)*legendPerPage;
-                var endIndex=startIndex+legendPerPage;
-
-                var seriesSubset=[],colorscaleubset=[];
-
-                for(var i=0;i<linedata.length;i++){
-                    if(i>=startIndex && i<endIndex){
-                        seriesSubset.push(linedata[i]);
-                        colorscaleubset.push(colorscale[i]);
-                    }
-                }  
-
-               DrawLegendSubset(seriesSubset,colorscaleubset,legendPerPage,pageNo,totalPages);
-            }
 
 
 	
-			
-			//define the brush	
-			var brush = d3.svg.brush()
-				.x(x)
-				.on("brushend",brushed);
-				
-			number.append("g")
-				.attr("class", "x brush")
-				.call(brush)
-				.selectAll("rect")
-				.attr("y", 0)
-				.attr("height", height );
-
-			function brushed() {
-				tooltip.classed("hidden", true);
-				var regex = /(.+),(.+)/ ;
-				match = regex.exec(brush.extent());
-				startd = match[1] ;
-				endd =  match[2] ;
-				if (startd == endd) {mapdate = new Date(startd); selecteddate = mapdate; change(mapdate,mapcountry) ;return;} // change mapdate on one click
-				brushselect(startd,endd)
-			}
-
-
-			//define the Tooltips/Mousovers
-			ttipid = "#tooltip" + gnumber;
-			tooltip = d3.select(ttipid)
-			.attr("class", "tooltip hidden")
 	
-			
-			number.selectAll("rect")
-				.on("mousemove", function(d) {
-					var mousel = d3.event.pageX;
-					var mouset = d3.event.pageY;
-					var x0 = x.invert(d3.mouse(this)[0])
-					var y0 = y.invert(d3.mouse(this)[1])
-					getmouseposition(x0,y0,mousel,mouset)
-					//alert(mousel)
+	
+	function drawprice (pricedata,yearrevenue){
+	
+var width = document.getElementById("Graph4").offsetWidth
+var height = document.getElementById("Graph4").offsetHeight
+var margin = {top: 40, right: 20, bottom: 30, left: 80};
+var width = +width- margin.left - margin.right;
+var height = +height- margin.top - margin.bottom;
 
-					totidate = totiparse(x0)
-					tooltip.classed("hidden", false)
-						.attr("style", "left:"+(ttposition)+"px;top:"+(ttheight)+"px")
-						.html(mouseover[gnumber][(totidate)]);
-						//.html("Date: "+formatDate(x0) + "<br>" + d.name + ": "+ NumbType(y0) );
-				})
-				.on("mouseout",  function(d) {
-					tooltip.classed("hidden", true);
-				}) 
-				.on("mousedown", function(){
-					if(d3.event.button === 2){
-						d3.event.stopImmediatePropagation();		//verhindert das mit rechter maustaste "gebrushed" wird
-					};
-				})
-				.on('contextmenu', function (d, i) {				// react on right-clicking
-					tooltip.classed("hidden", true);
-					d3.event.preventDefault();
-					showall()
-				});
+	//erstellen des svg's
+	var number = d3.select("#Graph5")
+		.append("svg")
+		.attr("width", width + margin.left + margin.right)
+		.attr("id","svgGraph3")
+		.attr("height", height + margin.top + margin.bottom)
+		.append("g")
+		.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+	number.append("text")            
+		.attr("y", 4 - (margin.top / 2))
+		.attr("x", width/2 )
+		.style("font-size", "20px")  
+		.style("font-family", typo) 
+		.text("Strompreise");
+	number.append("svg:rect")
+		.attr("width", width)
+		.attr("height", height)
+		.style("stroke", "lightgrey")
+		.style("stroke-width", 1)
+		.attr("fill","white");	
+	 //make a clip path for the graph  (defines the visible area of the graph )
+	var clip = number.append("svg:clipPath")
+		.attr("id", "clip")
+		.append("svg:rect")
+		.attr("x", 0)
+		.attr("y", 0)	
+		.attr("width", width )
+		.attr("height", height ); 
+	number.append("text")
+		.attr("text-anchor", "middle")  // this makes it easy to centre the text as the transform is applied to the anchor
+	   .style("font-family", typo) 
+	   .attr("transform", "translate("+ (-55) +","+(height/2+10)+")rotate(-90)")  // text is drawn off the screen top left, move down and out and rotate
+		.text("Strompreise in €/MWh");	
+		
+	//erstellen des svg's
+	var number2 = d3.select("#Graph6")
+		.append("svg")
+		.attr("width", width + margin.left + margin.right)
+		.attr("id","svgGraph4")
+		.attr("height", height + margin.top + margin.bottom)
+		.append("g")
+		.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+	number2.append("text")            
+		.attr("y", 4 - (margin.top / 2))
+		.attr("x", width/2 )
+		.style("font-size", "20px")  
+		.style("font-family", typo) 
+		.text("Einnahmen");
+	number2.append("svg:rect")
+		.attr("width", width)
+		.attr("height", height)
+		.style("stroke", "lightgrey")
+		.style("stroke-width", 1)
+		.attr("fill","white");	
+	 //make a clip path for the graph  (defines the visible area of thwe graph )
+	var clip = number2.append("svg:clipPath")
+		.attr("id", "clip")
+		.append("svg:rect")
+		.attr("x", 0)
+		.attr("y", 0)	
+		.attr("width", width )
+		.attr("height", height );	
 
-		}		
+	number2.append("text")
+		.attr("text-anchor", "middle")  // this makes it easy to centre the text as the transform is applied to the anchor
+		.style("font-family", typo) 
+		.attr("transform", "translate("+ (-55) +","+(height/2+10)+")rotate(-90)")  // text is drawn off the screen top left, move down and out and rotate
+		.text("stündliche Erlöse in €");	
+		
+
+// Set the ranges
+var x = d3.time.scale().range([0, width]);
+var y = d3.scale.linear().range([height, 0]);
+var y2 = d3.scale.linear().range([height, 0]);
+
+// Define the axes
+var xAxis = d3.svg.axis().scale(x)
+    .orient("bottom").ticks(5);
+
+var yAxis = d3.svg.axis().scale(y)
+    .orient("left").ticks(5);
+var yAxis2 = d3.svg.axis().scale(y2)
+    .orient("left").ticks(5);
+
+	
+	// Define the lines
+var valueline = d3.svg.line()
+    .x(function(d) { return x(d.date); })
+    .y(function(d) { return y(d.value); });		
+var valueline2 = d3.svg.line()
+    .x(function(d) { return x(d.date); })
+    .y(function(d) { return y2(d.erlose); });	
+	
+    // Scale the range of the data
+    x.domain(d3.extent(pricedata, function(d) { return d.date; }));
+    y.domain(d3.extent(pricedata, function(d) { return d.value; }));
+	y2.domain([0, d3.max(pricedata, function(d) { return d.erlose*1.1; })]);
+
+    // Add the valueline path.
+    number.append("path")
+        .attr("class", "line")
+        .attr("d", valueline(pricedata));
+		
+	 // Add the valueline path.
+    number2.append("path")
+        .attr("class", "line")
+        .attr("d", valueline2(pricedata));	
+
+    // Add the X Axis
+    number.append("g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(xAxis);
+
+    // Add the Y Axis
+    number.append("g")
+        .attr("class", "y axis")
+        .call(yAxis);
+	
+    // Add the X Axis
+    number2.append("g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(xAxis);
+
+    // Add the Y Axis
+    number2.append("g")
+        .attr("class", "y axis")
+        .call(yAxis2);	
+	
+	
+
+
+
+
+
+
+	//Buttons for csv
+			csvbutton = number2.append('text')
+			  .attr("y", height-250)
+		  .attr("x", width-90)
+			  .attr("class", "clear-button")			  .text("CSV");	
+
+
+csvbutton
+.on('click',function(){exportToCsv('export.csv',csvexportdata[erlose])})	 
+		
+drawrevprice(yearrevenue);
+	
+	
 	}	
+
+
+function drawgeneratorline(){
+
+
+	margin = {top: 20, right: 20, bottom: 40, left: 70}
+	var width = document.getElementById("Graph2").offsetWidth- margin.left - margin.right
+	var height = document.getElementById("Graph2").offsetHeight- margin.top - margin.bottom;
 	
-
-/////////Map with countries and Crossborderflow//////////////////////////////////////////////////////////////////////////////////////////	
-	else {if (type == "map") 
-	{	
 	
-		maxcosc = document.getElementById("maxcosc").value;
-		mincosc = document.getElementById("mincosc").value;
-		if (maxcosc != ""){ymax = maxcosc}
-		if (mincosc != ""){ymin = mincosc}
-		//zoom and center settings for diffrent countrys
-		land = mapcountry		
-		centercountry(land)
-		setup(width,height);		
-		zoom = d3.behavior.zoom()
-			.scaleExtent([1,2.5])
-			//.center([(tran1), (tran2)])
-			.scale( sca+(height + margin.top + margin.bottom-300)*1.5)		
-			.on("zoom", move);
-		//call the zoom on the SVG
-		number.call(zoom)
-		//load the data from CSV
-		if (rseries == "y"){dateparser = d3.time.format("%Y")}
-		else if (rseries == "m"){dateparser = d3.time.format("%Y-%m")}
-		else if (rseries == "d"){dateparser = d3.time.format("%Y-%m-%d")}
-		else if (rseries == "h"){dateparser = d3.time.format("%d-%m-%Y %H")}
-		ccoulour = new Array;
-		coulour = new Array;
-		cvalue = new Array;
-		var data =  new Array;
-		mapdateparser = d3.time.format("%d-%m-%Y %H:%M");
-		if (rseries == "m" )		{parseDate = d3.time.format("%d.%m.%Y").parse; 			csvreso = datapath +"m"+csv + ".csv"		;											mintinterval = 1332800000	}
-		else if (rseries == "y"  )	{parseDate = d3.time.format("%d.%m.%Y").parse; 			csvreso = datapath +"y"+csv + ".csv" 		;											mintinterval = 1332800000}
-		else if (rseries == "d"  )	{parseDate = d3.time.format("%d.%m.%Y").parse; 			csvreso = datapath +"d"+csv +"_01-01-"+MapYear +".csv" 	;						mintinterval = 86400000}
-		else if (rseries == "h"  )	{
-			if(hourly=="no"){
-				parseDate = d3.time.format("%d.%m.%Y").parse; 			csvreso = datapath +"d"+csv +"_01-01-"+MapYear +".csv" 	;						mintinterval = 86400000}
-			else{
-				parseDate = d3.time.format("%d.%m.%Y %H:%M:%S").parse; csvreso = datapath +"h"+csv +"_01-"+ InputStartMonthNr +"-"+InputStartYear +".csv" ;	mintinterval = 3600000}
-		}
-	
-		cbflowsparseDate = d3.time.format("%d.%m.%Y %H:%M").parse;
-		getyear = d3.time.format("%Y")
-		getmonth = d3.time.format("%m")
+	data = []
+	xy = []
+	generatorline = []
+	d3.csv("data/windturbines.csv", function(error, data){
+		turbineselecter = document.getElementById("windturbine").value;
 
-
-		queue()
-			.defer(d3.csv,csvreso) 
-			.await(function(error, data) {
-			if (data == null ){nodataalert(number,hourly)}
-				load(data)
-			})
-		
-
-		ttipid = "#tooltip" + gnumber;
-		tooltip = d3.select(ttipid).attr("class", "tooltip hidden");
-
-		// legende
-		//array of  colours for scale 
-		for (var i = 1; i <= 11; i++)
-		{
-			n= i/10;
-			getcolours(n,colorscale)
-			coulour[i] =colour;
-		}	
-		varcolour = [coulour[1],coulour[2],coulour[3],coulour[4],coulour[5],coulour[6],coulour[7],coulour[8],coulour[9],coulour[10],coulour[11]]
-		
-		var threshold = d3.scale.threshold()
-			.domain(d3.range(5,16))
-			.range(varcolour)
-
-		var x = d3.scale.linear()
-			.domain([1,5,11])
-			.range([20, 90])	
-			
-		var xAxis = d3.svg.axis() 
-			.scale(x)
-			.tickSize(100)	
-			.tickValues(d3.range(1.5,12.5,5))	
-			.tickFormat(function(d)  {ymin = +ymin;return  (((ymax-ymin)/10)*(d-1.5)+ymin); }) 
-
-		var legend = d3.select("#svg"+gnumber)		
-			
-		var headpts = "0,0 0,130 "+width+",130 "+width+",0";
-		maphead = legend.append("svg:polygon")
-			.attr("points", headpts)
-			.attr("stroke", "lightgrey")
-			.attr("stroke-width", 1)
-			.attr("fill", "white");
-
-		legend
-			.style("font-size","16px")
-			//.attr('transform', 'translate(0, 0)')
-			.call(xAxis);		
-				
-		legend.select(".domain")
-			.remove();
-			
-		legend.selectAll("rect")
-			.data(threshold.range().map(function(color) {
-				var d = threshold.invertExtent(color);
-				if (d[0] == null) d[0] = x.domain()[0];
-				if (d[1] == null) d[1] = x.domain()[1];
-				return d;
-			}))
-			.enter().insert("rect", ".tick")
-			.attr("height", 12)
-			.attr("y", 85)
-			.attr("x", function(d) { return x(d[0])-60; })
-			.attr("width", function(d) { return x(d[1]) - x(d[0]); })
-			//.attr("transform", function(d) { return "rotate(90)" })
-			.attr("fill", function(d) { return threshold(d[0]); })
-			
-		legend.append("text")
-			.attr("fill", "#000")
-			.attr("font-weight", "bold")
-			.attr("text-anchor", "start")
-			.attr("y", 26)
-			.attr("x", 6)
-			.style("font-size","22px")
-			.style("font-family", typo) 
-			.text(headline);
-
-		if (rseries == "h"){shownformat = dateparser(mapdate)+":00"}
-		else {shownformat = dateparser(mapdate)}
-		legend.append("text")
-			.attr("fill", "#000")
-			//.attr("font-weight", "bold")
-			.attr("text-anchor", "start")
-			.attr("y", 60)
-			.attr("x", 6)
-			.style("font-size","18px")
-			.style("font-family", typo) 
-			.text("Date: "+shownformat);
-		
-/////Functions		
-		function setup(width,height){
-			//projection = d3.geo.mercator()
-			if (width > 600){
-			projection =d3.geo.naturalEarth()
-				.translate([(tran1+(height + margin.top + margin.bottom-300)), (tran2+(height + margin.top + margin.bottom-300)*2)])				//ganz europa bei einer höhe von 300px: 75,470 scale 350
-				.scale( sca+(height + margin.top + margin.bottom-300)*1.5);																			//Zoomstufe (kleinere Zahl --> weniger Zooom)
-			}
-			else {
-			projection =d3.geo.naturalEarth()
-				.translate([(tran1+(height + margin.top + margin.bottom-300)*1.8), (tran2+(height + margin.top + margin.bottom-300)*2)])				//ganz europa bei einer höhe von 300px: 75,470 scale 350
-				.scale( sca+(height + margin.top + margin.bottom-300)*1.5);																			//Zoomstufe (kleinere Zahl --> weniger Zooom)
-			}
-			path = d3.geo.path().projection(projection)		 
-		}
-		//Zoomfunktion
-		function move() {
-			var t = d3.event.translate;
-			s = d3.event.scale; 
-			var coordinates = [0, 0];
-			coordinates = d3.mouse(this);
-			var mx = coordinates[0];
-			var my = coordinates[1];
-			//s>1 bei aktivem zoom mit my/mx wird auf die mausposition gezoomt bei s=1 (maximales herauszoomen ist ganz europa sichtbar
-			if(s>1){
-				t[0] = (1-s)*mx;
-				t[1] = (1-s)*my;
-			}
-			else {
-				t[0] = (1-s)*650;
-				t[1] = (1-s)*750;
-			}
-
-			zoom.translate(t);
-			
-			number.attr("transform", "translate(" + t + ")scale(" + s + ")");
-		  d3.selectAll(".text").style("opacity",   2.5*s-2.84);	//ab einen s Wert von 0.9 wird Text unsichtbar
-		}
-		
-		function load(data){
-					causes =[];
-			var header = d3.keys(data[1]);		//Spalte der Länder
-			
-			for (i=1;i<header.length;i++){causes[i-1]= header[i];}
-			
-			line = causes[mapcolumn];   //Spaltennummer aus der die Werte kommen sollen	
-			autoscalemax = "init";	
-			autoscalemin = "init";	
-		
-					
-			data.forEach(function(i){
-				i.UTC = parseDate(i.UTC);
-				if (rseries == "y"){dateparser = d3.time.format("%Y")}
-				if (rseries == "m"){dateparser = d3.time.format("%Y-%m")}
-				if (rseries == "d"){dateparser = d3.time.format("%Y-%m-%d")}
-				if (rseries == "h"){
-					if(hourly=="no"){dateparser = d3.time.format("%Y-%m-%d")}
-					else {
-						dateparser = d3.time.format("%Y-%m-%d %H")}
+		data.forEach(function(d){
+			if (d.name == turbineselecter){
+				for (s =0;s<=35;s=s+0.5){
+				d.speed = s
+				d.value = +d[s]
+				xy.push({x: d.speed, y: d.value});
+				generatorline[s] = +d.value 
 				}
-				//i.UTC = dateparser(i.UTC)
-				//cmapdate = dateparser(mapdate)
-				tinterval = mapdate-i.UTC
-				
-				//mapstartdate = mapdateparser(mapdate)
-				
-				test = showncountries.indexOf(i.Type);
-				if (test>=0){
-					if (dateparser(mapdate) == dateparser(i.UTC)){
-						getminmax(i[line])
-
-						getcolour(i.Type,i[line]);						//Type ist die Spalte mit den Ländernamen
-					}
-				}	
-			});	
-			//Autoscale the map
-			if (autoscalevalue ==1 && firsttimehere == 0){
-				autoscalemin = +autoscalemin
-				autoscalemax = +autoscalemax
-				autoscalemin = autoscalemin.toFixed(0);  //runden
-				autoscalemax = autoscalemax.toFixed(0);
-				e = document.getElementById("mincosc");
-				e.value = autoscalemin;
-				f = document.getElementById("maxcosc");
-				f.value = autoscalemax;
-				firsttimehere = 1;
-				addplot(gnumber, width, height, type, csv, headline,strkwidth, ymin,ymax,cbselecter,mapcolumn,mapdate,mapcountry,hourly,lines,avoidline,colorscale) 
 			}
-			else {firsttimehere = 0;}
-			d3.json("libarys/world-topo-min.json", function(error, world) {
-				var topo = topojson.feature(world, world.objects.countries).features;	
-				draw(topo,ccoulour);
+		})
+		
+		var xscl = d3.scale.linear()
+			.domain(d3.extent(xy, function(d) {return d.x;})) //use just the x part
+			.range([margin.left, width])
+			
+		var x_axis = d3.svg.axis()
+			.scale(xscl)
+			.orient("bottom") ;
+	maxgenrationpower = d3.max(xy, function(d) {return d.y;})
+
+		var yscl = d3.scale.linear()
+			.domain(d3.extent(xy, function(d) {return d.y*1.1;})) // use just the y part
+			.range([height + margin.top, margin.top])
+			
+		var y_axis = d3.svg.axis()
+                .scale(yscl)
+				 
+                .orient("left").ticks(3) ;	
+	
+		slice = d3.svg.line()
+		  .x(function(d) { return xscl(d.x);}) // apply the x scale to the x data
+		  .y(function(d) { return yscl(d.y);}) // apply the y scale to the y data
+
+
+		
+		var svg = d3.select("#Graph2")
+			.append("svg")
+						.attr({
+				width: width+ margin.left + margin.right,
+				height: height+ margin.top + margin.bottom,
 			});
-		//adding some crossborderflows from external CSV file if selecter is set to 1 in stylesheets
-			if(cbselecter == 1)
-			{
-				loadvalues()
-			}
-			else {}
 			
-		};	
-
-function loadvalues(){
-			cexport = []; 
-			cimport = []; 
-			if (rseries == "m" )		{parseDate = d3.time.format("%d.%m.%Y").parse; 			cbdata = datapath +"mCBCaps.csv"}
-			else if (rseries == "y"  )	{parseDate = d3.time.format("%d.%m.%Y").parse; 			cbdata = datapath +"yCBCaps.csv" }
-			else if (rseries == "d"  )	{parseDate = d3.time.format("%d.%m.%Y").parse; 			cbdata = datapath +"dCBCaps" +"_01-01-"+InputStartYear +".csv" }
-			else if (rseries == "h"  )	{parseDate = d3.time.format("%d.%m.%Y %H:%M:%S").parse; cbdata = datapath +"hCBCaps" +"_01-"+ InputStartMonthNr +"-"+InputStartYear +".csv" ;}
-
-			if (rseries == "d" && getyear(InputStartDate) < getyear(InputEndDate)){ 	cbdata2 =  datapath +"dCBCaps" +"_01-01-"+getyear(InputEndDate) +".csv"; 					duobleload = 1;}
-			if (rseries == "h" && getmonth(InputStartDate) < getmonth(InputEndDate)){ 	cbdata2 =  datapath +"hCBCaps" +"_01-"+ getmonth(InputEndDate) +"-"+InputStartYear +".csv"; 	duobleload = 1;}
-			if (rseries == "h" && getyear(InputStartDate) < getyear(InputEndDate)){ 	cbdata2 =  datapath +"hCBCaps" +"_01-01-"+getyear(InputEndDate) +".csv"; 					duobleload = 1;}
-		
-			if (duobleload ==1){
-				queue()
-					.defer(d3.csv,cbdata) 
-					.defer(d3.csv,cbdata2) 
-					.await(function(error, data1, data2) {
-						flowvalue = data1.concat(data2) 
-						loadflowvalues(flowvalue)
-					})
-			}
-			else{
-				queue()
-					.defer(d3.csv,cbdata) 
-					.await(function(error, flowvalue) {
-						loadflowvalues(flowvalue)
-					})
-			}
-			
-			function loadflowvalues(flowvalue){				
-				flowvalue.forEach(function(i){
-					i.utc = parseDate(i.UTC);
-					i.type = i.Type;
-					var regex = /(\w+)>(\w+)/ ;
-					match = regex.exec(i.type);
-					i.scene = match[1] ;
-					i.level =  match[2] ;
-					InputStartDate = InputDateParse(fromdate);
-					if (rseries == "y"){dateparser = d3.time.format("%Y")}
-					if (rseries == "m"){dateparser = d3.time.format("%Y-%m")}
-					if (rseries == "d"){dateparser = d3.time.format("%Y-%m-%d")}
-					if (rseries == "h"){dateparser = d3.time.format("%Y-%m-%d %H")}
-					Interval =i.utc-mapdate
-					
-					if ( i.scene == shortname  && dateparser(i.utc) == dateparser(mapdate)){  
-						cexport[i.level] = i.applied;
-					}
-					else if ( i.level == shortname  && dateparser(i.utc) == dateparser(mapdate)){  
-						cimport[i.scene] = i.applied;
-					}
-				});	
-				getlatlon();
-			};	
-		}	
-		
-		function getlatlon(){
-			textval = []; 
-			textval2 = [];
-			direction = [];
-			d3.csv("libarys/crossborder.csv", function(err, cbflows) {
-				cbflows.forEach(function(i){
-					i.value = i.value;
-					var regex2 = /(\w+)-(\w+)/ ;
-					match2 = regex2.exec(i.value);
-					i.fcountry = match2[1] ;
-					i.tcountry =  match2[2] ;
-					if ( i.fcountry == shortname){ 
-						exvalue = cexport[i.tcountry]
-						imvalue = cimport[i.tcountry]
-						addpoint(i.value, i.Longitude1, i.Latitude1,i.Longitude2, i.Latitude2,i.country1,i.country2,exvalue,imvalue);
-					}
-					if ( i.tcountry == shortname){ 
-						exvalue = cimport[i.fcountry]
-						imvalue = cexport[i.fcountry]
-						addpoint(i.value, i.Longitude1, i.Latitude1,i.Longitude2, i.Latitude2,i.country1,i.country2,exvalue,imvalue);
-					}
-				});
-			});
-		}
-		
-				//function to add polygons and text to the map 
-		function addpoint(text,lat1,lon1,lat2,lon2,country1,country2,exvalaue,imvalue) {
-				textval2[text] = imvalue
-				textval[text] = exvalue
-				vorzeichen = 1
-				direction[text] = + textval[text] - textval2[text];
-			if (+direction[text] < 0){latzw = lat2; lonzw = lon2 ; lat2 = lat1; lon2 = lon1; lat1 = latzw ; lon1 = lonzw; vorzeichen = -1	}
-			//var size = 5; // Dicke der Pfeile
-			var size = +direction[text]  / 350;   // Dicke der Pfeile
-			if (size > 5){size =5}
-			if (size < 1.5){size =1.5}
-			var gpoint = number.append("svg")
-				.attr("class", "gpoint");
+		svg.append('rect') // outline for reference
+			.attr({x: margin.left, y: margin.top,
+				width: width,
+				height: height,
+				stroke: 'black',
+				'stroke-width': 0.5,
+				fill:'white'});
 				
-			if (+lat2 < +lat1 || +lon2 > +lon1){var pfeil = -size;}
-			else  {var pfeil = size;}
+		svg.append("text")            
+			.attr("y", 17)
+			.attr("x", width/2 )
+			.style("font-size", "15px")  
+			.style("font-family", typo) 
+			.text("Generatorkennlinie");		
+		
+		svg.append("text")
+            .attr("text-anchor", "middle")  // this makes it easy to centre the text as the transform is applied to the anchor
+           .style("font-family", typo) 
+		   .attr("transform", "translate("+ (15) +","+(height/2+10)+")rotate(-90)")  // text is drawn off the screen top left, move down and out and rotate
+            .text("Leistung in kw");
 			
-			var x1 = projection([lat1,lon1])[0];
-			var y1 = projection([lat1,lon1])[1];
-			var x2 = projection([lat2,lon2])[0];
-			var y2 = projection([lat2,lon2])[1];
-			if(lat1==lat2)	{var p1x = x1 + pfeil; 	var p1y = y1; 		var p2x = x1 + pfeil; 		var p2y = y2 -2*pfeil; 	var p3x = x1 + 2*pfeil; 	var p3y = y2 -2*pfeil;	var p4x = x1 ; 	var p4y = y2 ;	var p5x = x1 -2* pfeil; 	var p5y = y2 -2*pfeil; 	var p6x = x1 - pfeil; 		var p6y = y2 -2*pfeil;	var p7x = x1 - pfeil; 	var p7y = y1;}
-			else 		{var p1x = x1 ; 		var p1y = y1+pfeil; var p2x = x2 - 2*pfeil; 	var p2y = y2 + pfeil; 	var p3x = x2 - 2*pfeil; 	var p3y = y2 +2*pfeil;	var p4x = x2 ; 	var p4y = y2 ;	var p5x = x2 -2* pfeil; 	var p5y = y2 -2*pfeil;	var p6x = x2 - 2*pfeil; 	var p6y = y2 - pfeil;	var p7x = x1 ; 			var p7y = y1 - pfeil;}
-			var pts = p1x+","+p1y+" "+p2x+","+p2y+" "+p3x+","+p3y+" "+p4x+","+p4y+" "+p5x+","+p5y+" "+p6x+","+p6y+" "+p7x+","+p7y;			
-			var xt = x2;
-			var yt = y2;
-			if (x1 > x2){var xt = x1;}
-			gpoint.append("svg:polygon")
-				.attr("points", pts)
-				.attr("fill", "darkblue");
-
-			netto = NumbType1(+direction[text] * vorzeichen)
-			if (!isNaN(netto)){
-				gpoint.append("text")
-					.attr("x", xt+5)
-					.attr("y", yt+6)
-					.style("opacity",0)
-					.attr("class","text")
-					.attr("fill", "black")
-					.text(netto+"MW");
-			  }
-			//offsets for tooltips2(cbflows)
-			var offsetL = 20;
-			var offsetT = 20;  
-				  
-			//tooltips2
-			gpoint
-				.on("mousemove", function(d,i) {
-					tooltip.classed("hidden", false)
-						.attr("style", 'left:' + (d3.event.clientX + offsetL) + 'px; top:' + (d3.event.clientY - offsetT) + 'px')
-						.html( country1+" to "+country2+": "+NumbType1(textval[text])+"  MW<br>"+country2+" to "+country1+": "+NumbType1(textval2[text])+"  MW");
-				})
-				.on("mouseout",  function(d,i) {
-					tooltip.classed("hidden", true);
-				}); 
-		}
-function getminmax(value)	
-{
-value = +value
-if (autoscalemax == "init"){autoscalemax = +value}
-			if (autoscalemin == "init"){autoscalemin = +value}
-			if (value >= autoscalemax){autoscalemax = value}
-			if (value <= autoscalemin){autoscalemin = value;}
+	svg.append("text")
+            .attr("text-anchor", "middle")  // this makes it easy to centre the text as the transform is applied to the anchor
+            .attr("transform", "translate("+ (width/2) +","+250+")")  // centre below axis
+            .style("font-family", typo) 
+			.text("Windgeschwindigkeit in m/s");		
 			
 
+		
+		height = height+margin.top
+				svg.append("g")	
+					.attr("class", "x axis")
+					.attr("transform", "translate(0," + height  + ")") 
+					.call(x_axis)
+			
+				svg.append("g")
+					.attr("transform", "translate(" + margin.left  + ",0)") 
+					.attr("class", "y axis")
+					.call(y_axis)			
+				
+		svg.append("path")
+			.attr("class", "line")
+			.attr("d", slice(xy)) // use the return value of slice(xy) as the data, 'd'
+			.style("fill", "none")
+			.style("stroke", "red")
+			.style("stroke-width", 2)
+			
+			
+
+			
+	})
+;
+
+
+   
+	
 }
-		//Berechnungsvorschriften um aus Werten eine Farbe zu machen kommen hier hin
-		function getcolour(country,value) {
 
-			ymax = +ymax;
-			n = (+value-ymin)	/(ymax-ymin);
-			value = +value
-			if (n < 0){n = 0; }
-			if (n > 1){n = 1; }	
-			getcolours(n,colorscale)
-			
-			
-			ccoulour[country] = colour;
-			cvalue[country] = value;
-		}
-		
-		function draw(topo,ccoulour) {
-			var country = number.selectAll(".type").data(topo);
-			country.enter().insert("path")
-				.attr("class", "country")
-				.attr("d", path)
-				.attr("id", function(d) { return d.id; })
-				.attr("title", function(d) { return d.properties.name; })
-				//farbe
-				.style("fill", function(d,i) { contry = (ccoulour[d.properties.name]) ; 
-					if ( typeof ccoulour[d.properties.name] != 'undefined') {;d.properties.color = contry;return d.properties.color}
-					else {d.properties.color = "lightgrey" ;return d.properties.color}
-				});
 
-			
-			//offsets for tooltips(countries)
-			var offsetL = 20;
-			var offsetT = 20;  
+function drawmap(gnumber){
 
-			//tooltips for countries
-			 country
-				.on("mousemove", function(d,i) {
-				  tooltip.classed("hidden", false)
-						 .attr("style", 'left:' + (d3.event.clientX + offsetL) + 'px; top:' + (d3.event.clientY - offsetT) + 'px')
-						 .html(d.properties.name+ "<br> "+headline+" : "+ NumbType(cvalue[d.properties.name]));
-				  })
-				  .on("mouseout",  function(d,i) {
-					tooltip.classed("hidden", true);
-				  })
-				.on("click", function(d) {
-					tooltip.classed("hidden", true);
-					e = document.getElementById("cntry");
-					e.value = d.properties.name
-					change(mapdate,d.properties.name)
-				});	
-					mapfontsize = "15px";
-				country.enter().insert("text")
-					.attr("class", "country-label")
-					.attr("transform", function(d) {
-						if( path.centroid(d) != 'NaN,NaN') {	
-							return "translate(" +  path.centroid(d) + ")"; 
-						}
-					})		//use the geographic middle of the countries(sometimes a offset is necesary(defined in centersettings at the beginning)
-					.text(function(d) { return d.properties.sname ; })
-					.attr("dx", function (d) {
-						centercountry(d.properties.name);
-						clatvalue = -0.2+clat
-						return clatvalue+"em";
-                    })
-                    .attr("dy", function (d) {
-                        centercountry(d.properties.name);
-						clonvalue = -0.9+clon
-						return clonvalue+"em";
-                    })
-                    .style('fill', 'black')
-					.style("font-size",mapfontsize)
-					.attr("font-weight", "bold")
-					.style("font-family", typo) 
-					.on("click", function(d) {
-						tooltip.classed("hidden", true);
-						e = document.getElementById("cntry");
-						e.value = d.properties.name
-						change(mapdate,d.properties.name)
-					});	
-			
-				country.enter().insert("text")
-					.attr("class", "country-val")
-					.attr("transform", function(d) {
-						if( path.centroid(d) != 'NaN,NaN') {	
-							return "translate(" +  path.centroid(d) + ")"; 
-						}
-					})	
-					.text(function(d) {if(!isNaN(cvalue[d.properties.name])){
-						if (ymax >= 1000 || ymin <= -1000){return NumbType0(cvalue[d.properties.name])}
-						else{ return NumbType(cvalue[d.properties.name]) ;} 
-					}})
-					.attr("dx", function (d) {
-						centercountry(d.properties.name);
-						clatvalue = -0.8+clat
-						return clatvalue+"em";
-                    })
-                    .attr("dy", function (d) {
-                        centercountry(d.properties.name);
-						clonvalue = -0.02 + clon
-						return clonvalue+"em";
-                    })
-                    .style('fill', 'black')
-					.style("font-size",mapfontsize)
-					.style("font-family", typo) 
-						.on("click", function(d) {
-					tooltip.classed("hidden", true);
-					e = document.getElementById("cntry");
-					e.value = d.properties.name
-					change(mapdate,d.properties.name)
-				});	
-				land = mapcountry
-		centercountry(land)
-		}
-		
+
+	anlage  = document.getElementById("anlage").value;
+	mapselecter = document.getElementById("mapselecter").value;
+	mapdate = document.getElementById("mapdate").value;
+	csvpath = document.getElementById("szenarioselecter").value;
+	
+
+csvyear = document.getElementById("refjahr").value;
+	
+ if (mapselecter == "Rauhigkeitslaenge in m "){
+		colorscale = "blue";
+		wdata = "data/rauhigkeitslänge.csv"; //Pfad
+		ymin = 0;
+		ymax = 1;
+		auflsng =0.25
+	}
+
+	else if (mapselecter == 'WKA Standorte'){
+		auflsng =0.025
+		colorscale = "";
+		wdata = "data/wkalist.csv"; //Pfad
+		ymin = 0;
+		ymax = 8000;
 	}
 	
+	else if (mapselecter == 'Mittlere Windgeschwindigkeit in m/s'){
+		auflsng =0.25
+		colorscale = "";
+		wdata = "data/mvwind.csv"; //Pfad
+		ymin = 0;
+		ymax = 12;
+	}
 	
+	else {
+	wdata = "data/"+csvpath+"_"+csvyear+"/"+anlage+mapselecter+".txt"; //Pfad
 	
+	colorscale = "";
+	ymin = 0;
+	ymax = 1500;
+	auflsng =0.25
 	
-//////////////////WINDMAP,TEMPERATUTMAP,RADIATIONMAP///////////////////////////////////////////////////////////////	
-	else {if (type == "windmap") {
-	autoscalemax = "init";	
-			autoscalemin = "init";	
-		maxcosc = document.getElementById("maxcosc").value;
-		mincosc = document.getElementById("mincosc").value;
-		if (maxcosc != ""){ymax = maxcosc}
-		if (mincosc != ""){ymin = mincosc}
-		InputYearParse = d3.time.format("%Y");
-		InputMonthParse = d3.time.format("%m");
-		InputDayParse = d3.time.format("%d");
-		mapdateyear = InputYearParse(mapdate);
-		mapdatemonth = InputMonthParse(mapdate);
-		mapdateday = InputDayParse(mapdate);
-
-
-		stylecsv = document.getElementById("series").value;
-		land = mapcountry;; concolor = "white";concolorop = 0
-		if (csv == "winddata.csv"){mapdateparser = d3.time.format("%Y"); dateparser = d3.time.format("%Y")}
-		else{
-			
-			if (rseries == "y" )		{mapdateparser = d3.time.format("%Y"); 					csv = "y"+csv + ".csv"		;											dateparser = d3.time.format("%Y")	}
-			else if (rseries == "m"  )	{mapdateparser = d3.time.format("01.%m.%Y"); 			csv = "m"+csv +"_"+mapdateyear +".csv" 		;											dateparser = d3.time.format("%Y-%m")}
-			else if (rseries == "d"  )	{mapdateparser = d3.time.format("%d.%m.%Y"); 			csv = "d"+csv +"_01-"+mapdatemonth+"-"+mapdateyear +".csv" 	;						dateparser = d3.time.format("%Y-%m-%d")}
-			else if (rseries == "h"  )	{
-				if(hourly=="no"){mapdateparser = d3.time.format("%d.%m.%Y"); 			csv = "d"+csv +"_01-"+mapdatemonth+"-"+mapdateyear +".csv" 	;						dateparser = d3.time.format("%Y-%m-%d")}
-				else {
-					mapdateparser = d3.time.format("%d.%m.%Y %H:00:00"); 	csv = "h"+csv +"_"+mapdateday+"-"+mapdatemonth+"-"+mapdateyear +".csv" 	; ;	dateparser = d3.time.format("%d-%m-%Y %H")}
-			}		
+	if (document.getElementById("Autoscale").checked == true){
+		NumbType0 = d3.format(".0f"); 
+		queue()
+			.defer(d3.csv,wdata) 
+			.await(function(error, test) { 
+				maxmapval = d3.max(test, function(d) { if (d.Date == mapdate){ return +d.value; }})
+				minmapval = d3.min(test, function(d) { if (d.Date == mapdate){return +d.value; }})
+				e = document.getElementById("mapmax");
+				e.value = NumbType0(maxmapval);
+				f = document.getElementById("mapmin");
+				f.value = NumbType0(minmapval);
+				//alert(maxmapval)
+				drawmap2 (gnumber,auflsng,colorscale,wdata)
+			})
 		}
-
+		else {
+			ymin = document.getElementById("mapmin").value;
+			ymax = document.getElementById("mapmax").value
+			drawmap2 (gnumber,auflsng,colorscale,wdata)
+		}
+	}
+}		
 		
+function drawmap2 (gnumber,auflsng,colorscale,wdata ){	
+
+var mapwidth = document.getElementById(gnumber).offsetWidth-5;
+	var mapheight = document.getElementById(gnumber).offsetHeight-4;
+	anlage  = document.getElementById("anlage").value;
+	mapselecter = document.getElementById("mapselecter").value;
+	mapdate = document.getElementById("mapdate").value;
+	csvpath = document.getElementById("szenarioselecter").value;	
+	
+mapmin = document.getElementById("mapmin").value;
+mapmax = document.getElementById("mapmax").value;	
+
+if 	(mapmin != ""){ymin = mapmin}
+if (mapmax != ""){ymax = mapmax}
+	
+	//Define map projection
+	projection = d3.geo.mercator() 
+		.center([ 10.3, 51 ]) 
+		.translate([ mapwidth/2, mapheight/2 ]) 
+		.scale([3100]); 
+	//Define path generator
+	var path = d3.geo.path()
+		 .projection(projection);
+	//Create SVG
+	svg = d3.select("#"+gnumber)
+		.append("svg")
+		.attr("id","svg"+gnumber)
+		.attr("width", mapwidth)
+		.attr("height", mapheight-5)
+		.append("g")
 		
-		centercountry(land)
-		setup(width,height);
 
-
-		zoom = d3.behavior.zoom()
+zoom = d3.behavior.zoom()
 			.scaleExtent([1,2.5])
-			.center([(tran1), (tran2)])
-			.scale( sca+(height + margin.top + margin.bottom-300)*1.5)		
+			//.center([(tran1), (tran2)])
+			.scale([3100])	
 			.on("zoom", move);
-			
 		//call the zoom on the SVG
-		number.call(zoom)
-		
+		//svg.call(zoom)
+
+
+
+
+
+
 		function move() {
 			var t = d3.event.translate;
 			s = d3.event.scale; 
@@ -1891,191 +1058,291 @@ if (autoscalemax == "init"){autoscalemax = +value}
 
 			zoom.translate(t);
 			
-			number.attr("transform", "translate(" + t + ")scale(" + s + ")");
+			svg.attr("transform", "translate(" + t + ")scale(" + s + ")");
 		  d3.selectAll(".text").style("opacity",   2.5*s-2.84);	//ab einen s Wert von 0.9 wird Text unsichtbar
-		}
+		}		
 		
 		
+	//create map
+	d3.json("libarys/world-topo-min.json", function(error, world) {
+		var topo = topojson.feature(world, world.objects.countries).features;
+		var country = svg.selectAll(".type").data(topo);
+		country.enter().insert("path")
+			.attr("class", "country")
+			.attr("d", path)
+			.style("fill", "white")
+	});
+	capacitydata=[]
+	entrynmbr=0
+	if (mapselecter == 'erträge'){
+		capdata = "data/windger.csv";
+		d3.csv(capdata, function(err, value) {
+			value.forEach(function(i){
+				if (i.Date == "2016"){
 
-					//adding some data from external CSV file
-			wdata = meteodatapath + csv
-			comparedate = mapdateparser(mapdate);
-						//comparedate = mapdateparser(comparedate);
-
-			
-			d3.csv(wdata, function(err, value) {
-				value.forEach(function(i){
+					capacitydata[entrynmbr]= {
+						date : i.Date,
+						Longitude : i.Longitude,
+						Latitude:i.Latitude,
+						value:i.value
+					}
+				}
+				entrynmbr++
+			});
+		});		
+	}
 	
-				if (csv == "winddata.csv"){
-					comparedate = mapdateparser(mapdate);
-					
-					if (i.Date == comparedate){
-							addpoint(i.LON, i.Latitude,i.value );
+
+	
+
+	
+	
+		
+		
+				
+		
+	
+	d3.csv(wdata, function(err, value) {
+		value.forEach(function(i){
+	
+		if (mapselecter == 'WKA Standorte'){
+		addwka(i.Longitude, i.Latitude,i.Nennleistung,i.Manufacturer,i.Turbine,i.TurbineHubheight,i.CommisioningDate );
+			
+		}
+		else{
+			if (i.Date == mapdate){
+				if (mapselecter == 'erträge'){					
+					for (entry in capacitydata){
+						if (i.Longitude == capacitydata[entry].Longitude && i.Latitude == capacitydata[entry].Latitude){
+							i.rounded = Math.round(i.value*2)/2;
+							maxgenerator = generatorline[23]
+							capacitydata[entry].value = + capacitydata[entry].value
+							i.generation = (generatorline[i.rounded]/maxgenerator * capacitydata[entry].value)
+							i.value= i.generation
+							erzeugung_deutschlandweit = erzeugung_deutschlandweit+i.value
+							instaliert_deutschlandweit = instaliert_deutschlandweit + capacitydata[entry].value
 						}
 					}
-					
-					else {
-						
-						colname = comparedate;
-						getminmax(i[colname])
-						if (autoscalevalue ==0)
-							{addpoint(i.LON, i.LAT,i[colname] );}
-						if (autoscalevalue ==1 && firsttimehere == 1)
-							{addpoint(i.LON, i.LAT,i[colname] );}	
-					}
-					
-				});
-				
-				if (autoscalevalue ==1 && firsttimehere == 0){
-				autoscalemin = +autoscalemin
-				autoscalemax = +autoscalemax
-				autoscalemin = autoscalemin.toFixed(0);
-				autoscalemax = autoscalemax.toFixed(0);
-				e = document.getElementById("mincosc");
-				e.value = autoscalemin;
-				f = document.getElementById("maxcosc");
-				f.value = autoscalemax;
-				firsttimehere = 1;
-				change(mapdate,mapcountry)
+
 				}
-				else {firsttimehere = 0;}
 				
-				d3.json("libarys/world-topo-min.json", function(error, world) {
-					var topo = topojson.feature(world, world.objects.countries).features;
-						draw(topo);
-				});	
+				addpoint(i.Longitude, i.Latitude,i.value );
+			}
+				
+			//addpoint(i.Longitude, i.Latitude,i.value );
+			}
+		});
+		 
+
+	});
+	
+
+	addlegend()
+	
+}
+
+function addyouarehere(){
+
+removeold = document.getElementById("heremarker")
+if (removeold != null){
+
+	d3.select("#heremarker").remove()
+}
+
+loclon = document.getElementById("MapLatitude").value;
+			
+loclat = document.getElementById("MapLongitude").value;
+	
+	var lat1 = +loclat-0.25/2;
+	var lon1 = +loclon-0.25/2;
+	var lat2 = +loclat+0.25/2;
+	var lon2 = +loclon+0.25/2;
+	var gpoint = svg.append("g").attr("class", "gpoint");
+	var x = projection([lat1,lon1])[0];
+	var y = projection([lat1,lon1])[1];
+	var x2 = projection([lat2,lon2])[0]*1.001;
+	var y2 = projection([lat2,lon2])[1]-0.35;
+
+	
+
+	polypoints = x+","+y+"  "+x2+","+y+" "+x2+","+y2+" "+x+","+y2+" "
+
+	gpoint.append("polygon")
+		.attr("id","heremarker")
+		.attr("points",polypoints)
+		.attr("fill-opacity",0.3)
+		.attr("stroke-width", "1px")
+		.attr("stroke", "black")
+		
+
+}
+
+function addwka(lat,lon,value,firma,turbine,höhe,datum) {
+	
+	var lat1 = +lat-auflsng/2;
+	var lon1 = +lon-auflsng/2;
+	var lat2 = +lat+auflsng/2;
+	var lon2 = +lon+auflsng/2;
+	var gpoint = svg.append("g").attr("class", "gpoint");
+	var x = projection([lat1,lon1])[0];
+	var y = projection([lat1,lon1])[1];
+	var x2 = projection([lat2,lon2])[0]*1.001;
+	var y2 = projection([lat2,lon2])[1]-0.35;
+	value = +value
+	
+	
+	n = (+value-ymin)	/(ymax-ymin);
+	
+	getcolours(n,colorscale)
+	polypoints = x+","+y+"  "+x2+","+y+" "+x2+","+y2+" "+x+","+y2+" "
+
+	gpoint.append("polygon")
+		.attr("points",polypoints)
+		.attr("fill-opacity",0.8)
+		.attr("stroke-width", "0px")
+		.attr("stroke", colour)
+		.attr("fill", colour);
+		
+		
+		tooltip = d3.select("#tooltip").attr("class", "tooltip hidden");
+		//offsets for tooltips
+		var offsetL = 20;
+		var offsetT =20;  
+			  
+		//tooltips
+		gpoint
+			.on("mousemove", function(d,i) {
+			
+				tooltip.classed("hidden", false)
+					 .attr("style", 'left:' + (d3.event.clientX + offsetL) + 'px; top:' + (d3.event.clientY - offsetT) + 'px')
+					.html("Position: "+NumbType(lat)+";"+NumbType(lon)+ "<br> " + "Turbinentyp: "+firma+" "+turbine+ "<br> " +"Inbetriebnahme: "+datum);
+			})
+			.on("mouseout",  function(d,i) {
+				tooltip.classed("hidden", true);
+			})
+			.on("click", function(d) {
+				tooltip.classed("hidden", true);
+				e = document.getElementById("MapLatitude");
+				e.value = Math.round(lon/0.25)*0.25;
+				f = document.getElementById("MapLongitude");
+				f.value = Math.round(lat/0.25)*0.25;
+				//g = document.getElementById("startjahr");
+				//g.value = datum;
+			addyouarehere()
 			});
 		
+		
+}
 
-				
-		ttipid = "#tooltip" + gnumber;
-			tooltip = d3.select(ttipid).attr("class", "tooltip hidden");
-		function draw(topo) {
-			var country = number.selectAll(".type").data(topo);
-			country.enter().insert("path")
-				.attr("class", "country")
-				.attr("d", path)
-				.attr("id", function(d,i) { return d.id; })
-				.attr("title", function(d,i) { return d.properties.name; })
-				//farbe
-				.style("fill", concolor)
-				.attr("fill-opacity",concolorop)
-				
-			//offsets for tooltips
-			var offsetL = 20;
-			var offsetT = 20;  
 
-			//tooltips for countries
-			 country	
-				.on("click", function(d) {
-					tooltip.classed("hidden", true);
-					e = document.getElementById("cntry");
-					e.value = d.properties.name
-					change(mapdate,d.properties.name)
-				});				 
-		}
+
+function addpoint(lat,lon,value) {
 	
-
+	var lat1 = +lat-auflsng/2;
+	var lon1 = +lon-auflsng/2;
+	var lat2 = +lat+auflsng/2;
+	var lon2 = +lon+auflsng/2;
+	var gpoint = svg.append("g").attr("class", "gpoint");
+	var x = projection([lat1,lon1])[0];
+	var y = projection([lat1,lon1])[1];
+	var x2 = projection([lat2,lon2])[0]*1.001;
+	var y2 = projection([lat2,lon2])[1]-0.35;
+	value = +value
 	
-		coulour = new Array;		
-		ymax = +ymax;
-		ymin = +ymin	
+	
+	n = (+value-ymin)	/(ymax-ymin);
+	
+	getcolours(n,colorscale)
+	polypoints = x+","+y+"  "+x2+","+y+" "+x2+","+y2+" "+x+","+y2+" "
 
-	function getminmax(value)	
-{
-value = +value
-if (autoscalemax == "init"){autoscalemax = +value}
-			if (autoscalemin == "init"){autoscalemin = +value}
-			if (value >= autoscalemax){autoscalemax = value}
-			if (value <= autoscalemin){autoscalemin = value;}
+	gpoint.append("polygon")
+		.attr("points",polypoints)
+		.attr("fill-opacity",0.8)
+		.attr("stroke-width", "0px")
+		.attr("stroke", colour)
+		.attr("fill", colour);
+		
+		
+		tooltip = d3.select("#tooltip").attr("class", "tooltip hidden");
+		//offsets for tooltips
+		var offsetL = 20;
+		var offsetT =20;  
+			  
+		//tooltips
+		gpoint
+			.on("mousemove", function(d,i) {
 			
-
-}	
-				
-		function addpoint(lat,lon,value) {
-			auflsng =0.5
-			var lat1 = +lat-auflsng/2;
-			var lon1 = +lon-auflsng/2;
-			var lat2 = +lat+auflsng/2;
-			var lon2 = +lon+auflsng/2;
-			var gpoint = number.append("g").attr("class", "gpoint");
-			var x = projection([lat1,lon1])[0];
-			var y = projection([lat1,lon1])[1];
-			var x2 = projection([lat2,lon2])[0]*1.0051;
-			var y2 = projection([lat2,lon2])[1]-0.55;
-			value = +value
-			n = (+value-ymin)	/(ymax-ymin);
-
-			getcolours(n,colorscale)
-					
-
-polypoints = x+","+y+"  "+x2+","+y+" "+x2+","+y2+" "+x+","+y2+" "
-
-gpoint.append("polygon")
-.attr("points",polypoints)
-.attr("fill-opacity",oppcity)
-.attr("stroke-width", "0px")
-.attr("stroke", colour)
-.attr("fill", colour);
-		
-			//offsets for tooltips
-			var offsetL = 0;
-			var offsetT = 100;
-			var ttvalue = (Math.round(+value*100))/100;			  
-				  
-			//tooltips
-			//gpoint
-				//.on("mousemove", function(d,i) {
-			//tooltip.classed("hidden", false)
-						//.attr("style", 'left:' + (d3.event.clientX + offsetL) + 'px; top:' + (d3.event.clientY - offsetT) + 'px')
-						//.html( headline+": "+ttvalue);
-				//})
-				//.on("mouseout",  function(d,i) {
-				//	tooltip.classed("hidden", true);
-			//	});		
-		}
-		// legende
-		
-		//array of  colours for scale 
+				tooltip.classed("hidden", false)
+					 .attr("style", 'left:' + (d3.event.clientX + offsetL) + 'px; top:' + (d3.event.clientY - offsetT) + 'px')
+					.html( NumbType(lat) + ";"+ NumbType(lon)+ ";"+"<br> " +NumbType(value));
+			})
+			.on("mouseout",  function(d,i) {
+				tooltip.classed("hidden", true);
+			}) 
+	.on("click", function(d) {
+				tooltip.classed("hidden", true);
+				e = document.getElementById("MapLatitude");
+				e.value = Math.round(lon/0.25)*0.25;
+				f = document.getElementById("MapLongitude");
+				f.value = Math.round(lat/0.25)*0.25;
+				//g = document.getElementById("startjahr");
+				//g.value = datum;
+			addyouarehere()
+			});		
 		
 		
-			for (var i = 0; i <= 10; i++){
-				n= i/10;
-				getcolours(n,colorscale)
-				coulour[i] =colour;
-				
-			}
+}
+function addlegend(){
+	
+	if (mapselecter == 'WKA Standorte'){maptext = "WKA Standorte"}
+	else if (mapselecter == 'Windspeed'){maptext = "Windgeschwindigkeit 100 m in m/s "}
+	else if (mapselecter == 'Rauhigkeitslaenge in m '){maptext = "Rauhigkeitslaenge in m "}
+	else if (mapselecter == 'revenue'){maptext = "Jährliche Erträge in €"}
+	else if (mapselecter == 'volllast'){maptext = "Jährliche Volllaststunden in h"}
+	else if (mapselecter == 'spezrev'){maptext = "spezifischen jährliche Erträge in €/kW inst."}
+	else if (mapselecter == 'production'){maptext = "jährlich produzierte Strommenge in GWh"}
+	else if (mapselecter == 'installed'){maptext = "Installierte Leistung in kW"}
+	else if (mapselecter == 'spezpprice'){maptext = "Vermarktungswerte in €/MWh"}
+	else if (mapselecter == 'npv'){maptext = "Ertragswert in €/kW(inst.)"}
+	else {maptext = ""}
 		
-		varcolour = [coulour[0],coulour[1],coulour[2],coulour[3],coulour[4],coulour[5],coulour[6],coulour[7],coulour[8],coulour[9],coulour[10]]
-			
 
-var threshold = d3.scale.threshold()
-			.domain(d3.range(5,16))
-			.range(varcolour)
-
-		var x = d3.scale.linear()
-			.domain([1,5,11])
-			.range([0, 90])	
-			
+	coulour = new Array;
+	for (var i = 0; i <= 10; i++){
+		n= i/10;
+		getcolours(n,colorscale)
+		coulour[i] =colour;
+	}	
+	varcolour = [coulour[0],coulour[1],coulour[2],coulour[3],coulour[4],coulour[5],coulour[6],coulour[7],coulour[8],coulour[9],coulour[10]]
+	var threshold = d3.scale.threshold()
+		.domain(d3.range(5,16))
+		.range(varcolour)
+	var x = d3.scale.linear()
+		.domain([0,5,10])
+		.range([0, 90])	
+	var xAxis = d3.svg.axis()  
+		.scale(x)
+		.tickSize(705)	
+		.tickValues(d3.range(1.5,12.5,5))	
 		
-		var xAxis = d3.svg.axis()  
-
-			.scale(x)
-			
-			.tickSize(100)	
-			.tickValues(d3.range(1.5,12.5,5))	
-			.tickFormat(function(d)  {ymin = +ymin;return  (((ymax-ymin)/10)*(d-1.5)+ymin); }) 
-				
-		 legend = d3.select("#svg"+gnumber)
-		 
-		 			var headpts = "0,0 0,130 "+width+",130 "+width+",0";
-			maphead = legend.append("svg:polygon")
-				.attr("points", headpts)
-				.attr("stroke", "lightgrey")
-				.attr("stroke-width", 1)
-				.attr("fill", "white");
+		.tickFormat(function(d)  {ymin = +ymin;return  (((ymax-ymin)/10)*(d-1.5)+ymin); }) 	
 		
-			legend.style("font-size","16px")
+	 legend = d3.select("#svg"+gnumber)
+	 
+	 	legend.append("rect")
+			.attr("height", 80)
+			.attr("y", 688)
+			.attr("x", 3)
+			.attr("width", 434)
+			.style("fill", "white");
+	
+	 var headpts = "0,950 0,955 270,955 270,950";
+	maphead = legend.append("svg:polygon")
+		.attr("points", headpts)
+		.attr("stroke", "lightgrey")
+		.attr("stroke-width", 1)
+		.attr("fill", "white");
+	 legend.style("font-size","18px")
 			.call(xAxis);
 
 		legend.select(".domain")
@@ -2090,84 +1357,200 @@ var threshold = d3.scale.threshold()
 			}))
 			.enter().insert("rect", ".tick")
 			.attr("height", 12)
-			.attr("y", 85)
+			.attr("y", 690)
 			.attr("x", function(d) { return x(d[0])-75; })
 			.attr("width", function(d) { return x(d[1]) - x(d[0]); })
 			//.attr("transform", function(d) { return "rotate(90)" })
 			.attr("fill", function(d) { return threshold(d[0]); })
-			
-
-
-		legend.append("text")
-			.attr("fill", "#000")
-			.attr("font-weight", "bold")
-			.attr("text-anchor", "start")
-			.attr("y", 26)
-			.attr("x", 6)
-			.style("font-size","22px")
-			.style("font-family", typo) 
-			.text(headline);
-
-			   
-
 		
-		if (rseries == "h" && hourly != "no"){shownformat = dateparser(mapdate)+":00"}
-		else {shownformat = dateparser(mapdate)}
+	
+			
 		legend.append("text")
 			.attr("fill", "#000")
-			//.attr("font-weight", "bold")
+		
 			.attr("text-anchor", "start")
-			.attr("y", 60)
+			.attr("y", 745)
 			.attr("x", 6)
 			.style("font-size","18px")
-			.style("font-family", typo) 
-			.text(shownformat);
+		
+			.text(maptext);
+}
+
+function drawrevprice(yearrevenue) {
+
+
+	NumbType0 = d3.format(".0f"); 
+
+var width = document.getElementById("Graph7").offsetWidth
+var height = document.getElementById("Graph7").offsetHeight
+var margin = {top: 40, right: 20, bottom: 30, left: 80};
+var width = +width- margin.left - margin.right;
+var height = +height- margin.top - margin.bottom;
+
+//erstellen des svg's
+	var number = d3.select("#Graph7")
+		.append("svg")
+		.attr("width", width + margin.left + margin.right)
+		.attr("id","svgGraph7")
+		.attr("height", height + margin.top + margin.bottom)
+		.append("g")
+		.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+	number.append("text")            
+		.attr("y", 4 - (margin.top / 2))
+		.attr("x", width/2 )
+		.style("font-size", "20px")  
+		.style("font-family", typo) 
+		.text("jährliche Einnnahmen");
+	number.append("svg:rect")
+		.attr("width", width)
+		.attr("height", height)
+		.style("stroke", "lightgrey")
+		.style("stroke-width", 1)
+		.attr("fill","white");	
+	 //make a clip path for the graph  (defines the visible area of the graph )
+	var clip = number.append("svg:clipPath")
+		.attr("id", "clip")
+		.append("svg:rect")
+		.attr("x", 0)
+		.attr("y", 0)	
+		.attr("width", width )
+		.attr("height", height ); 
+	number.append("text")
+		.attr("text-anchor", "middle")  // this makes it easy to centre the text as the transform is applied to the anchor
+	   .style("font-family", typo) 
+	   .attr("transform", "translate("+ (-65) +","+(height/2+10)+")rotate(-90)")  // text is drawn off the screen top left, move down and out and rotate
+		.text("Einnahmen in €/a");
+
+		
+// Set the ranges
+var x = d3.scale.linear().range([0, width]);
+var y = d3.scale.linear().range([height, 0]);
+
+
+// Define the axes
+var xAxis = d3.svg.axis().scale(x)
+    .orient("bottom").ticks(3).tickFormat(d3.format(".0f"));
+
+var yAxis = d3.svg.axis().scale(y)
+    .orient("left").ticks(5);
+
+
+	
+	// Define the lines
+var valueline = d3.svg.line()
+    .x(function(d) { return x(d.date); })
+    .y(function(d) { return y(d.rmzerlose); });		
+	
+	max =  d3.max(yearrevenue, function(d) { return +d.rmzerlose;} );
+    // Scale the range of the data
+    x.domain(d3.extent(yearrevenue, function(d) { return d.date; }));
+    y.domain([0, max*1.2]);
+
+
+    // Add the valueline path.
+   line =  number.append("path")
+        .attr("class", "line")
+        .attr("d", valueline(yearrevenue))
+		.style("stroke", "red")
+			.style("stroke-width", 2);
+		
+	
+
+    // Add the X Axis
+    number.append("g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(xAxis)
+		
+
+    // Add the Y Axis
+    number.append("g")
+        .attr("class", "y axis")
+        .call(yAxis);
+
+
+	
+		
+		
+		tooltip = d3.select("#tooltip").attr("class", "tooltip hidden");
+		//offsets for tooltips
+		var offsetL = 20;
+		var offsetT =20;  
+			  
+		//tooltips
+		line
+			.on("mousemove", function(d,i) {
+				var mousel = d3.event.pageX;
+					var mouset = d3.event.pageY;
+					var x0 = x.invert(d3.mouse(this)[0])
+					var y0 = y.invert(d3.mouse(this)[1])
+					getmouseposition(x0,y0,mousel,mouset)
 			
-// functions 
-		function setup(width,height){
-			//projection = d3.geo.mercator()
-			if (width > 600){
-			projection =d3.geo.naturalEarth()
-				.translate([(tran1+(height + margin.top + margin.bottom-300)), (tran2+(height + margin.top + margin.bottom-300)*2)])				//ganz europa bei einer höhe von 300px: 75,470 scale 350
-				.scale( sca+(height + margin.top + margin.bottom-300)*1.5);																			//Zoomstufe (kleinere Zahl --> weniger Zooom)
-			}
-			else {
-			projection =d3.geo.naturalEarth()
-				.translate([(tran1+(height + margin.top + margin.bottom-300)*1.8), (tran2+(height + margin.top + margin.bottom-300)*2)])				//ganz europa bei einer höhe von 300px: 75,470 scale 350
-				.scale( sca+(height + margin.top + margin.bottom-300)*1.5);																			//Zoomstufe (kleinere Zahl --> weniger Zooom)
-			}
-			path = d3.geo.path().projection(projection)		 
-		}			
-			
-	}	
-}}}
-
-// Create an export button
-//d3.select("body")
-//   .append("button")
-//  .html("Export")
-//    .on("click",svgToCanvas);
-
-
-// Create the export function - this will just export 
-// the first svg element it finds
-function svgToCanvas(){
-    // Select the first svg element
-    var svg = d3.select("svg"),
-        img = new Image(),
-        serializer = new XMLSerializer(),
-        width = 2000,
-        height = 2000;
+				tooltip.classed("hidden", false)
+					 .attr("style", 'left:' + (d3.event.clientX + offsetL) + 'px; top:' + (d3.event.clientY - offsetT) + 'px')
+					.html(NumbType0(x0)+"<br>"+NumbType0(y0));
+			})
+			.on("mouseout",  function(d,i) {
+				tooltip.classed("hidden", true);
+			}) 
+		
+		
+		
+}
 
 
 
 
 
-    // generate IMG in new tab
-    var svgStr = serializer.serializeToString(svg.node());
-     img.src = 'data:image/svg+xml;base64,'+window.btoa(unescape(encodeURIComponent(svgStr)));
-window.open().document.write('<img src="' + img.src + '"/>');
-};
+
+function redrawmap(){
+	//delete the old Graphs
+		 div = document.getElementById("Graph1");	
+	while(div.firstChild){
+		div.removeChild(div.firstChild);
+	}
+	drawmap("Graph1")
+}
+
+function change(){
+	//delete the old Graphs
+		 div = document.getElementById("Graph1");	
+	while(div.firstChild){
+		div.removeChild(div.firstChild);
+	}
+			 div = document.getElementById("Graph2");	
+	while(div.firstChild){
+		div.removeChild(div.firstChild);
+	}
+				 div = document.getElementById("Graph3");	
+	while(div.firstChild){
+		div.removeChild(div.firstChild);
+	}
+				 div = document.getElementById("Graph4");	
+	while(div.firstChild){
+		div.removeChild(div.firstChild);
+	}
+				 div = document.getElementById("Graph5");	
+	while(div.firstChild){
+		div.removeChild(div.firstChild);
+	}
+				 div = document.getElementById("Graph6");	
+	while(div.firstChild){
+		div.removeChild(div.firstChild);
+	}
+					 div = document.getElementById("Graph7");	
+	while(div.firstChild){
+		div.removeChild(div.firstChild);
+	}
+for(i= 2005;i<2051;i++){jahrerloes[i] = 0}
+redraw()
+}
+
+
+
+
+
+
 
 </script> 
 </body>
