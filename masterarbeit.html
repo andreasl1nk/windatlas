@@ -65,7 +65,10 @@ path {
 	}
 .line{stroke-width: 0.2px;}	
 .tablevalue{
-text-align: right
+	font-family: PT Sans;
+	text-align: right;
+	margin-top:25px;
+	padding: .5em; 
 }
 
 div.tooltip {
@@ -89,13 +92,13 @@ div.tooltip {
 </style>
 </head>
 <body>
-<script src="https://andreasl1nk.github.io/windatlas/libarys/d3.v3.min.js"></script>
-<script src="https://andreasl1nk.github.io/windatlas/libarys/queue.v1.min.js"></script>
-<script src="https://andreasl1nk.github.io/windatlas/libarys/topojson.v1.min.js"></script>
-<script src="https://andreasl1nk.github.io/windatlas/libarys/d3.geo.projection.v0.min.js"></script>
-<script src="https://andreasl1nk.github.io/windatlas/libarys/colorscale.js"></script>
-<script src="https://andreasl1nk.github.io/windatlas/libarys/contrylist.js"></script>
-<script src="https://andreasl1nk.github.io/windatlas/libarys/myfunctions.js"></script>
+<script src="libarys/d3.v3.min.js"></script>
+<script src="libarys/queue.v1.min.js"></script>
+<script src="libarys/topojson.v1.min.js"></script>
+<script src="libarys/d3.geo.projection.v0.min.js"></script>
+<script src="libarys/colorscale.js"></script>
+<script src="libarys/contrylist.js"></script>
+<script src="libarys/myfunctions.js"></script>
 
 <div   id="complscreen" style="width: 1890px;height: 850px;background-color: white;"> 
 	<div id="dropdowncontainer" style="background-color:White; border: 1px solid #00305d; height: 765px; margin-left:10px; margin-bottom:0px; margin-top:5px; width:240px;   float: left" align="left">
@@ -124,26 +127,75 @@ div.tooltip {
 		<p style="margin-left:10px; float: left ;margin-top:20px;font-family: PT Sans ;" align="left">Longitude<input type="text" id="MapLongitude"style="width: 170px !important; min-width: 170px; max-width: 170px" value = 10 > </p>	
 		<p style="margin-left:10px; float: left ;margin-top:20px;font-family: PT Sans ;" align="left">Turmhöhe in m<input type="text" id="turmhoehe"style="width: 170px !important; min-width: 170px; max-width: 170px" value = 100 > </p>	
 		<p style="margin-left:10px; float: left ;margin-top:20px;font-family: PT Sans ;" align="left">Startjahr<input type="text" id="startjahr"style="width: 170px !important; min-width: 170px; max-width: 170px" value = 2014 > </p>	
-		<p style="margin-left:10px; float: left ;margin-top:20px;font-family: PT Sans ;" align="left">Referenzwindjahr<input type="text" id="refjahr"style="width: 170px !important; min-width: 170px; max-width: 170px" value = 2009 > </p>	
+		<p class="selectertext">Referenzwindjahr</p> 
+	 	<select   id="refjahr" class ="dropdown" > 
+			<option selected value='2009'>2009</option> 
+			<option value='2007'>2007</option> 
+	 		<option value='2010'>2010</option> 
+
+			
+			
+	 	</select> 
 		<p style="margin-left:10px; float: left ;margin-top:20px;font-family: PT Sans ;" align="left">Anlagenlaufzeit<input type="text" id="laufzeit"style="width: 170px !important; min-width: 170px; max-width: 170px" value = 2 > </p>	
-	 	<p class="selectertext">Map</p> 
-	 	<select   id="mapselecter" class ="dropdown" > 
-			<option value='WKA Standorte'>WKA Standorte</option> 
-			<option value='Windspeed'>Windgeschwindigkeit 100 m in m/s </option> 
-	 		<option value='capacity'>Installierte Leistung in MW</option> 
-			<option value='capacity2050'>Installierte Leistung 2050 in MW</option> 
-	 		<option value='erträge'>Erzeugte Leistung in MWh </option> 
-			
-			
+		<p style="margin-left:10px; float: left ;margin-top:20px;font-family: PT Sans ;" align="left">WACC in %<input type="text" id="wacc"style="width: 170px !important; min-width: 170px; max-width: 170px" value = 5 > </p>	
+	
+		<p class="selectertext">Szenario</p> 
+	 	<select   id="szenarioselecter" class ="dropdown" > 
+			<option value='EUET'>Szenario 1</option> 
+			<option value='EUET_Schwachwindzubau'>Szenario 2</option> 
+			<option value='Agora'>Szenario 3</option> 			
 	 	</select> 
 		<input name="submit" align="center" type="button" value="Run Simulation"  style="margin-left:40px;margin-top:30px;" onclick="change()" />	
 	
 		<div   id="tooltip"></div>
 	</div> 	
-	<!--<div  class="graph" id="Graph1" style="width:700px; height: 1045px;"></div>-->
-<div  class="graph" id="Graph1" style="width:550px; height: 770px;"></div>
-<div  class="graph" id="Graph2"	style="width:400px; height: 153px;"></div>
+	<div 	class="graph" id="Graph1" style="width:550px; height: 765px;"></div>
+	<div  class="graph" id="auswertung" style="width:695px; height: 765px;">
+	
+	
+	 	<select   id="anlage" class ="dropdown" > 
+		<!--	<option value=''></option>-->
+			<option value='standard'>Standard </option> 
+			<option value='schwachwind'>Schwachwindanlage</option> 
+	 		<option value='starkwind'>Starkwindanlage</option> 
 
+	
+	 	</select> 	
+	
+
+ 	<select   id="mapselecter" class ="dropdown" style="width: 290px !important; min-width: 290px; max-width: 290px"> 
+		<!--	<option value='WKA Standorte'>WKA Standorte</option> -->
+		<!--	<option value='Windspeed'>Windgeschwindigkeit 100 m in m/s </option> -->
+		<!--	<option value='Rauhigkeitslaenge in m '>Rauhigkeitslaenge in m </option> -->
+	 		<option value='revenue'>Jährliche Erträge in €</option> 
+			<option value='volllast'>Jährliche Volllaststunden in h</option> 
+			<option value='spezrev'>spezifischen jährliche Erträge in €/MW inst.</option> 
+			<option value='production'>jährlich produzierte Strommenge in GWh</option> 
+		<option value='installed'>Installierte Leistung in kW</option> 
+			<option value='spezpprice'>Vermarktungswerte in €/MWh</option> 
+			<option value='npv'>Ertragswerte in €/kW(inst.)</option> 
+	 	</select> 
+		<select   id="mapdate" class ="dropdown" > 
+			<!--<option value='2017'>2017</option> -->
+			<option value='2020'>2020</option> 
+			<option value='2025'>2025</option> 
+			<option value='2030'>2030</option> 
+			<option value='2035'>2035</option> 
+			<option value='2040'>2040</option> 
+			<option value='2045'>2045</option> 
+			<option value='2050'>2050</option> 
+	 	</select> 	
+		
+		<p style="margin-left:10px; float: left ;margin-top:20px;font-family: PT Sans ;" align="left">min<input type="text" id="mapmin"style="width: 170px !important; min-width: 170px; max-width: 170px"  > </p>	
+		<p style="margin-left:10px; float: left ;margin-top:20px;font-family: PT Sans ;" align="left">max<input type="text" id="mapmax"style="width: 170px !important; min-width: 170px; max-width: 170px"  > </p>	
+		<input style="font-family: PT Sans ;margin-left:40px" id="Autoscale" type="checkbox"  checked> Autoscale <br>
+		<input name="newmap" align="center" type="button" value="Karte aktualisieren"  style="margin-left:40px;margin-top:10px;" onclick="redrawmap()" />	
+	
+	
+		 
+
+<div  class="graph" id="Graph2"	style="width:600px; height: 253px;"></div>
+			
 	
 	<table    id="summarytable"     >   
 		 <tr>
@@ -152,9 +204,9 @@ div.tooltip {
 			<td>€</td>
 		  </tr>
 		<tr>
-			<td>Erlöse pro MW installierter Leistung:  </td>
+			<td>Erlöse pro kW installierter Leistung:  </td>
 			<td id="table2"class="tablevalue">  </td>
-			<td>€/MW(installiert)</td>
+			<td>€/kW(installiert)</td>
 		</tr>
 		<tr>
 			<td>produzierte Strommenge: </td>
@@ -162,43 +214,50 @@ div.tooltip {
 			<td>MWh</td>
 		</tr>
 		<tr>
-			<td>Durschnittlicher Strompreis: </td>
+			<td>Durchschnittlicher Strompreis: </td>
 			<td id="table4"class="tablevalue">  </td>
 			<td>€/MWh</td>
 		</tr>
 		<tr>
-			<td>Durschnittlicher Vollaststunden/a: </td>
+			<td>Durchschnittliche Vollaststunden/a: </td>
 			<td id="table5"class="tablevalue">  </td>
 			<td>h</td>
 		</tr>
 	</table>
-	
-		<div  class="graph" id="Graph3"	style="width:800px; height: 303px;"></div>
-	<div  class="graph" id="Graph4"	style="width:800px; height: 303px;"></div>
-	<div  class="graph" id="Graph5"	style="width:800px; height: 303px;"></div>
-	<div  class="graph" id="Graph6"	style="width:800px; height: 303px;"></div>
-	
+	<div   id="tooltipGraph7"></div>
+	<div  class="graph" id="Graph7"	style="width:600px; height: 200px;"></div>
+	</div>	
+
+		<div  class="graph" id="Graph3"	style="width:750px; height: 303px;"></div>
+	<div  class="graph" id="Graph4"	style="width:750px; height: 303px;"></div>
+	<div  class="graph" id="Graph5"	style="width:750px; height: 303px;"></div>
+	<div  class="graph" id="Graph6"	style="width:750px; height: 303px;"></div>
+	<img style="margin-left:-705px;margin-top:360px;float: left;position:absolute" id="loadscreen" src="./loading.png" align="left" width: 1890px;height: 850px alt="loading" > 	
+
 </div> 
 
 <script>
 
-//Startbildschirm
-//var menu = d3.select("#mapselecter")
-//   .on("change", change);
-//var menu = d3.select("#windturbine")
-//    .on("change", change);
+
 
 typo = "PT Sans";	
 NumbType = d3.format(",.2f");	
 redraw ();
 
+	jahrerloes = []
+	for (i= 2005;i<=2051;i++){jahrerloes[i] = []}
+				
 
 function redraw (){ //lädt die komplette seite neu
+
+
+
+d3.select("#loadscreen").style("visibility", "visible");
 tooltip = d3.select("#tooltip").attr("class", "tooltip hidden");
 	winddata = []
 	pricedata = []
 	extendeddata = []
-	loadwinddata()
+	loadrldata()
 	gnumber = "Graph1"
 drawmap(gnumber )
 drawgeneratorline()
@@ -208,12 +267,32 @@ drawgeneratorline()
 }
 
 
+
+function loadrldata(){
+	lati = Math.round(document.getElementById("MapLatitude").value/0.25)*0.25;
+	longi= Math.round(document.getElementById("MapLongitude").value/0.25)*0.25;
+
+	csvreso =  "data/rauhigkeitslänge.csv";
+	queue()
+		.defer(d3.csv,csvreso) 
+		.await(function(error, rldata) {
+		    rldata.forEach(function(d) {
+				if (d.Latitude == lati && d.Longitude == longi){
+					rauhigkeitslänge=d.value;
+				}
+				
+			})
+			//alert(rauhigkeitslänge)
+			loadwinddata ()	
+		})
+}		
+
 //load the Data
 function loadwinddata(){
 lati = Math.round(document.getElementById("MapLatitude").value/0.25)*0.25;
 longi= Math.round(document.getElementById("MapLongitude").value/0.25)*0.25;
 
-csvreso =  "https://andreasl1nk.github.io/windatlas/data/winddata/vwind_"+lati+"_"+longi+".txt";
+csvreso =  "data/winddata/vwind_"+lati+"_"+longi+".txt";
 //csvreso =  "data/wind_52_13_80m_2014.csv";
 queue()
 	.defer(d3.csv,csvreso) 
@@ -222,12 +301,16 @@ queue()
 	})
 }
 function loadprices (winddata){
-csvreso =  "data/price_2014.csv";
+csvpath = document.getElementById("szenarioselecter").value;
+csvyear = document.getElementById("refjahr").value;
+csvreso =  "data/"+csvpath+"_"+csvyear+"/powerprices.csv";
 		queue()
 		.defer(d3.csv,csvreso) 
 		.await(function(error, pricedata) {
 			//processdata(winddata,pricedata)
 			calculatewindgeneration (winddata,pricedata);
+			d3.select("#loadscreen").style("visibility", "hidden");
+			
 			addyouarehere()
 		})
 
@@ -244,15 +327,14 @@ function calculatewindgeneration (winddata,pricedata){
 	refwindyear = document.getElementById("refjahr").value;
 	startjahr = document.getElementById("startjahr").value
 	turmhoehe = document.getElementById("turmhoehe").value
-	if (+refwindyear >= 2015  ){biascorection = 0.88}
-	else {biascorection = 0.8}
+	biascorection = 0.77
 	
 	produziertsum = 0
 	windgeneration = []
 	entrynmbr=0
 	extendeddata=[]
 
-	parseDateiso = d3.time.format("%Y-%m-%dT%H:%M:%S").parse;
+	parseDateiso = d3.time.format("%Y-%m-%dT%H:%M:%SZ").parse;
 	parseDate = d3.time.format("%d.%m.%Y %H:%M").parse;
 	reparseDate = d3.time.format("%d.%m.%Y %H:%M");
 	
@@ -261,18 +343,32 @@ function calculatewindgeneration (winddata,pricedata){
 		
 
 		readinyear = d.date.getFullYear();
-	    	
 		if (readinyear == refwindyear){
 		
 			d.value = +d["wind_speed_100m:ms"]*biascorection;
 			if (+turmhoehe != 100){
-			rauhigkeitslänge = 0.2
+			//rauhigkeitslänge = 0.01
+			
 			d.value = d.value *Math.log(turmhoehe/rauhigkeitslänge)/Math.log(100/rauhigkeitslänge)
 			
 				
 			}
 			d.rounded = Math.round(d.value*2)/2;
-			d.generation = generatorline[d.rounded]
+			d.ceil = Math.ceil(d.value*2)/2;
+			d.floor = Math.floor(d.value*2)/2;
+			if (d.ceil != d.floor)
+			{
+				d.y1 = generatorline[d.ceil]
+				d.y2 = generatorline[d.floor]
+				steigung = (d.y1-d.y2)/(d.ceil-d.floor)
+				t = d.y1 - steigung * d.ceil
+				d.generation = steigung *d.value + t
+			
+			}
+			else
+			{
+				d.generation = generatorline[d.rounded]
+			}
 			extendeddata[entrynmbr]= {
 					date : d.date,
 					generation : d.generation,
@@ -285,8 +381,8 @@ function calculatewindgeneration (winddata,pricedata){
 				
 				yearrunner = startyear+i
 				
-				var monthrunner = ('0' + (d.date.getMonth())).slice(-2);
-				var dayrunner =   ('0' + d.date.getDate()).slice(-2);
+				var monthrunner = d.date.getMonth()+1;
+				var dayrunner = d.date.getDate();
 				var hourrunner = d.date.getHours();
 				var daterunner = new Date(yearrunner+"-"+monthrunner+"-"+dayrunner+"T"+hourrunner+":00:00");
 				windgeneration[daterunner] = d.generation
@@ -314,19 +410,31 @@ reparseDateiso = d3.time.format("%Y-%m-%dT%H:%M:%SZ");
 		laufzeit = document.getElementById("laufzeit").value;
 		endjahr = +laufzeit+startjahr
 		pricedata=[]
+		yearrevenue =[]
+		
+		
 		entrynmbr=0
+		entrynmbr2=0
 		erlossum = 0
+		realerlossum =0
 	//console.log(winddata)
 	csvexportdata = []
+	
 	erlose = "erlose";
 	csvexportdata[erlose] = []
+
+	
+	headerrow  = "Date;Erloese;Windgeneration";
+	csvexportdata[erlose].push(headerrow)
 		data.forEach(function(d) {
 			d.date = parseDate(d.date);
+
 			d.value = +d.simulated;
 			//if (year>= 2018){pricedate  = new Date(yearrunner+"-"+monthrunner+"-"+dayrunner+"T"+hourrunner+":00:00");
 			//else {pricedate}
 		
 			readinyear = d.date.getFullYear();
+			
 			if (readinyear >= startjahr && readinyear < endjahr)
 			{
 					pricedate = (d.date)
@@ -335,16 +443,26 @@ reparseDateiso = d3.time.format("%Y-%m-%dT%H:%M:%SZ");
 					//vwind = winddata.find(x => x.date.getTime() === pricedate.getTime()).value
 				if (isNumeric(windgeneration[d.date]) ){}
 				else (windgeneration[d.date]=0 )
-		
-				d.erlose = d.value * windgeneration[d.date]/1000
-				erlossum = erlossum +d.erlose;
+				
+				if (d.value >= 0){
+					d.erlose = d.value * windgeneration[d.date]/1000
+					jahrerloes[readinyear] = +jahrerloes[readinyear] + d.erlose
+				}
+				else 
+				{
+					d.erlose = 0;
+					produziertsum = produziertsum - windgeneration[d.date]
+				}
+				
+			
+				
 				//csv
 				
 
 			exportvalue = reparsedatexcel(d.date)  +" ; "+  d.erlose+" ; "+ windgeneration[d.date]
 			csvexportdata[erlose].push(exportvalue)
 				
-					//console.log(d.erlose)
+					
 				  	pricedata[entrynmbr]= {
 					date : pricedate,
 					erlose : d.erlose,
@@ -354,13 +472,28 @@ reparseDateiso = d3.time.format("%Y-%m-%dT%H:%M:%SZ");
 			}
 
 		});	
-			
- document.getElementById("table1").innerHTML = NumbType(erlossum);
- document.getElementById("table2").innerHTML = NumbType(erlossum/(maxgenrationpower/1000));
+		wacc = document.getElementById("wacc").value;
+		for (yearcounter = startjahr;yearcounter<endjahr;yearcounter++){
 
- document.getElementById("table4").innerHTML = NumbType(erlossum/(produziertsum/1000));
-  document.getElementById("table5").innerHTML = NumbType((produziertsum/laufzeit)/maxgenrationpower);
-		drawprice (pricedata)
+			yearrevenue[entrynmbr2]= {
+				date : yearcounter,
+				erlose : jahrerloes[yearcounter],
+				rmzerlose : jahrerloes[yearcounter]/ Math.pow( (1+wacc/100),(yearcounter-startjahr))	
+				
+						
+			}
+			entrynmbr2 ++;
+			erlossum = erlossum +jahrerloes[yearcounter]/ Math.pow( (1+wacc/100),(yearcounter-startjahr));
+			realerlossum = realerlossum +jahrerloes[yearcounter];
+		}	
+		//console.log(jahrerloes)	
+	
+		document.getElementById("table1").innerHTML = NumbType(erlossum);
+		document.getElementById("table2").innerHTML = NumbType(erlossum/(maxgenrationpower));
+
+		document.getElementById("table4").innerHTML = NumbType(realerlossum/(produziertsum/1000));
+		document.getElementById("table5").innerHTML = NumbType((produziertsum/laufzeit)/maxgenrationpower);
+		drawprice (pricedata,yearrevenue)
 	}
 
 function isNumeric(n) {
@@ -375,7 +508,7 @@ function drawwindline(winddata) {
 
 var width = document.getElementById("Graph4").offsetWidth
 var height = document.getElementById("Graph4").offsetHeight
-var margin = {top: 40, right: 20, bottom: 30, left: 60};
+var margin = {top: 40, right: 20, bottom: 30, left: 80};
 var width = +width- margin.left - margin.right;
 var height = +height- margin.top - margin.bottom;
 
@@ -392,7 +525,7 @@ var height = +height- margin.top - margin.bottom;
 		.attr("x", width/2 )
 		.style("font-size", "20px")  
 		.style("font-family", typo) 
-		.text("Windspeed in m/s");
+		.text("Windgeschwindigkeit");
 	number.append("svg:rect")
 		.attr("width", width)
 		.attr("height", height)
@@ -407,6 +540,14 @@ var height = +height- margin.top - margin.bottom;
 		.attr("y", 0)	
 		.attr("width", width )
 		.attr("height", height ); 
+	number.append("text")
+		.attr("text-anchor", "middle")  // this makes it easy to centre the text as the transform is applied to the anchor
+	   .style("font-family", typo) 
+	   .attr("transform", "translate("+ (-55) +","+(height/2+10)+")rotate(-90)")  // text is drawn off the screen top left, move down and out and rotate
+		.text("Windgeschwindigkeit in m/s");
+		
+
+		
 	
 	//erstellen des svg's 4
 	var number2 = d3.select("#Graph4")
@@ -421,7 +562,7 @@ var height = +height- margin.top - margin.bottom;
 		.attr("x", width/2 )
 		.style("font-size", "20px")  
 		.style("font-family", typo) 
-		.text("Windgeneration in kW");
+		.text("Stromerzeugung");
 	number2.append("svg:rect")
 		.attr("width", width)
 		.attr("height", height)
@@ -435,7 +576,12 @@ var height = +height- margin.top - margin.bottom;
 		.attr("x", 0)
 		.attr("y", 0)	
 		.attr("width", width )
-		.attr("height", height );		
+		.attr("height", height );	
+	number2.append("text")
+		.attr("text-anchor", "middle")  // this makes it easy to centre the text as the transform is applied to the anchor
+	   .style("font-family", typo) 
+	   .attr("transform", "translate("+ (-55) +","+(height/2+10)+")rotate(-90)")  // text is drawn off the screen top left, move down and out and rotate
+		.text("Stromerzeugung in kW");		
 
 		
 // Set the ranges
@@ -506,11 +652,11 @@ var valueline2 = d3.svg.line()
 	
 	
 	
-	function drawprice (pricedata){
+	function drawprice (pricedata,yearrevenue){
 	
 var width = document.getElementById("Graph4").offsetWidth
 var height = document.getElementById("Graph4").offsetHeight
-var margin = {top: 40, right: 20, bottom: 30, left: 60};
+var margin = {top: 40, right: 20, bottom: 30, left: 80};
 var width = +width- margin.left - margin.right;
 var height = +height- margin.top - margin.bottom;
 
@@ -527,7 +673,7 @@ var height = +height- margin.top - margin.bottom;
 		.attr("x", width/2 )
 		.style("font-size", "20px")  
 		.style("font-family", typo) 
-		.text("Power Prices in €/MWh");
+		.text("Strompreise");
 	number.append("svg:rect")
 		.attr("width", width)
 		.attr("height", height)
@@ -542,6 +688,12 @@ var height = +height- margin.top - margin.bottom;
 		.attr("y", 0)	
 		.attr("width", width )
 		.attr("height", height ); 
+	number.append("text")
+		.attr("text-anchor", "middle")  // this makes it easy to centre the text as the transform is applied to the anchor
+	   .style("font-family", typo) 
+	   .attr("transform", "translate("+ (-55) +","+(height/2+10)+")rotate(-90)")  // text is drawn off the screen top left, move down and out and rotate
+		.text("Strompreise in €/MWh");	
+		
 	//erstellen des svg's
 	var number2 = d3.select("#Graph6")
 		.append("svg")
@@ -555,7 +707,7 @@ var height = +height- margin.top - margin.bottom;
 		.attr("x", width/2 )
 		.style("font-size", "20px")  
 		.style("font-family", typo) 
-		.text("Erlöse in €");
+		.text("Einnahmen");
 	number2.append("svg:rect")
 		.attr("width", width)
 		.attr("height", height)
@@ -569,7 +721,14 @@ var height = +height- margin.top - margin.bottom;
 		.attr("x", 0)
 		.attr("y", 0)	
 		.attr("width", width )
-		.attr("height", height );		
+		.attr("height", height );	
+
+	number2.append("text")
+		.attr("text-anchor", "middle")  // this makes it easy to centre the text as the transform is applied to the anchor
+		.style("font-family", typo) 
+		.attr("transform", "translate("+ (-55) +","+(height/2+10)+")rotate(-90)")  // text is drawn off the screen top left, move down and out and rotate
+		.text("stündliche Erlöse in €");	
+		
 
 // Set the ranges
 var x = d3.time.scale().range([0, width]);
@@ -648,7 +807,7 @@ var valueline2 = d3.svg.line()
 csvbutton
 .on('click',function(){exportToCsv('export.csv',csvexportdata[erlose])})	 
 		
-
+drawrevprice(yearrevenue);
 	
 	
 	}	
@@ -657,7 +816,7 @@ csvbutton
 function drawgeneratorline(){
 
 
-	margin = {top: 20, right: 20, bottom: 30, left: 50}
+	margin = {top: 20, right: 20, bottom: 40, left: 70}
 	var width = document.getElementById("Graph2").offsetWidth- margin.left - margin.right
 	var height = document.getElementById("Graph2").offsetHeight- margin.top - margin.bottom;
 	
@@ -694,6 +853,7 @@ function drawgeneratorline(){
 			
 		var y_axis = d3.svg.axis()
                 .scale(yscl)
+				 
                 .orient("left").ticks(3) ;	
 	
 		slice = d3.svg.line()
@@ -716,6 +876,27 @@ function drawgeneratorline(){
 				stroke: 'black',
 				'stroke-width': 0.5,
 				fill:'white'});
+				
+		svg.append("text")            
+			.attr("y", 17)
+			.attr("x", width/2 )
+			.style("font-size", "15px")  
+			.style("font-family", typo) 
+			.text("Generatorkennlinie");		
+		
+		svg.append("text")
+            .attr("text-anchor", "middle")  // this makes it easy to centre the text as the transform is applied to the anchor
+           .style("font-family", typo) 
+		   .attr("transform", "translate("+ (15) +","+(height/2+10)+")rotate(-90)")  // text is drawn off the screen top left, move down and out and rotate
+            .text("Leistung in kw");
+			
+	svg.append("text")
+            .attr("text-anchor", "middle")  // this makes it easy to centre the text as the transform is applied to the anchor
+            .attr("transform", "translate("+ (width/2) +","+250+")")  // centre below axis
+            .style("font-family", typo) 
+			.text("Windgeschwindigkeit in m/s");		
+			
+
 		
 		height = height+margin.top
 				svg.append("g")	
@@ -747,54 +928,87 @@ function drawgeneratorline(){
 }
 
 
-function drawmap(){
+function drawmap(gnumber){
 
 
-
-	var mapwidth = document.getElementById(gnumber).offsetWidth-5;
-	var mapheight = document.getElementById(gnumber).offsetHeight-4;
+	anlage  = document.getElementById("anlage").value;
 	mapselecter = document.getElementById("mapselecter").value;
-	if (mapselecter == "capacity"){
+	mapdate = document.getElementById("mapdate").value;
+	csvpath = document.getElementById("szenarioselecter").value;
+	
+
+csvyear = document.getElementById("refjahr").value;
+	
+ if (mapselecter == "Rauhigkeitslaenge in m "){
 		colorscale = "blue";
-	wdata = "data/windger.csv"; //Pfad
-	mapdate = "2016";
-	ymin = 0;
-	ymax = 2000;
-	auflsng =0.25
+		wdata = "data/rauhigkeitslänge.csv"; //Pfad
+		ymin = 0;
+		ymax = 1;
+		auflsng =0.25
 	}
-		else if (mapselecter == "capacity2050"){
-		colorscale = "blue";
-	wdata = "data/windger2050.csv"; //Pfad
-	mapdate = "2016";
-	ymin = 0;
-	ymax = 2000;
-	auflsng =0.25
-	}
-	else if (mapselecter == 'erträge'){
-	auflsng =0.25
+
+	else if (mapselecter == 'WKA Standorte'){
+		auflsng =0.025
 		colorscale = "";
-	wdata = "data/025_wind_2016.csv"; //Pfad
-	mapdate = "2016";
-	ymin = 0;
-	ymax = 30000;
+		wdata = "data/wkalist.csv"; //Pfad
+		ymin = 0;
+		ymax = 8000;
 	}
-		else if (mapselecter == 'WKA Standorte'){
-	auflsng =0.025
+	
+	else if (mapselecter == 'Mittlere Windgeschwindigkeit in m/s'){
+		auflsng =0.25
 		colorscale = "";
-	wdata = "data/wkalist.csv"; //Pfad
-	mapdate= document.getElementById("startjahr").value;
-	//mapdate = "2016";
-	ymin = 0;
-	ymax = 8000;
+		wdata = "data/mvwind.csv"; //Pfad
+		ymin = 0;
+		ymax = 12;
 	}
+	
 	else {
-	auflsng =0.25
-		colorscale = "";
-	wdata = "data/025_wind_2016.csv"; //Pfad
-	mapdate = "2016";
+	wdata = "data/"+csvpath+"_"+csvyear+"/"+anlage+mapselecter+".txt"; //Pfad
+	
+	colorscale = "";
 	ymin = 0;
-	ymax = 12;
+	ymax = 1500;
+	auflsng =0.25
+	
+	if (document.getElementById("Autoscale").checked == true){
+		NumbType0 = d3.format(".0f"); 
+		queue()
+			.defer(d3.csv,wdata) 
+			.await(function(error, test) { 
+				maxmapval = d3.max(test, function(d) { if (d.Date == mapdate){ return +d.value; }})
+				minmapval = d3.min(test, function(d) { if (d.Date == mapdate){return +d.value; }})
+				e = document.getElementById("mapmax");
+				e.value = NumbType0(maxmapval);
+				f = document.getElementById("mapmin");
+				f.value = NumbType0(minmapval);
+				//alert(maxmapval)
+				drawmap2 (gnumber,auflsng,colorscale,wdata)
+			})
+		}
+		else {
+			ymin = document.getElementById("mapmin").value;
+			ymax = document.getElementById("mapmax").value
+			drawmap2 (gnumber,auflsng,colorscale,wdata)
+		}
 	}
+}		
+		
+function drawmap2 (gnumber,auflsng,colorscale,wdata ){	
+
+var mapwidth = document.getElementById(gnumber).offsetWidth-5;
+	var mapheight = document.getElementById(gnumber).offsetHeight-4;
+	anlage  = document.getElementById("anlage").value;
+	mapselecter = document.getElementById("mapselecter").value;
+	mapdate = document.getElementById("mapdate").value;
+	csvpath = document.getElementById("szenarioselecter").value;	
+	
+mapmin = document.getElementById("mapmin").value;
+mapmax = document.getElementById("mapmax").value;	
+
+if 	(mapmin != ""){ymin = mapmin}
+if (mapmax != ""){ymax = mapmax}
+	
 	//Define map projection
 	projection = d3.geo.mercator() 
 		.center([ 10.3, 51 ]) 
@@ -808,7 +1022,7 @@ function drawmap(){
 		.append("svg")
 		.attr("id","svg"+gnumber)
 		.attr("width", mapwidth)
-		.attr("height", mapheight)
+		.attr("height", mapheight-5)
 		.append("g")
 		
 
@@ -818,7 +1032,7 @@ zoom = d3.behavior.zoom()
 			.scale([3100])	
 			.on("zoom", move);
 		//call the zoom on the SVG
-		svg.call(zoom)
+		//svg.call(zoom)
 
 
 
@@ -877,9 +1091,20 @@ zoom = d3.behavior.zoom()
 			});
 		});		
 	}
+	
 
+	
+
+	
+	
+		
+		
+				
+		
+	
 	d3.csv(wdata, function(err, value) {
 		value.forEach(function(i){
+	
 		if (mapselecter == 'WKA Standorte'){
 		addwka(i.Longitude, i.Latitude,i.Nennleistung,i.Manufacturer,i.Turbine,i.TurbineHubheight,i.CommisioningDate );
 			
@@ -900,14 +1125,18 @@ zoom = d3.behavior.zoom()
 					}
 
 				}
-				}
-			addpoint(i.Longitude, i.Latitude,i.value );
+				
+				addpoint(i.Longitude, i.Latitude,i.value );
+			}
+				
+			//addpoint(i.Longitude, i.Latitude,i.value );
 			}
 		});
 		 
 
 	});
 	
+
 	addlegend()
 	
 }
@@ -1045,16 +1274,39 @@ function addpoint(lat,lon,value) {
 			
 				tooltip.classed("hidden", false)
 					 .attr("style", 'left:' + (d3.event.clientX + offsetL) + 'px; top:' + (d3.event.clientY - offsetT) + 'px')
-					.html( lat + ";"+ lon);
+					.html( NumbType(lat) + ";"+ NumbType(lon)+ ";"+"<br> " +NumbType(value));
 			})
 			.on("mouseout",  function(d,i) {
 				tooltip.classed("hidden", true);
-			}); 
-		
+			}) 
+	.on("click", function(d) {
+				tooltip.classed("hidden", true);
+				e = document.getElementById("MapLatitude");
+				e.value = Math.round(lon/0.25)*0.25;
+				f = document.getElementById("MapLongitude");
+				f.value = Math.round(lat/0.25)*0.25;
+				//g = document.getElementById("startjahr");
+				//g.value = datum;
+			addyouarehere()
+			});		
 		
 		
 }
 function addlegend(){
+	
+	if (mapselecter == 'WKA Standorte'){maptext = "WKA Standorte"}
+	else if (mapselecter == 'Windspeed'){maptext = "Windgeschwindigkeit 100 m in m/s "}
+	else if (mapselecter == 'Rauhigkeitslaenge in m '){maptext = "Rauhigkeitslaenge in m "}
+	else if (mapselecter == 'revenue'){maptext = "Jährliche Erträge in €"}
+	else if (mapselecter == 'volllast'){maptext = "Jährliche Volllaststunden in h"}
+	else if (mapselecter == 'spezrev'){maptext = "spezifischen jährliche Erträge in €/kW inst."}
+	else if (mapselecter == 'production'){maptext = "jährlich produzierte Strommenge in GWh"}
+	else if (mapselecter == 'installed'){maptext = "Installierte Leistung in kW"}
+	else if (mapselecter == 'spezpprice'){maptext = "Vermarktungswerte in €/MWh"}
+	else if (mapselecter == 'npv'){maptext = "Ertragswert in €/kW(inst.)"}
+	else {maptext = ""}
+		
+
 	coulour = new Array;
 	for (var i = 0; i <= 10; i++){
 		n= i/10;
@@ -1066,23 +1318,31 @@ function addlegend(){
 		.domain(d3.range(5,16))
 		.range(varcolour)
 	var x = d3.scale.linear()
-		.domain([1,5,11])
+		.domain([0,5,10])
 		.range([0, 90])	
 	var xAxis = d3.svg.axis()  
 		.scale(x)
-		.tickSize(735)	
+		.tickSize(705)	
 		.tickValues(d3.range(1.5,12.5,5))	
+		
 		.tickFormat(function(d)  {ymin = +ymin;return  (((ymax-ymin)/10)*(d-1.5)+ymin); }) 	
 		
 	 legend = d3.select("#svg"+gnumber)
+	 
+	 	legend.append("rect")
+			.attr("height", 80)
+			.attr("y", 688)
+			.attr("x", 3)
+			.attr("width", 434)
+			.style("fill", "white");
 	
-	 var headpts = "0,955 0,1000 270,1000 270,955";
+	 var headpts = "0,950 0,955 270,955 270,950";
 	maphead = legend.append("svg:polygon")
 		.attr("points", headpts)
 		.attr("stroke", "lightgrey")
 		.attr("stroke-width", 1)
 		.attr("fill", "white");
-	 legend.style("font-size","16px")
+	 legend.style("font-size","18px")
 			.call(xAxis);
 
 		legend.select(".domain")
@@ -1097,11 +1357,159 @@ function addlegend(){
 			}))
 			.enter().insert("rect", ".tick")
 			.attr("height", 12)
-			.attr("y", 725)
+			.attr("y", 690)
 			.attr("x", function(d) { return x(d[0])-75; })
 			.attr("width", function(d) { return x(d[1]) - x(d[0]); })
 			//.attr("transform", function(d) { return "rotate(90)" })
 			.attr("fill", function(d) { return threshold(d[0]); })
+		
+	
+			
+		legend.append("text")
+			.attr("fill", "#000")
+		
+			.attr("text-anchor", "start")
+			.attr("y", 745)
+			.attr("x", 6)
+			.style("font-size","18px")
+		
+			.text(maptext);
+}
+
+function drawrevprice(yearrevenue) {
+
+
+	NumbType0 = d3.format(".0f"); 
+
+var width = document.getElementById("Graph7").offsetWidth
+var height = document.getElementById("Graph7").offsetHeight
+var margin = {top: 40, right: 20, bottom: 30, left: 80};
+var width = +width- margin.left - margin.right;
+var height = +height- margin.top - margin.bottom;
+
+//erstellen des svg's
+	var number = d3.select("#Graph7")
+		.append("svg")
+		.attr("width", width + margin.left + margin.right)
+		.attr("id","svgGraph7")
+		.attr("height", height + margin.top + margin.bottom)
+		.append("g")
+		.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+	number.append("text")            
+		.attr("y", 4 - (margin.top / 2))
+		.attr("x", width/2 )
+		.style("font-size", "20px")  
+		.style("font-family", typo) 
+		.text("jährliche Einnnahmen");
+	number.append("svg:rect")
+		.attr("width", width)
+		.attr("height", height)
+		.style("stroke", "lightgrey")
+		.style("stroke-width", 1)
+		.attr("fill","white");	
+	 //make a clip path for the graph  (defines the visible area of the graph )
+	var clip = number.append("svg:clipPath")
+		.attr("id", "clip")
+		.append("svg:rect")
+		.attr("x", 0)
+		.attr("y", 0)	
+		.attr("width", width )
+		.attr("height", height ); 
+	number.append("text")
+		.attr("text-anchor", "middle")  // this makes it easy to centre the text as the transform is applied to the anchor
+	   .style("font-family", typo) 
+	   .attr("transform", "translate("+ (-65) +","+(height/2+10)+")rotate(-90)")  // text is drawn off the screen top left, move down and out and rotate
+		.text("Einnahmen in €/a");
+
+		
+// Set the ranges
+var x = d3.scale.linear().range([0, width]);
+var y = d3.scale.linear().range([height, 0]);
+
+
+// Define the axes
+var xAxis = d3.svg.axis().scale(x)
+    .orient("bottom").ticks(3).tickFormat(d3.format(".0f"));
+
+var yAxis = d3.svg.axis().scale(y)
+    .orient("left").ticks(5);
+
+
+	
+	// Define the lines
+var valueline = d3.svg.line()
+    .x(function(d) { return x(d.date); })
+    .y(function(d) { return y(d.rmzerlose); });		
+	
+	max =  d3.max(yearrevenue, function(d) { return +d.rmzerlose;} );
+    // Scale the range of the data
+    x.domain(d3.extent(yearrevenue, function(d) { return d.date; }));
+    y.domain([0, max*1.2]);
+
+
+    // Add the valueline path.
+   line =  number.append("path")
+        .attr("class", "line")
+        .attr("d", valueline(yearrevenue))
+		.style("stroke", "red")
+			.style("stroke-width", 2);
+		
+	
+
+    // Add the X Axis
+    number.append("g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(xAxis)
+		
+
+    // Add the Y Axis
+    number.append("g")
+        .attr("class", "y axis")
+        .call(yAxis);
+
+
+	
+		
+		
+		tooltip = d3.select("#tooltip").attr("class", "tooltip hidden");
+		//offsets for tooltips
+		var offsetL = 20;
+		var offsetT =20;  
+			  
+		//tooltips
+		line
+			.on("mousemove", function(d,i) {
+				var mousel = d3.event.pageX;
+					var mouset = d3.event.pageY;
+					var x0 = x.invert(d3.mouse(this)[0])
+					var y0 = y.invert(d3.mouse(this)[1])
+					getmouseposition(x0,y0,mousel,mouset)
+			
+				tooltip.classed("hidden", false)
+					 .attr("style", 'left:' + (d3.event.clientX + offsetL) + 'px; top:' + (d3.event.clientY - offsetT) + 'px')
+					.html(NumbType0(x0)+"<br>"+NumbType0(y0));
+			})
+			.on("mouseout",  function(d,i) {
+				tooltip.classed("hidden", true);
+			}) 
+		
+		
+		
+}
+
+
+
+
+
+
+function redrawmap(){
+	//delete the old Graphs
+		 div = document.getElementById("Graph1");	
+	while(div.firstChild){
+		div.removeChild(div.firstChild);
+	}
+	drawmap("Graph1")
 }
 
 function change(){
@@ -1130,7 +1538,11 @@ function change(){
 	while(div.firstChild){
 		div.removeChild(div.firstChild);
 	}
-
+					 div = document.getElementById("Graph7");	
+	while(div.firstChild){
+		div.removeChild(div.firstChild);
+	}
+for(i= 2005;i<2051;i++){jahrerloes[i] = 0}
 redraw()
 }
 
